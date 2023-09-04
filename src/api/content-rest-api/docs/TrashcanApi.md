@@ -161,7 +161,7 @@ trashcanApi.getDeletedNodeContent('nodeId').then((data) => {
 | ifModifiedSince | Date    | Only returns the content if it has been modified since the date provided. Use the date format defined by HTTP. For example, `Wed, 09 Mar 2016 16:56:34 GMT`.                                                                                                                                                                                                                                                                                                                              |
 | range           | string  | The Range header indicates the part of a document that the server should return. Single part request supported, for example: bytes=1-10.                                                                                                                                                                                                                                                                                                                                                  | 
 
-**Return type**: **Blob**
+**Return type**: Blob
 
 ## listDeletedNodeRenditions
 

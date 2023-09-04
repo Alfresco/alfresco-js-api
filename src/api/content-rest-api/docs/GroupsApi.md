@@ -18,7 +18,7 @@ All URIs are relative to *https://localhost/alfresco/api/-default-/public/alfres
 
 Create a group
 
-> this endpoint is available in Alfresco 5.2.1 and newer versions.
+> this endpoint is available in **Alfresco 5.2.1** and newer versions.
 > You must have admin rights to create a group.
 
 Create a group.
@@ -64,7 +64,7 @@ groupsApi.createGroup(payload, opts).then((data) => {
 
 Create a group membership
 
-> this endpoint is available in Alfresco 5.2.1 and newer versions.
+> this endpoint is available in **Alfresco 5.2.1** and newer versions.
 > You must have admin rights to create a group membership.
 
 Create a group membership (for an existing person or group) within a group **groupId**.
@@ -90,11 +90,10 @@ import { AlfrescoApi, GroupsApi } from '@alfresco/js-api';
 const alfrescoApi = new AlfrescoApi(/*..*/);
 const groupsApi = new GroupsApi(alfrescoApi);
 
-const groupId = '<groupId>'
-const payload = {};
+const groupMembershipBodyCreate = {};
 const opts = {};
 
-groupsApi.createGroupMembership(groupId, payload, opts).then((data) => {
+groupsApi.createGroupMembership(`<groupId>`, groupMembershipBodyCreate, opts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 });
 ```
@@ -103,7 +102,7 @@ groupsApi.createGroupMembership(groupId, payload, opts).then((data) => {
 
 Delete a group
 
-> this endpoint is available in Alfresco 5.2.1 and newer versions.
+> this endpoint is available in **Alfresco 5.2.1** and newer versions.
 > You must have admin rights to delete a group.
 
 The option to cascade delete applies this recursively to any hierarchy of group members.
@@ -138,7 +137,7 @@ groupsApi.deleteGroup(`<groupId>`, opts).then(() => {
 
 Delete a group membership
 
-> this endpoint is available in Alfresco 5.2.1 and newer versions.
+> this endpoint is available in **Alfresco 5.2.1** and newer versions.
 > You must have admin rights to delete a group membership.
 
 Delete group member **groupMemberId** (person or subgroup) from group **groupId**.
@@ -170,7 +169,7 @@ groupsApi.deleteGroupMembership(`<groupId>`, `<groupMemberId>`).then(() => {
 
 Get group details
 
-> this endpoint is available in Alfresco 5.2.1 and newer versions.
+> this endpoint is available in **Alfresco 5.2.1** and newer versions.
 
 You can use the **include** parameter to return additional information.
 
@@ -203,7 +202,7 @@ groupsApi.getGroup(`<groupId>`, opts).then((data) => {
 
 List memberships of a group
 
-> this endpoint is available in Alfresco 5.2.1 and newer versions.
+> this endpoint is available in **Alfresco 5.2.1** and newer versions.
 
 Gets a list of the group memberships for the group **groupId**.
 You can use the **where** parameter to filter the returned groups by **memberType**.
@@ -252,7 +251,7 @@ groupsApi.listGroupMemberships(`<groupId>`, opts).then((data) => {
 
 List group memberships
 
-> this endpoint is available in Alfresco 5.2.1 and newer versions.
+> this endpoint is available in **Alfresco 5.2.1** and newer versions.
 
 Gets a list of group membership information for person **personId**.
 
@@ -325,7 +324,7 @@ groupsApi.listGroupMembershipsForPerson(`<personId>`, opts).then((data) => {
 
 List groups
 
-> this endpoint is available in Alfresco 5.2.1 and newer versions.
+> this endpoint is available in **Alfresco 5.2.1** and newer versions.
 
 Gets a list of groups.
 
@@ -396,7 +395,7 @@ groupsApi.listGroups(opts).then((data) => {
 
 Update group details
 
-> this endpoint is available in Alfresco 5.2.1 and newer versions.
+> this endpoint is available in **Alfresco 5.2.1** and newer versions.
 > You must have admin rights to update a group.
 
 **Parameters**
@@ -417,11 +416,10 @@ import { AlfrescoApi, GroupsApi } from '@alfresco/js-api';
 
 const alfrescoApi = new AlfrescoApi(/*..*/);
 const groupsApi = new GroupsApi(alfrescoApi);
-
-const payload = {};
+const groupBodyUpdate = {};
 const opts = {};
 
-groupsApi.updateGroup(`<groupId>`, payload, opts).then((data) => {
+groupsApi.updateGroup(`<groupId>`, groupBodyUpdate, opts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 });
 ```

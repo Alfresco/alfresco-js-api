@@ -94,8 +94,8 @@ favoritesApi.createFavorite(`<personId>`, favoriteBodyCreate, opts).then((data) 
 
 Create a site favorite
 
-**Note:** this endpoint is deprecated as of Alfresco 4.2, and will be removed in the future.
-Use /people/{personId}/favorites instead.
+> this endpoint is deprecated as of **Alfresco 4.2**, and will be removed in the future.  
+> Use **/people/{personId}/favorites** instead.
 
 Create a site favorite for person **personId**.
 
@@ -193,8 +193,8 @@ favoritesApi.deleteFavorite(`<personId>`, `<favoriteId>`).then(() => {
 
 Delete a site favorite
 
-**Note:** this endpoint is deprecated as of Alfresco 4.2, and will be removed in the future.
-Use /people/{personId}/favorites/{favoriteId} instead.
+> this endpoint is deprecated as of **Alfresco 4.2**, and will be removed in the future.  
+> Use **/people/{personId}/favorites/{favoriteId}** instead.
 
 Deletes site **siteId** from the favorite site list of person **personId**.
 
@@ -255,7 +255,7 @@ favoritesApi.getFavorite(`<personId>`, `<favoriteId>`, opts).then((data) => {
 
 Get a favorite site
 
-> This endpoint is **deprecated** as of Alfresco 4.2, and will be removed in the future.  
+> This endpoint is **deprecated** as of **Alfresco 4.2**, and will be removed in the future.  
 > Use `/people/{personId}/favorites/{favoriteId}` instead.
 
 Gets information on favorite site **siteId** of person **personId**.
@@ -281,7 +281,7 @@ const alfrescoApi = new AlfrescoApi(/*..*/);
 const favoritesApi = new FavoritesApi(alfrescoApi);
 const opts = {};
 
-favoritesApi.getFavoriteSite(personId, siteId, opts).then((data) => {
+favoritesApi.getFavoriteSite(`<personId>`, `<siteId>`, opts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 });
 ```
@@ -291,7 +291,7 @@ favoritesApi.getFavoriteSite(personId, siteId, opts).then((data) => {
 List favorite sites
 
 > This endpoint is **deprecated** as of Alfresco 4.2, and will be removed in the future.  
-> Use /people/{personId}/favorites instead.
+> Use **/people/{personId}/favorites** instead.
 
 Gets a list of a person's favorite sites.
 
@@ -306,7 +306,7 @@ const alfrescoApi = new AlfrescoApi(/*..*/);
 const favoritesApi = new FavoritesApi(alfrescoApi);
 const opts = {};
 
-favoritesApi.listFavoriteSitesForPerson(personId, opts).then((data) => {
+favoritesApi.listFavoriteSitesForPerson(`<personId>`, opts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 });
 ```

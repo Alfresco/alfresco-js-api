@@ -17,7 +17,7 @@ All URIs are relative to *https://localhost/alfresco/api/-default-/public/alfres
 
 Permanently delete audit entries for an audit application
 
-> this endpoint is available in Alfresco 5.2.2 and newer versions.
+> this endpoint is available in **Alfresco 5.2.2** and newer versions.
 
 The **where** clause must be specified, either with an inclusive time period or for
 an inclusive range of ids. The deletion is within the context of the given audit application.
@@ -53,7 +53,7 @@ auditApi.deleteAuditEntriesForAuditApp('<auditApplicationId>', '<where>').then((
 
 Permanently delete an audit entry
 
-> this endpoint is available in Alfresco 5.2.2 and newer versions.
+> this endpoint is available in **Alfresco 5.2.2** and newer versions.  
 > You must have admin rights to delete audit information.
 
 **Parameters**
@@ -80,7 +80,7 @@ auditApi.deleteAuditEntry('<auditApplicationId>', '<auditEntryId>').then(() => {
 
 Get audit application info
 
-> **Note:** this endpoint is available in Alfresco 5.2.2 and newer versions.
+> **Note:** this endpoint is available in Alfresco 5.2.2 and newer versions.  
 > You must have admin rights to retrieve audit information.
 
 You can use the **include** parameter to return the minimum and/or maximum audit record id for the application.
@@ -102,10 +102,9 @@ import { AlfrescoApi, AuditApi } from '@alfresco/js-api';
 
 const alfrescoApi = new AlfrescoApi(/*...*/);
 const auditApi = new AuditApi(alfrescoApi);
-const auditApplicationId = '<auditApplicationId>';
 const opts = {};
 
-auditApi.getAuditApp(auditApplicationId, opts).then((data) => {
+auditApi.getAuditApp(`<auditApplicationId>`, opts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 });
 ```
@@ -114,7 +113,7 @@ auditApi.getAuditApp(auditApplicationId, opts).then((data) => {
 
 Get audit entry
 
-> this endpoint is available in Alfresco 5.2.2 and newer versions.
+> this endpoint is available in **Alfresco 5.2.2** and newer versions.  
 > You must have admin rights to access audit information.
 
 **Parameters**
@@ -145,9 +144,9 @@ auditApi.getAuditEntry('<auditApplicationId>', '<auditEntryId>', opts).then((dat
 
 List audit applications
 
-> this endpoint is available in Alfresco 5.2.2 and newer versions.
+> this endpoint is available in **Alfresco 5.2.2** and newer versions.  
 > You must have admin rights to retrieve audit information.
-> 
+
 Gets a list of audit applications in this repository.
 This list may include pre-configured audit applications, if enabled, such as:
 
@@ -184,7 +183,7 @@ auditApi.listAuditApps(opts).then((data) => {
 
 List audit entries for an audit application
 
-> this endpoint is available in Alfresco 5.2.2 and newer versions.
+> this endpoint is available in **Alfresco 5.2.2** and newer versions.  
 > You must have admin rights to retrieve audit information.
 
 You can use the **include** parameter to return additional **values** information.
@@ -209,8 +208,9 @@ import { AlfrescoApi, AuditApi} from '@alfresco/js-api';
 
 const alfrescoApi = new AlfrescoApi(/*...*/);
 const auditApi = new AuditApi(alfrescoApi);
+const opts = {};
 
-auditApi.listAuditEntriesForAuditApp(auditApplicationIdopts).then((data) => {
+auditApi.listAuditEntriesForAuditApp(`<auditApplicationId>`, opts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 });
 ```
@@ -282,10 +282,9 @@ import { AlfrescoApi, AuditApi } from '@alfresco/js-api';
 
 const alfrescoApi = new AlfrescoApi(/*...*/);
 const auditApi = new AuditApi(alfrescoApi);
-const nodeId = 'nodeId';
 const opts = {};
 
-auditApi.listAuditEntriesForNode(nodeId, opts).then((data) => {
+auditApi.listAuditEntriesForNode(`<nodeId>`, opts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 });
 ```
@@ -294,7 +293,7 @@ auditApi.listAuditEntriesForNode(nodeId, opts).then((data) => {
 
 Update audit application info
 
-> this endpoint is available in Alfresco 5.2.2 and newer versions.
+> this endpoint is available in **Alfresco 5.2.2** and newer versions.  
 > You must have admin rights to update audit application.
 
 Disable or re-enable the audit application **auditApplicationId**.
@@ -302,7 +301,7 @@ Disable or re-enable the audit application **auditApplicationId**.
 New audit entries will not be created for a disabled audit application until
 it is re-enabled (and system-wide auditing is also enabled).
 
-Note, it is still possible to query &/or delete any existing audit entries even
+> it is still possible to query &/or delete any existing audit entries even
 if auditing is disabled for the audit application.
 
 **Parameters**
@@ -322,11 +321,10 @@ import { AlfrescoApi, AuditApi} from '@alfresco/js-api';
 
 const alfrescoApi = new AlfrescoApi(/*...*/);
 const auditApi = new AuditApi(alfrescoApi);
-const auditApplicationId = 'auditApplicationId';
 const auditAppBodyUpdate = {};
 const opts = {};
 
-auditApi.updateAuditApp(auditApplicationId, auditAppBodyUpdate, opts).then((data) => {
+auditApi.updateAuditApp(`<auditApplicationId>`, auditAppBodyUpdate, opts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 });
 ```

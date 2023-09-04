@@ -225,10 +225,8 @@ const tagsApi = new TagsApi(alfrescoApi);
 const tagBodyUpdate = {};
 const opts = {};
 
-tagsApi.updateTag(tagId, tagBodyUpdate, opts).then((data) => {
+tagsApi.updateTag(`<tagId>`, tagBodyUpdate, opts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
-  console.error(error);
 });
 ```
 

@@ -14,7 +14,7 @@ All URIs are relative to *https://localhost/alfresco/api/-default-/public/alfres
 
 Retrieve the details of an action definition
 
-> this endpoint is available in Alfresco 5.2 and newer versions.
+> this endpoint is available in **Alfresco 5.2** and newer versions.
 
 **Parameters**
 
@@ -41,7 +41,7 @@ actionsApi.actionDetails(`<actionDefinitionId>`).then((data) => {
 
 Execute an action
 
-> this endpoint is available in Alfresco 5.2 and newer versions.
+> this endpoint is available in **Alfresco 5.2** and newer versions.
 
 Executes an action
 
@@ -68,9 +68,9 @@ Parameters supplied to the action within the params object will be converted to 
 where possible using the DefaultTypeConverter class. In addition:
 
 * Node IDs may be supplied in their short form (implicit `workspace://SpacesStore` prefix)
-* Aspect names may be supplied using their short form, e.g. cm:versionable or cm:auditable
+* Aspect names may be supplied using their short form, e.g. `cm:versionable` or `cm:auditable`
 
-In this example, we add the aspect cm:versionable to a node using the QName resolution mentioned above:
+In this example, we add the aspect `cm:versionable` to a node using the QName resolution mentioned above:
 
 ```json
 {
@@ -104,9 +104,9 @@ import { AlfrescoApi, ActionsApi } from '@alfresco/js-api';
 
 const alfrescoApi = new AlfrescoApi(/*..*/);
 const actionsApi = new ActionsApi(alfrescoApi);
-const payload = {};
+const actionBodyExec = {};
 
-actionsApi.actionExec(payload).then((data) => {
+actionsApi.actionExec(actionBodyExec).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 });
 ```
@@ -115,7 +115,7 @@ actionsApi.actionExec(payload).then((data) => {
 
 Retrieve list of available actions
 
-> this endpoint is available in Alfresco 5.2.2 and newer versions.
+> this endpoint is available in **Alfresco 5.2.2** and newer versions.
 
 The default sort order for the returned list is for actions to be sorted by ascending name.
 You can override the default by using the **orderBy** parameter.
