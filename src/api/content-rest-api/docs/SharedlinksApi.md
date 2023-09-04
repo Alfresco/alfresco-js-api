@@ -2,672 +2,456 @@
 
 All URIs are relative to *https://localhost/alfresco/api/-default-/public/alfresco/versions/1*
 
-Method | HTTP request | Description
-------------- | ------------- | -------------
-[**createSharedLink**](SharedlinksApi.md#createSharedLink) | **POST** /shared-links | Create a shared link to a file
-[**deleteSharedLink**](SharedlinksApi.md#deleteSharedLink) | **DELETE** /shared-links/{sharedId} | Deletes a shared link
-[**emailSharedLink**](SharedlinksApi.md#emailSharedLink) | **POST** /shared-links/{sharedId}/email | Email shared link
-[**getSharedLink**](SharedlinksApi.md#getSharedLink) | **GET** /shared-links/{sharedId} | Get a shared link
-[**getSharedLinkContent**](SharedlinksApi.md#getSharedLinkContent) | **GET** /shared-links/{sharedId}/content | Get shared link content
-[**getSharedLinkRendition**](SharedlinksApi.md#getSharedLinkRendition) | **GET** /shared-links/{sharedId}/renditions/{renditionId} | Get shared link rendition information
-[**getSharedLinkRenditionContent**](SharedlinksApi.md#getSharedLinkRenditionContent) | **GET** /shared-links/{sharedId}/renditions/{renditionId}/content | Get shared link rendition content
-[**listSharedLinkRenditions**](SharedlinksApi.md#listSharedLinkRenditions) | **GET** /shared-links/{sharedId}/renditions | List renditions for a shared link
-[**listSharedLinks**](SharedlinksApi.md#listSharedLinks) | **GET** /shared-links | List shared links
+| Method                                                          | HTTP request                                                      | Description                           |
+|-----------------------------------------------------------------|-------------------------------------------------------------------|---------------------------------------|
+| [createSharedLink](#createSharedLink)                           | **POST** /shared-links                                            | Create a shared link to a file        |
+| [deleteSharedLink](#deleteSharedLink)                           | **DELETE** /shared-links/{sharedId}                               | Deletes a shared link                 |
+| [emailSharedLink](#emailSharedLink)                             | **POST** /shared-links/{sharedId}/email                           | Email shared link                     |
+| [getSharedLink](#getSharedLink)                                 | **GET** /shared-links/{sharedId}                                  | Get a shared link                     |
+| [getSharedLinkContent](#getSharedLinkContent)                   | **GET** /shared-links/{sharedId}/content                          | Get shared link content               |
+| [getSharedLinkRendition](#getSharedLinkRendition)               | **GET** /shared-links/{sharedId}/renditions/{renditionId}         | Get shared link rendition information |
+| [getSharedLinkRenditionContent](#getSharedLinkRenditionContent) | **GET** /shared-links/{sharedId}/renditions/{renditionId}/content | Get shared link rendition content     |
+| [listSharedLinkRenditions](#listSharedLinkRenditions)           | **GET** /shared-links/{sharedId}/renditions                       | List renditions for a shared link     |
+| [listSharedLinks](#listSharedLinks)                             | **GET** /shared-links                                             | List shared links                     |
 
-
-<a name="createSharedLink"></a>
 ## createSharedLink
-> SharedLinkEntry createSharedLink(sharedLinkBodyCreateopts)
 
 Create a shared link to a file
 
-**Note:** this endpoint is available in Alfresco 5.2 and newer versions.
+> this endpoint is available in **Alfresco 5.2** and newer versions.
 
 Create a shared link to the file **nodeId** in the request body. Also, an optional expiry date could be set,
 so the shared link would become invalid when the expiry date is reached. For example:
 
-JSON
-  {
-    \"nodeId\": \"1ff9da1a-ee2f-4b9c-8c34-3333333333\",
-    \"expiresAt\": \"2017-03-23T23:00:00.000+0000\"
-  }
-
+```json
+{
+  "nodeId": "1ff9da1a-ee2f-4b9c-8c34-3333333333",
+  "expiresAt": "2017-03-23T23:00:00.000+0000"
+}
+```
 
 **Note:** You can create shared links to more than one file
 specifying a list of **nodeId**s in the JSON body like this:
 
-JSON
+```json
 [
   {
-    \"nodeId\": \"1ff9da1a-ee2f-4b9c-8c34-4444444444\"
+    "nodeId": "1ff9da1a-ee2f-4b9c-8c34-4444444444"
   },
   {
-    \"nodeId\": \"1ff9da1a-ee2f-4b9c-8c34-5555555555\"
+    "nodeId": "1ff9da1a-ee2f-4b9c-8c34-5555555555"
   }
 ]
+```
 
 If you specify a list as input, then a paginated list rather than an entry is returned in the response body. For example:
 
-JSON
+```json
 {
-  \"list\": {
-    \"pagination\": {
-      \"count\": 2,
-      \"hasMoreItems\": false,
-      \"totalItems\": 2,
-      \"skipCount\": 0,
-      \"maxItems\": 100
+  "list": {
+    "pagination": {
+      "count": 2,
+      "hasMoreItems": false,
+      "totalItems": 2,
+      "skipCount": 0,
+      "maxItems": 100
     },
-    \"entries\": [
+    "entries": [
       {
-        \"entry\": {
-          ...
+        "entry": {
         }
       },
       {
-        \"entry\": {
-          ...
+        "entry": {
         }
       }
     ]
   }
 }
+```
 
+**Parameters**
 
+| Name                     | Type                                          | Description                                                                                                                                                                                                                                                                                                                                                                                                                             |
+|--------------------------|-----------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **sharedLinkBodyCreate** | [SharedLinkBodyCreate](#SharedLinkBodyCreate) | The nodeId to create a shared link for.                                                                                                                                                                                                                                                                                                                                                                                                 |
+| opts.include             | string[]                                      | Returns additional information about the shared link, the following optional fields can be requested: `allowableOperations`, `path`, `properties`, `isFavorite`, `aspectNames`                                                                                                                                                                                                                                                          |
+| opts.fields              | string[]                                      | A list of field names. You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth. The list applies to a returned individual entity or entries within a collection. If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter. |
 
-### Example
+**Return type**: [SharedLinkEntry](#SharedLinkEntry)
+
+**Example**
 
 ```javascript
-import { AlfrescoApi, SharedlinksApi} from '@alfresco/js-api';
+import { AlfrescoApi, SharedlinksApi } from '@alfresco/js-api';
 
-const alfrescoApi = new AlfrescoApi({
-    hostEcm: 'http://127.0.0.1:8080'
-});
-
+const alfrescoApi = new AlfrescoApi(/*..*/);
 const sharedlinksApi = new SharedlinksApi(alfrescoApi);
+const sharedLinkBodyCreate = {};
+const opts = {};
 
-const opts = { 
-  'include':  /*  | Returns additional information about the shared link, the following optional fields can be requested:
-* allowableOperations
-* path
-* properties
-* isFavorite
-* aspectNames
- */
-  'fields':  /*  | A list of field names.
-
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
-
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
- */
-};
-
-sharedlinksApi.createSharedLink(sharedLinkBodyCreateopts).then((data) => {
+sharedlinksApi.createSharedLink(sharedLinkBodyCreate, opts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
-  console.error(error);
 });
 ```
 
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **sharedLinkBodyCreate** | [**SharedLinkBodyCreate**](SharedLinkBodyCreate.md)| The nodeId to create a shared link for. | 
- **include** | [**string**](string.md)| Returns additional information about the shared link, the following optional fields can be requested:
-* allowableOperations
-* path
-* properties
-* isFavorite
-* aspectNames
- | [optional] 
- **fields** | [**string**](string.md)| A list of field names.
-
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
-
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
- | [optional] 
-
-### Return type
-
-[**SharedLinkEntry**](SharedLinkEntry.md)
-
-<a name="deleteSharedLink"></a>
 ## deleteSharedLink
-> deleteSharedLink(sharedId)
 
 Deletes a shared link
 
-**Note:** this endpoint is available in Alfresco 5.2 and newer versions.
+> this endpoint is available in Alfresco 5.2 and newer versions.
 
-Deletes the shared link with identifier **sharedId**.
+**Parameters**
 
+| Name         | Type   | Description                                |
+|--------------|--------|--------------------------------------------|
+| **sharedId** | string | The identifier of a shared link to a file. |
 
-### Example
+**Example**
 
 ```javascript
-import { AlfrescoApi, SharedlinksApi} from '@alfresco/js-api';
+import { AlfrescoApi, SharedlinksApi } from '@alfresco/js-api';
 
-const alfrescoApi = new AlfrescoApi({
-    hostEcm: 'http://127.0.0.1:8080'
-});
-
+const alfrescoApi = new AlfrescoApi(/*..*/);
 const sharedlinksApi = new SharedlinksApi(alfrescoApi);
 
-
-sharedlinksApi.deleteSharedLink(sharedId).then(() => {
+sharedlinksApi.deleteSharedLink(`<sharedId>`).then(() => {
   console.log('API called successfully.');
-}, function(error) {
-  console.error(error);
 });
 ```
 
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **sharedId** | **string**| The identifier of a shared link to a file. | 
-
-### Return type
-
-null (empty response body)
-
-<a name="emailSharedLink"></a>
 ## emailSharedLink
-> emailSharedLink(sharedIdsharedLinkBodyEmail)
 
 Email shared link
 
-**Note:** this endpoint is available in Alfresco 5.2 and newer versions.
+> this endpoint is available in **Alfresco 5.2** and newer versions.
 
 Sends email with app-specific url including identifier **sharedId**.
 
 The client and recipientEmails properties are mandatory in the request body. For example, to email a shared link with minimum info:
-JSON
-{
-    \"client\": \"myClient\",
-    \"recipientEmails\": [\"john.doe@acme.com\", \"joe.bloggs@acme.com\"]
-}
 
-A plain text message property can be optionally provided in the request body to customise the sent email.
+```json
+{
+    "client": "myClient",
+    "recipientEmails": ["john.doe@acme.com", "joe.bloggs@acme.com"]
+}
+```
+
+A plain text message property can be optionally provided in the request body to customise the email being sent.
 Also, a locale property can be optionally provided in the request body to send the emails in a particular language (if the locale is supported by Alfresco).
 For example, to email a shared link with a messages and a locale:
-JSON
-{
-    \"client\": \"myClient\",
-    \"recipientEmails\": [\"john.doe@acme.com\", \"joe.bloggs@acme.com\"],
-    \"message\": \"myMessage\",
-    \"locale\":\"en-GB\"
-}
 
-**Note:** The client must be registered before you can send a shared link email. See [server documentation]. However, out-of-the-box
+```json
+{
+    "client": "myClient",
+    "recipientEmails": ["john.doe@acme.com", "joe.bloggs@acme.com"],
+    "message": "myMessage",
+    "locale":"en-GB"
+}
+```
+
+>The client must be registered before you can send a shared link email. See [server documentation]. However, out-of-the-box
  share is registered as a default client, so you could pass **share** as the client name:
-JSON
+
+```json
 {
-    \"client\": \"share\",
-    \"recipientEmails\": [\"john.doe@acme.com\"]
+    "client": "share",
+    "recipientEmails": ["john.doe@acme.com"]
 }
+```
 
+**Parameters**
 
+| Name                    | Type                                        | Description                                |
+|-------------------------|---------------------------------------------|--------------------------------------------|
+| **sharedId**            | string                                      | The identifier of a shared link to a file. |
+| **sharedLinkBodyEmail** | [SharedLinkBodyEmail](#SharedLinkBodyEmail) | The shared link email to send.             |
 
-### Example
+**Example**
 
 ```javascript
-import { AlfrescoApi, SharedlinksApi} from '@alfresco/js-api';
+import { AlfrescoApi, SharedlinksApi } from '@alfresco/js-api';
 
-const alfrescoApi = new AlfrescoApi({
-    hostEcm: 'http://127.0.0.1:8080'
-});
-
+const alfrescoApi = new AlfrescoApi(/*..*/);
 const sharedlinksApi = new SharedlinksApi(alfrescoApi);
+const sharedLinkBodyEmail = {};
 
-
-sharedlinksApi.emailSharedLink(sharedIdsharedLinkBodyEmail).then(() => {
+sharedlinksApi.emailSharedLink(`<sharedId>`, sharedLinkBodyEmail).then(() => {
   console.log('API called successfully.');
-}, function(error) {
-  console.error(error);
 });
 ```
 
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **sharedId** | **string**| The identifier of a shared link to a file. | 
- **sharedLinkBodyEmail** | [**SharedLinkBodyEmail**](SharedLinkBodyEmail.md)| The shared link email to send. | 
-
-### Return type
-
-null (empty response body)
-
-<a name="getSharedLink"></a>
 ## getSharedLink
-> SharedLinkEntry getSharedLink(sharedIdopts)
 
 Get a shared link
 
-**Note:** this endpoint is available in Alfresco 5.2 and newer versions.
+> this endpoint is available in **Alfresco 5.2** and newer versions.  
+> No authentication is required to call this endpoint.
 
 Gets minimal information for the file with shared link identifier **sharedId**.
 
-**Note:** No authentication is required to call this endpoint.
+**Parameters**
 
+| Name         | Type     | Description                                                                                                                                                                                                                                                                                                                                                                                                                             |
+|--------------|----------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **sharedId** | string   | The identifier of a shared link to a file.                                                                                                                                                                                                                                                                                                                                                                                              |
+| opts.fields  | string[] | A list of field names. You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth. The list applies to a returned individual entity or entries within a collection. If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter. | | 
 
-### Example
+**Return type**: [SharedLinkEntry](#SharedLinkEntry)
+
+**Example**
 
 ```javascript
-import { AlfrescoApi, SharedlinksApi} from '@alfresco/js-api';
+import { AlfrescoApi, SharedlinksApi } from '@alfresco/js-api';
 
-const alfrescoApi = new AlfrescoApi({
-    hostEcm: 'http://127.0.0.1:8080'
-});
-
+const alfrescoApi = new AlfrescoApi(/*..*/);
 const sharedlinksApi = new SharedlinksApi(alfrescoApi);
+const opts = {};
 
-const opts = { 
-  'fields':  /*  | A list of field names.
-
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
-
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
- */
-};
-
-sharedlinksApi.getSharedLink(sharedIdopts).then((data) => {
+sharedlinksApi.getSharedLink(`<sharedId>`, opts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
-  console.error(error);
 });
 ```
 
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **sharedId** | **string**| The identifier of a shared link to a file. | 
- **fields** | [**string**](string.md)| A list of field names.
-
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
-
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
- | [optional] 
-
-### Return type
-
-[**SharedLinkEntry**](SharedLinkEntry.md)
-
-<a name="getSharedLinkContent"></a>
 ## getSharedLinkContent
-> Blob getSharedLinkContent(sharedIdopts)
 
 Get shared link content
 
-**Note:** this endpoint is available in Alfresco 5.2 and newer versions.
+> this endpoint is available in **Alfresco 5.2** and newer versions.  
+> No authentication is required to call this endpoint.
 
 Gets the content of the file with shared link identifier **sharedId**.
 
-**Note:** No authentication is required to call this endpoint.
+**Parameters**
 
+| Name                 | Type    | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+|----------------------|---------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **sharedId**         | string  | The identifier of a shared link to a file.                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| opts.attachment      | boolean | **true** (default) enables a web browser to download the file as an attachment. **false** means a web browser may preview the file in a new tab or window, but not download the file. You can only set this parameter to **false** if the content type of the file is in the supported list; for example, certain image files and PDF files. If the content type is not supported for preview, then a value of **false**  is ignored, and the attachment will be returned in the response. |
+| opts.ifModifiedSince | Date    | Only returns the content if it has been modified since the date provided. Use the date format defined by HTTP. For example, Wed, 09 Mar 2016 16:56:34 GMT.                                                                                                                                                                                                                                                                                                                                 |
+| opts.range           | string  | The Range header indicates the part of a document that the server should return. Single part request supported, for example: bytes=1-10.                                                                                                                                                                                                                                                                                                                                                   |
 
-### Example
+**Return type**: Blob
+
+**Example**
 
 ```javascript
-import { AlfrescoApi, SharedlinksApi} from '@alfresco/js-api';
+import { AlfrescoApi, SharedlinksApi } from '@alfresco/js-api';
 
-const alfrescoApi = new AlfrescoApi({
-    hostEcm: 'http://127.0.0.1:8080'
-});
-
+const alfrescoApi = new AlfrescoApi(/*..*/);
 const sharedlinksApi = new SharedlinksApi(alfrescoApi);
+const opts = {};
 
-const opts = { 
-  'attachment': true /*  | **true** enables a web browser to download the file as an attachment.
-**false** means a web browser may preview the file in a new tab or window, but not
-download the file.
-
-You can only set this parameter to **false** if the content type of the file is in the supported list;
-for example, certain image files and PDF files.
-
-If the content type is not supported for preview, then a value of **false**  is ignored, and
-the attachment will be returned in the response.
- */
-  'ifModifiedSince': 2013-10-20T19:20:30+01:00 /*  | Only returns the content if it has been modified since the date provided.
-Use the date format defined by HTTP. For example, Wed, 09 Mar 2016 16:56:34 GMT.
- */
-  'range': range_example /*  | The Range header indicates the part of a document that the server should return.
-Single part request supported, for example: bytes=1-10.
- */
-};
-
-sharedlinksApi.getSharedLinkContent(sharedIdopts).then((data) => {
+sharedlinksApi.getSharedLinkContent(`<sharedId>`, opts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
-  console.error(error);
 });
 ```
 
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **sharedId** | **string**| The identifier of a shared link to a file. | 
- **attachment** | **boolean**| **true** enables a web browser to download the file as an attachment.
-**false** means a web browser may preview the file in a new tab or window, but not
-download the file.
-
-You can only set this parameter to **false** if the content type of the file is in the supported list;
-for example, certain image files and PDF files.
-
-If the content type is not supported for preview, then a value of **false**  is ignored, and
-the attachment will be returned in the response.
- | [optional] [default to true]
- **ifModifiedSince** | **Date**| Only returns the content if it has been modified since the date provided.
-Use the date format defined by HTTP. For example, Wed, 09 Mar 2016 16:56:34 GMT.
- | [optional] 
- **range** | **string**| The Range header indicates the part of a document that the server should return.
-Single part request supported, for example: bytes=1-10.
- | [optional] 
-
-### Return type
-
-**Blob**
-
-<a name="getSharedLinkRendition"></a>
 ## getSharedLinkRendition
-> RenditionEntry getSharedLinkRendition(sharedIdrenditionId)
 
 Get shared link rendition information
 
-**Note:** this endpoint is available in Alfresco 5.2 and newer versions.
+> this endpoint is available in **Alfresco 5.2** and newer versions.  
+> No authentication is required to call this endpoint.
 
 Gets rendition information for the file with shared link identifier **sharedId**.
 
 This API method returns rendition information where the rendition status is CREATED,
 which means the rendition is available to view/download.
 
-**Note:** No authentication is required to call this endpoint.
+**Parameters**
 
+| Name            | Type   | Description                                                        |
+|-----------------|--------|--------------------------------------------------------------------|
+| **sharedId**    | string | The identifier of a shared link to a file.                         |
+| **renditionId** | string | The name of a thumbnail rendition, for example `doclib`, or `pdf`. |
 
-### Example
+**Return type**: [RenditionEntry](RenditionEntry.md)
+
+**Example**
 
 ```javascript
-import { AlfrescoApi, SharedlinksApi} from '@alfresco/js-api';
+import { AlfrescoApi, SharedlinksApi } from '@alfresco/js-api';
 
-const alfrescoApi = new AlfrescoApi({
-    hostEcm: 'http://127.0.0.1:8080'
-});
-
+const alfrescoApi = new AlfrescoApi(/*..*/);
 const sharedlinksApi = new SharedlinksApi(alfrescoApi);
 
-
-sharedlinksApi.getSharedLinkRendition(sharedIdrenditionId).then((data) => {
+sharedlinksApi.getSharedLinkRendition(`<sharedId>`, `<renditionId>`).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
-  console.error(error);
 });
 ```
 
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **sharedId** | **string**| The identifier of a shared link to a file. | 
- **renditionId** | **string**| The name of a thumbnail rendition, for example *doclib*, or *pdf*. | 
-
-### Return type
-
-[**RenditionEntry**](RenditionEntry.md)
-
-<a name="getSharedLinkRenditionContent"></a>
 ## getSharedLinkRenditionContent
-> Blob getSharedLinkRenditionContent(sharedIdrenditionIdopts)
 
 Get shared link rendition content
 
-**Note:** this endpoint is available in Alfresco 5.2 and newer versions.
+> this endpoint is available in **Alfresco 5.2** and newer versions.  
+> No authentication is required to call this endpoint.
 
 Gets the rendition content for file with shared link identifier **sharedId**.
 
-**Note:** No authentication is required to call this endpoint.
+**Parameters**
 
+| Name                 | Type    | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+|----------------------|---------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **sharedId**         | string  | The identifier of a shared link to a file.                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| **renditionId**      | string  | The name of a thumbnail rendition, for example *doclib*, or *pdf*.                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| opts.attachment      | boolean | **true** (default) enables a web browser to download the file as an attachment. **false** means a web browser may preview the file in a new tab or window, but not download the file. You can only set this parameter to **false** if the content type of the file is in the supported list; for example, certain image files and PDF files. If the content type is not supported for preview, then a value of **false**  is ignored, and the attachment will be returned in the response. |
+| opts.ifModifiedSince | Date    | Only returns the content if it has been modified since the date provided. Use the date format defined by HTTP. For example, Wed, 09 Mar 2016 16:56:34 GMT.                                                                                                                                                                                                                                                                                                                                 |
+| opts.range           | string  | The Range header indicates the part of a document that the server should return. Single part request supported, for example: bytes=1-10.                                                                                                                                                                                                                                                                                                                                                   |
 
-### Example
+**Return type**: Blob
+
+**Example**
 
 ```javascript
-import { AlfrescoApi, SharedlinksApi} from '@alfresco/js-api';
+import { AlfrescoApi, SharedlinksApi } from '@alfresco/js-api';
 
-const alfrescoApi = new AlfrescoApi({
-    hostEcm: 'http://127.0.0.1:8080'
-});
-
+const alfrescoApi = new AlfrescoApi(/*..*/);
 const sharedlinksApi = new SharedlinksApi(alfrescoApi);
+const opts = {};
 
-const opts = { 
-  'attachment': true /*  | **true** enables a web browser to download the file as an attachment.
-**false** means a web browser may preview the file in a new tab or window, but not
-download the file.
-
-You can only set this parameter to **false** if the content type of the file is in the supported list;
-for example, certain image files and PDF files.
-
-If the content type is not supported for preview, then a value of **false**  is ignored, and
-the attachment will be returned in the response.
- */
-  'ifModifiedSince': 2013-10-20T19:20:30+01:00 /*  | Only returns the content if it has been modified since the date provided.
-Use the date format defined by HTTP. For example, Wed, 09 Mar 2016 16:56:34 GMT.
- */
-  'range': range_example /*  | The Range header indicates the part of a document that the server should return.
-Single part request supported, for example: bytes=1-10.
- */
-};
-
-sharedlinksApi.getSharedLinkRenditionContent(sharedIdrenditionIdopts).then((data) => {
+sharedlinksApi.getSharedLinkRenditionContent(`<sharedId>`, `<renditionId>`, opts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
-  console.error(error);
 });
 ```
 
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **sharedId** | **string**| The identifier of a shared link to a file. | 
- **renditionId** | **string**| The name of a thumbnail rendition, for example *doclib*, or *pdf*. | 
- **attachment** | **boolean**| **true** enables a web browser to download the file as an attachment.
-**false** means a web browser may preview the file in a new tab or window, but not
-download the file.
-
-You can only set this parameter to **false** if the content type of the file is in the supported list;
-for example, certain image files and PDF files.
-
-If the content type is not supported for preview, then a value of **false**  is ignored, and
-the attachment will be returned in the response.
- | [optional] [default to true]
- **ifModifiedSince** | **Date**| Only returns the content if it has been modified since the date provided.
-Use the date format defined by HTTP. For example, Wed, 09 Mar 2016 16:56:34 GMT.
- | [optional] 
- **range** | **string**| The Range header indicates the part of a document that the server should return.
-Single part request supported, for example: bytes=1-10.
- | [optional] 
-
-### Return type
-
-**Blob**
-
-<a name="listSharedLinkRenditions"></a>
 ## listSharedLinkRenditions
-> RenditionPaging listSharedLinkRenditions(sharedId)
 
 List renditions for a shared link
 
-**Note:** this endpoint is available in Alfresco 5.2 and newer versions.
+> this endpoint is available in **Alfresco 5.2** and newer versions.  
+> No authentication is required to call this endpoint.
 
 Gets a list of the rendition information for the file with shared link identifier **sharedId**.
 
 This API method returns rendition information, including the rendition id, for each rendition
-where the rendition status is CREATED, which means the rendition is available to view/download.
+where the rendition status is `CREATED`, which means the rendition is available to view/download.
 
-**Note:** No authentication is required to call this endpoint.
+**Parameters**
 
+| Name         | Type   | Description                                |
+|--------------|--------|--------------------------------------------|
+| **sharedId** | string | The identifier of a shared link to a file. |
 
-### Example
+**Return type**: [RenditionPaging](RenditionPaging.md)
+
+**Example**
 
 ```javascript
-import { AlfrescoApi, SharedlinksApi} from '@alfresco/js-api';
+import { AlfrescoApi, SharedlinksApi } from '@alfresco/js-api';
 
-const alfrescoApi = new AlfrescoApi({
-    hostEcm: 'http://127.0.0.1:8080'
-});
-
+const alfrescoApi = new AlfrescoApi(/*..*/);
 const sharedlinksApi = new SharedlinksApi(alfrescoApi);
 
-
-sharedlinksApi.listSharedLinkRenditions(sharedId).then((data) => {
+sharedlinksApi.listSharedLinkRenditions(`<sharedId>`).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
-  console.error(error);
 });
 ```
 
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **sharedId** | **string**| The identifier of a shared link to a file. | 
-
-### Return type
-
-[**RenditionPaging**](RenditionPaging.md)
-
-<a name="listSharedLinks"></a>
 ## listSharedLinks
-> SharedLinkPaging listSharedLinks(opts)
 
 List shared links
 
-**Note:** this endpoint is available in Alfresco 5.2 and newer versions.
+> this endpoint is available in Alfresco 5.2 and newer versions.
 
 Get a list of links that the current user has read permission on source node.
 
 The list is ordered in descending modified order.
 
-**Note:** The list of links is eventually consistent so newly created shared links may not appear immediately.
+> The list of links is eventually consistent so newly created shared links may not appear immediately.
 
+**Parameters**
 
-### Example
+| Name           | Type     | Description                                                                                                                                                                                                                                                                                                                                                                                                                            | Notes          |
+|----------------|----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------|
+| opts.skipCount | number   | The number of entities that exist in the collection before those included in this list. If not supplied then the default value is 0.                                                                                                                                                                                                                                                                                                   | default to 0   |
+| opts.maxItems  | number   | The maximum number of items to return in the list. If not supplied then the default value is 100.                                                                                                                                                                                                                                                                                                                                      | default to 100 |
+| opts.where     | string   | Optionally filter the list by "sharedByUser" userid of person who shared the link (can also use -me-)`where=(sharedByUser='jbloggs')`, `where=(sharedByUser='-me-')`                                                                                                                                                                                                                                                                   |                |
+| opts.include   | string[] | Returns additional information about the shared link, the following optional fields can be requested: `allowableOperations`, `path`, `properties`, `isFavorite`, `aspectNames`                                                                                                                                                                                                                                                         |                |
+| opts.fields    | string[] | A list of field names.You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth. The list applies to a returned individual entity or entries within a collection. If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter. |                |
+
+**Return type**: [SharedLinkPaging](#SharedLinkPaging)
+
+**Example**
 
 ```javascript
-import { AlfrescoApi, SharedlinksApi} from '@alfresco/js-api';
+import { AlfrescoApi, SharedlinksApi } from '@alfresco/js-api';
 
-const alfrescoApi = new AlfrescoApi({
-    hostEcm: 'http://127.0.0.1:8080'
-});
-
+const alfrescoApi = new AlfrescoApi(/*..*/);
 const sharedlinksApi = new SharedlinksApi(alfrescoApi);
-
-const opts = { 
-  'skipCount': 56 /*  | The number of entities that exist in the collection before those included in this list.
-If not supplied then the default value is 0.
- */
-  'maxItems': 56 /*  | The maximum number of items to return in the list.
-If not supplied then the default value is 100.
- */
-  'where': where_example /*  | Optionally filter the list by \"sharedByUser\" userid of person who shared the link (can also use -me-)
-
-*   where=(sharedByUser='jbloggs')
-
-*   where=(sharedByUser='-me-')
- */
-  'include':  /*  | Returns additional information about the shared link, the following optional fields can be requested:
-* allowableOperations
-* path
-* properties
-* isFavorite
-* aspectNames
- */
-  'fields':  /*  | A list of field names.
-
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
-
-The list applies to a returned individual
-entity or entries within a collection.
-
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
- */
-};
+const opts = {};
 
 sharedlinksApi.listSharedLinks(opts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
-  console.error(error);
 });
 ```
 
-### Parameters
+# Models
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **skipCount** | **number**| The number of entities that exist in the collection before those included in this list.
-If not supplied then the default value is 0.
- | [optional] [default to 0]
- **maxItems** | **number**| The maximum number of items to return in the list.
-If not supplied then the default value is 100.
- | [optional] [default to 100]
- **where** | **string**| Optionally filter the list by \"sharedByUser\" userid of person who shared the link (can also use -me-)
+## SharedLinkPaging
 
-*   where=(sharedByUser='jbloggs')
+**Properties**
 
-*   where=(sharedByUser='-me-')
- | [optional] 
- **include** | [**string**](string.md)| Returns additional information about the shared link, the following optional fields can be requested:
-* allowableOperations
-* path
-* properties
-* isFavorite
-* aspectNames
- | [optional] 
- **fields** | [**string**](string.md)| A list of field names.
+| Name | Type                                          |
+|------|-----------------------------------------------|
+| list | [SharedLinkPagingList](#SharedLinkPagingList) |
 
-You can use this parameter to restrict the fields
-returned within a response if, for example, you want to save on overall bandwidth.
+## SharedLinkPagingList
 
-The list applies to a returned individual
-entity or entries within a collection.
+**Properties**
 
-If the API method also supports the **include**
-parameter, then the fields specified in the **include**
-parameter are returned in addition to those specified in the **fields** parameter.
- | [optional] 
+| Name           | Type                                  |
+|----------------|---------------------------------------|
+| **pagination** | [Pagination](Pagination.md)           |
+| **entries**    | [SharedLinkEntry[]](#SharedLinkEntry) |
 
-### Return type
+## SharedLinkEntry
 
-[**SharedLinkPaging**](SharedLinkPaging.md)
+**Properties**
 
+| Name      | Type                      |
+|-----------|---------------------------|
+| **entry** | [SharedLink](#SharedLink) |
+
+## SharedLinkBodyEmail
+
+**Properties**
+
+| Name            | Type     |
+|-----------------|----------|
+| client          | string   |
+| message         | string   |
+| locale          | string   |
+| recipientEmails | string[] |
+
+## SharedLinkBodyCreate
+
+**Properties**
+
+| Name       | Type   |
+|------------|--------|
+| **nodeId** | string |
+| expiresAt  | Date   |
+
+## SharedLink
+
+**Properties**
+
+| Name                        | Type                          | Description                                                                                                                                                  |
+|-----------------------------|-------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| id                          | string                        |                                                                                                                                                              |
+| expiresAt                   | Date                          |                                                                                                                                                              |
+| nodeId                      | string                        |                                                                                                                                                              |
+| name                        | string                        | The name must not contain spaces or the following special characters: `* " < > \\ / ? :` and `\|`. The character . must not be used at the end of the name.  |
+| title                       | string                        |                                                                                                                                                              |
+| description                 | string                        |                                                                                                                                                              |
+| modifiedAt                  | Date                          |                                                                                                                                                              |
+| modifiedByUser              | [UserInfo](UserInfo.md)       |                                                                                                                                                              |
+| sharedByUser                | [UserInfo](UserInfo.md)       |                                                                                                                                                              |
+| content                     | [ContentInfo](ContentInfo.md) |                                                                                                                                                              |
+| allowableOperations         | string[]                      | The allowable operations for the Quickshare link itself. See allowableOperationsOnTarget for the allowable operations pertaining to the linked content node. |
+| allowableOperationsOnTarget | string[]                      | The allowable operations for the content node being shared.                                                                                                  |
+| isFavorite                  | boolean                       |                                                                                                                                                              |
+| properties                  | any                           | A subset of the target node's properties, system properties and properties already available in the SharedLink are excluded.                                 |
+| aspectNames                 | string[]                      |                                                                                                                                                              |
