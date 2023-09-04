@@ -175,7 +175,7 @@ If you specify a list as input, then a paginated list rather than an entry is re
 | **siteMembershipBodyCreate** | [SiteMembershipBodyCreate](#SiteMembershipBodyCreate) | The person to add and their role                                                                                                                                                                                                                                                                                                                                                                                                        |
 | opts.fields                  | string[]                                              | A list of field names. You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth. The list applies to a returned individual entity or entries within a collection. If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter. |
 
-**Return type**: [SiteMemberEntry](SiteMemberEntry.md)
+**Return type**: [SiteMemberEntry](#SiteMemberEntry)
 
 **Example**
 
@@ -463,7 +463,7 @@ You can use the `-me-` string in place of `<personId>` to specify the currently 
 | **personId** | string   | The identifier of a person.                                                                                                                                                                                                                                                                                                                                                                                                             |
 | opts.fields  | string[] | A list of field names. You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth. The list applies to a returned individual entity or entries within a collection. If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter. |
 
-**Return type**: [SiteMemberEntry](SiteMemberEntry.md)
+**Return type**: [SiteMemberEntry](#SiteMemberEntry)
 
 **Example**
 
@@ -657,7 +657,7 @@ List site memberships
 | opts.maxItems  | number   | The maximum number of items to return in the list. If not supplied then the default value is 100.                                                                                                                                                                                                                                                                                                                                       | default to 100 |
 | opts.fields    | string[] | A list of field names. You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth. The list applies to a returned individual entity or entries within a collection. If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter. |                |
 
-**Return type**: [SiteMemberPaging](SiteMemberPaging.md)
+**Return type**: [SiteMemberPaging](#SiteMemberPaging)
 
 **Example**
 
@@ -882,7 +882,7 @@ You can set the **role** to one of four types:
 | **siteMembershipBodyUpdate** | [SiteMembershipBodyUpdate](#SiteMembershipBodyUpdate) | The persons new role                                                                                                                                                                                                                                                                                                                                                                                                                    |
 | opts.fields                  | string[]                                              | A list of field names. You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth. The list applies to a returned individual entity or entries within a collection. If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter. |
 
-**Return type**: [SiteMemberEntry](SiteMemberEntry.md)
+**Return type**: [SiteMemberEntry](#SiteMemberEntry)
 
 **Example**
 
@@ -1183,4 +1183,46 @@ sitesApi.updateSiteMembershipRequestForPerson(`<personId>`, `<siteId>`, siteMemb
 | **person**    | [Person](Person.md) |
 | message       | **string**          |
 
+## SiteMemberPaging
 
+**Properties**
+
+| Name | Type                                          |
+|------|-----------------------------------------------|
+| list | [SiteMemberPagingList](#SiteMemberPagingList) |
+
+## SiteMemberPagingList
+
+**Properties**
+
+| Name           | Type                                  |
+|----------------|---------------------------------------|
+| **pagination** | [Pagination](Pagination.md)           |
+| **entries**    | [SiteMemberEntry[]](#SiteMemberEntry) |
+
+## SiteMemberEntry
+
+**Properties**
+
+| Name      | Type                      |
+|-----------|---------------------------|
+| **entry** | [SiteMember](#SiteMember) |
+
+
+## SiteMember
+
+**Properties**
+
+| Name            | Type                |
+|-----------------|---------------------|
+| **id**          | string              |
+| **person**      | [Person](Person.md) |
+| **role**        | string              |
+| isMemberOfGroup | boolean             |
+
+### SiteMember.RoleEnum
+
+* `SiteConsumer` (value: `'SiteConsumer'`)
+* `SiteCollaborator` (value: `'SiteCollaborator'`)
+* `SiteContributor` (value: `'SiteContributor'`)
+* `SiteManager` (value: `'SiteManager'`)
