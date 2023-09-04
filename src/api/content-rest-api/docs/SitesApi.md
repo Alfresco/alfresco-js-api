@@ -4,6 +4,7 @@ All URIs are relative to *https://localhost/alfresco/api/-default-/public/alfres
 
 | Method                                                                        | HTTP request                                                          | Description                       |
 |-------------------------------------------------------------------------------|-----------------------------------------------------------------------|-----------------------------------|
+| [listSiteGroups](#listSiteGroups)                                             | **GET** /sites/{siteId}/group-members                                 | List group membership for site    |
 | [approveSiteMembershipRequest](#approveSiteMembershipRequest)                 | **POST** /sites/{siteId}/site-membership-requests/{inviteeId}/approve | Approve a site membership request |
 | [createSite](#createSite)                                                     | **POST** /sites                                                       | Create a site                     |
 | [createSiteMembership](#createSiteMembership)                                 | **POST** /sites/{siteId}/members                                      | Create a site membership          |
@@ -27,6 +28,24 @@ All URIs are relative to *https://localhost/alfresco/api/-default-/public/alfres
 | [updateSite](#updateSite)                                                     | **PUT** /sites/{siteId}                                               | Update a site                     |
 | [updateSiteMembership](#updateSiteMembership)                                 | **PUT** /sites/{siteId}/members/{personId}                            | Update a site membership          |
 | [updateSiteMembershipRequestForPerson](#updateSiteMembershipRequestForPerson) | **PUT** /people/{personId}/site-membership-requests/{siteId}          | Update a site membership request  |
+
+## listSiteGroups
+
+List group membership for site
+
+> this endpoint is available in **Alfresco 7.0.0** and newer versions.
+
+**Parameters**
+
+| Name       | Type     | Description                                                                                                                                                                                                                                                                                                                                                                                                                             | Notes          |
+|------------|----------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------|
+| **siteId** | string   | The identifier of a site.                                                                                                                                                                                                                                                                                                                                                                                                               |                |
+| skipCount  | number   | The number of entities that exist in the collection before those included in this list. If not supplied then the default value is 0.                                                                                                                                                                                                                                                                                                    | default to 0   |
+| maxItems   | number   | The maximum number of items to return in the list. If not supplied then the default value is 100.                                                                                                                                                                                                                                                                                                                                       | default to 100 |
+| fields     | string[] | A list of field names. You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth. The list applies to a returned individual entity or entries within a collection. If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter. |                |
+
+
+**Return type**: [SiteGroupPaging](#SiteGroupPaging)
 
 ## approveSiteMembershipRequest
 
@@ -90,12 +109,12 @@ This container is the root folder for content stored in the site.
 
 **Parameters**
 
-| Name                    | Type                                 | Description                                                                                                                                                                                                                                                                                                                                                                                                                             |
-|-------------------------|--------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Name                    | Type                              | Description                                                                                                                                                                                                                                                                                                                                                                                                                             |
+|-------------------------|-----------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **siteBodyCreate**      | [SiteBodyCreate](#SiteBodyCreate) | The site details                                                                                                                                                                                                                                                                                                                                                                                                                        |
-| opts.skipConfiguration  | boolean                              | Flag to indicate whether the Share-specific (surf) configuration files for the site should not be created.                                                                                                                                                                                                                                                                                                                              |
-| opts.skipAddToFavorites | boolean                              | Flag to indicate whether the site should not be added to the user's site favorites.                                                                                                                                                                                                                                                                                                                                                     |
-| opts.fields             | string[]                             | A list of field names. You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth. The list applies to a returned individual entity or entries within a collection. If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter. | 
+| opts.skipConfiguration  | boolean                           | Flag to indicate whether the Share-specific (surf) configuration files for the site should not be created.                                                                                                                                                                                                                                                                                                                              |
+| opts.skipAddToFavorites | boolean                           | Flag to indicate whether the site should not be added to the user's site favorites.                                                                                                                                                                                                                                                                                                                                                     |
+| opts.fields             | string[]                          | A list of field names. You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth. The list applies to a returned individual entity or entries within a collection. If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter. | 
 
 **Return type**: [SiteEntry](SiteEntry.md)
 
@@ -1226,3 +1245,46 @@ sitesApi.updateSiteMembershipRequestForPerson(`<personId>`, `<siteId>`, siteMemb
 * `SiteCollaborator` (value: `'SiteCollaborator'`)
 * `SiteContributor` (value: `'SiteContributor'`)
 * `SiteManager` (value: `'SiteManager'`)
+
+## SiteGroupPaging
+
+**Properties**
+
+| Name | Type                                        |
+|------|---------------------------------------------|
+| list | [SiteGroupPagingList](#SiteGroupPagingList) |
+
+## SiteGroupPagingList
+
+**Properties**
+
+| Name           | Type                                |
+|----------------|-------------------------------------|
+| **pagination** | [Pagination](Pagination.md)         |
+| **entries**    | [SiteGroupEntry[]](#SiteGroupEntry) |
+
+## SiteGroupEntry
+
+**Properties**
+
+| Name      | Type                    |
+|-----------|-------------------------|
+| **entry** | [SiteGroup](#SiteGroup) |
+
+## SiteGroup
+
+**Properties**
+
+| Name      | Type                          |
+|-----------|-------------------------------|
+| **id**    | string                        |
+| **group** | [GroupMember](GroupMember.md) |
+| **role**  | string                        |
+
+### Enum: SiteGroup.RoleEnum
+
+* `SiteConsumer` (value: `'SiteConsumer'`)
+* `SiteCollaborator` (value: `'SiteCollaborator'`)
+* `SiteContributor` (value: `'SiteContributor'`)
+* `SiteManager` (value: `'SiteManager'`)
+
