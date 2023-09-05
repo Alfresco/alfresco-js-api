@@ -1,19 +1,16 @@
 # GroupMember
 
-## Properties
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**id** | **string** |  | [default to null]
-**displayName** | **string** |  | [default to null]
-**memberType** | **string** |  | [default to null]
+**Properties**
 
+| Name            | Type   |
+|-----------------|--------|
+| **id**          | string |
+| **displayName** | string |
+| **memberType**  | string |
 
-<a name="GroupMember.MemberTypeEnum"></a>
-## Enum: GroupMember.MemberTypeEnum
-
+## GroupMember.MemberTypeEnum
 
 * `GROUP` (value: `'GROUP'`)
-
 * `PERSON` (value: `'PERSON'`)
 
 

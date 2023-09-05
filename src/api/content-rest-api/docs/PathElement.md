@@ -1,11 +1,12 @@
 # PathElement
 
-## Properties
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**id** | **string** |  | [optional] [default to null]
-**name** | **string** |  | [optional] [default to null]
-**nodeType** | **string** |  | [optional] [default to null]
-**aspectNames** | **string[]** |  | [optional] [default to null]
+**Properties**
+
+| Name        | Type     |
+|-------------|----------|
+| id          | string   |
+| name        | string   |
+| nodeType    | string   |
+| aspectNames | string[] |
 
 

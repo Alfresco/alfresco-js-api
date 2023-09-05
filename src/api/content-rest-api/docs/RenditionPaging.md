@@ -1,8 +1,18 @@
 # RenditionPaging
 
-## Properties
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**list** | [**RenditionPagingList**](RenditionPagingList.md) |  | [optional] [default to null]
+**Properties**
+
+| Name | Type                                        |
+|------|---------------------------------------------|
+| list | [RenditionPagingList](#RenditionPagingList) |
+
+# RenditionPagingList
+
+**Properties**
+
+| Name       | Type                                  |
+|------------|---------------------------------------|
+| pagination | [Pagination](Pagination.md)           |
+| entries    | [RenditionEntry[]](RenditionEntry.md) |
 
 

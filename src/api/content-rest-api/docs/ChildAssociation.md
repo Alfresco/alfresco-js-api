@@ -1,9 +1,10 @@
 # ChildAssociation
 
-## Properties
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**childId** | **string** |  | [default to null]
-**assocType** | **string** |  | [default to null]
+**Properties**
+
+| Name          | Type   |
+|---------------|--------|
+| **childId**   | string |
+| **assocType** | string |
 
 

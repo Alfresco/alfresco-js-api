@@ -22,28 +22,30 @@ import { buildCollectionParam } from '../../../alfrescoApiClient';
 import { ContentFieldsQuery, ContentPagingQuery } from './types';
 
 /**
-* Activities service.
-* @module ActivitiesApi
-*/
+ * Activities service.
+ * @module ActivitiesApi
+ */
 export class ActivitiesApi extends BaseApi {
     /**
-    * List activities
-    *
-    * Gets a list of activities for person **personId**.
-
-You can use the -me- string in place of <personId> to specify the currently authenticated user.
-
-    *
-    * @param personId The identifier of a person.
-    * @param opts Optional parameters
-    * @param opts.who A filter to include the user's activities only me, other user's activities only others'
-    * @param opts.siteId Include only activity feed entries relating to this site.
-    * @return Promise<ActivityPaging>
-    */
-    listActivitiesForPerson(personId: string, opts?: {
-        who?: string;
-        siteId?: string;
-    } & ContentPagingQuery & ContentFieldsQuery): Promise<ActivityPaging> {
+     * List activities
+     *
+     * Gets a list of activities for person **personId**.
+     * You can use the -me- string in place of <personId> to specify the currently authenticated user.
+     *
+     * @param personId The identifier of a person.
+     * @param opts Optional parameters
+     * @param opts.who A filter to include the user's activities only me, other user's activities only others'
+     * @param opts.siteId Include only activity feed entries relating to this site.
+     * @return Promise<ActivityPaging>
+     */
+    listActivitiesForPerson(
+        personId: string,
+        opts?: {
+            who?: string;
+            siteId?: string;
+        } & ContentPagingQuery &
+            ContentFieldsQuery
+    ): Promise<ActivityPaging> {
         throwIfNotDefined(personId, 'personId');
         opts = opts || {};
 
