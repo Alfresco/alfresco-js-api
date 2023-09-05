@@ -2,49 +2,74 @@
 
 All URIs are relative to */activiti-app/api*
 
-Method | HTTP request | Description
-------------- | ------------- | -------------
-[**getDataSources**](DataSourcesApi.md#getDataSources) | **GET** /enterprise/editor/data-sources | Get data sources
+| Method                            | HTTP request                            | Description      |
+|-----------------------------------|-----------------------------------------|------------------|
+| [getDataSources](#getDataSources) | **GET** /enterprise/editor/data-sources | Get data sources |
 
-
-<a name="getDataSources"></a>
 # **getDataSources**
-> ResultListDataRepresentationDataSourceRepresentation getDataSources(opts)
 
 Get data sources
 
-### Example
+**Parameters**
+
+| Name     | Type   |
+|----------|--------|
+| tenantId | number |
+
+**Return type**: [ResultListDataRepresentationDataSourceRepresentation](#ResultListDataRepresentationDataSourceRepresentation)
+
+**Example**
 
 ```javascript
-import DatasourcesApi from 'src/api/activiti-rest-api/docs/DataSourcesApi';
-import {AlfrescoApi} from '@alfresco/js-api';
+import { AlfrescoApi, DataSourcesApi } from '@alfresco/js-api';
 
-this.alfrescoApi = new AlfrescoApi();
-this.alfrescoApi.setConfig({
-    hostEcm: 'http://127.0.0.1:8080'
-});
+const alfrescoApi = new AlfrescoApi(/*..*/);
+const dataSourcesApi = new DataSourcesApi(alfrescoApi);
 
-let datasourcesApi = new DatasourcesApi(this.alfrescoApi);
-
-let opts = {
-    'tenantId': 789 //  | tenantId
+const opts = {
+    tenantId: 789
 };
 
 datasourcesApi.getDataSources(opts).then((data) => {
     console.log('API called successfully. Returned data: ' + data);
-}, function (error) {
-    console.error(error);
 });
-
 ```
 
-### Parameters
+# Models
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **tenantId** | **number**| tenantId | [optional] 
+## ResultListDataRepresentationDataSourceRepresentation
 
-### Return type
+**Properties**
 
-[**ResultListDataRepresentationDataSourceRepresentation**](ResultListDataRepresentationDataSourceRepresentation.md)
+| Name  | Type                                                    |
+|-------|---------------------------------------------------------|
+| data  | [DataSourceRepresentation[]](#DataSourceRepresentation) |
+| size  | number                                                  |
+| start | number                                                  |
+| total | number                                                  |
+
+## DataSourceRepresentation
+
+**Properties**
+
+| Name     | Type                                                              |
+|----------|-------------------------------------------------------------------|
+| config   | [DataSourceConfigRepresentation](#DataSourceConfigRepresentation) |
+| id       | number                                                            |
+| name     | string                                                            |
+| tenantId | number                                                            |
+
+## DataSourceConfigRepresentation
+
+**Properties**
+
+| Name        | Type   |
+|-------------|--------|
+| driverClass | string |
+| jdbcUrl     | string |
+| password    | string |
+| username    | string |
+
+
+
 
