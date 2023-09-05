@@ -2,44 +2,55 @@
 
 All URIs are relative to */activiti-app/api*
 
-Method | HTTP request | Description
-------------- | ------------- | -------------
-[**getAccounts**](AccountIntegrationApi.md#getAccounts) | **GET** /enterprise/account/integration | Retrieve external account information
+| Method                      | HTTP request                            | Description                           |
+|-----------------------------|-----------------------------------------|---------------------------------------|
+| [getAccounts](#getAccounts) | **GET** /enterprise/account/integration | Retrieve external account information |
 
-
-<a name="getAccounts"></a>
 # **getAccounts**
-> ResultListDataRepresentationAccountRepresentation getAccounts()
 
 Retrieve external account information
 
 Accounts are used to integrate with third party apps and clients
 
-### Example
+**Return type**: [ResultListDataRepresentationAccountRepresentation](#ResultListDataRepresentationAccountRepresentation)
+
+**Example**
 
 ```javascript
-import AccountintegrationApi from 'src/api/activiti-rest-api/docs/AccountIntegrationApi';
-import {AlfrescoApi} from '@alfresco/js-api';
+import { AlfrescoApi, AccountIntegrationApi } from '@alfresco/js-api';
 
-this.alfrescoApi = new AlfrescoApi();
-this.alfrescoApi.setConfig({
-    hostEcm: 'http://127.0.0.1:8080'
-});
+const alfrescoApi = new AlfrescoApi(/*..*/);
+const accountIntegrationApi = new AccountIntegrationApi(alfrescoApi);
 
-let accountintegrationApi = new AccountintegrationApi(this.alfrescoApi);
-
-accountintegrationApi.getAccounts().then((data) => {
+accountIntegrationApi.getAccounts().then((data) => {
     console.log('API called successfully. Returned data: ' + data);
-}, function (error) {
-    console.error(error);
 });
-
 ```
 
-### Parameters
-This endpoint does not need any parameter.
+# Models
 
-### Return type
+## ResultListDataRepresentationAccountRepresentation
 
-[**ResultListDataRepresentationAccountRepresentation**](ResultListDataRepresentationAccountRepresentation.md)
+**Properties**
+
+| Name  | Type                                              |
+|-------|---------------------------------------------------|
+| data  | [AccountRepresentation[]](#AccountRepresentation) |
+| size  | number                                            |
+| start | number                                            |
+| total | number                                            |
+
+
+## AccountRepresentation
+
+**Properties**
+
+| Name             | Type    |
+|------------------|---------|
+| authorizationUrl | string  |
+| authorized       | boolean |
+| metaDataAllowed  | boolean |
+| name             | string  |
+| serviceId        | string  |
+
 
