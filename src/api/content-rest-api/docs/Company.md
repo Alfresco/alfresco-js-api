@@ -1,15 +1,16 @@
 # Company
 
-## Properties
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**organization** | **string** |  | [optional] [default to null]
-**address1** | **string** |  | [optional] [default to null]
-**address2** | **string** |  | [optional] [default to null]
-**address3** | **string** |  | [optional] [default to null]
-**postcode** | **string** |  | [optional] [default to null]
-**telephone** | **string** |  | [optional] [default to null]
-**fax** | **string** |  | [optional] [default to null]
-**email** | **string** |  | [optional] [default to null]
+**Properties**
+
+| Name         | Type   |
+|--------------|--------|
+| organization | string |
+| address1     | string |
+| address2     | string |
+| address3     | string |
+| postcode     | string |
+| telephone    | string |
+| fax          | string |
+| email        | string |
 
 

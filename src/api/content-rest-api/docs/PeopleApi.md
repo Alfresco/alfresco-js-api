@@ -233,10 +233,10 @@ share is registered as a default client, so you could pass **share** as the clie
 
 **Parameters**
 
-| Name           | Type                        | Description                                          |
-|----------------|-----------------------------|------------------------------------------------------|
-| **personId**   | **string**                  | The identifier of a person.                          |
-| **clientBody** | [ClientBody](ClientBody.md) | The client name to send email with app-specific url. |
+| Name           | Type                      | Description                                          |
+|----------------|---------------------------|------------------------------------------------------|
+| **personId**   | **string**                | The identifier of a person.                          |
+| **clientBody** | [ClientBody](#ClientBody) | The client name to send email with app-specific url. |
 
 **Example**
 
@@ -271,10 +271,10 @@ The password, id and key properties are mandatory in the request body. For examp
 
 **Parameters**
 
-| Name                  | Type                                      | Description                 |
-|-----------------------|-------------------------------------------|-----------------------------|
-| **personId**          | string                                    | The identifier of a person. |
-| **passwordResetBody** | [PasswordResetBody](PasswordResetBody.md) | The reset password details  |
+| Name                  | Type                                    | Description                 |
+|-----------------------|-----------------------------------------|-----------------------------|
+| **personId**          | string                                  | The identifier of a person. |
+| **passwordResetBody** | [PasswordResetBody](#PasswordResetBody) | The reset password details  |
 
 **Example**
 
@@ -433,5 +433,25 @@ peopleApi.updatePerson(`<personId>`, personBodyUpdate, opts).then((data) => {
 | oldPassword               | string                |
 | aspectNames               | string[]              |
 | properties                | any                   |
+
+## ClientBody
+
+**Properties**
+
+| Name   | Type   | Description     |
+|--------|--------|-----------------|
+| client | string | the client name |
+
+## PasswordResetBody
+
+**Properties**
+
+| Name         | Type   | Description                                           |
+|--------------|--------|-------------------------------------------------------|
+| **password** | string | the new password                                      |
+| **id**       | string | the workflow id provided in the reset password email  |
+| **key**      | string | the workflow key provided in the reset password email |
+
+
 
 

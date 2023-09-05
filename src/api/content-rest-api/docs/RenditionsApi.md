@@ -14,7 +14,7 @@ All URIs are relative to *https://localhost/alfresco/api/-default-/public/alfres
 
 Create rendition
 
-**Note:** this endpoint is available in Alfresco 5.2 and newer versions.
+> this endpoint is available in **Alfresco 5.2** and newer versions.
 
 An asynchronous request to create a rendition for file **nodeId**.
 
@@ -51,13 +51,11 @@ Multiple names may be specified as a comma separated list or using a list format
 ```javascript
 import { AlfrescoApi, RenditionsApi } from '@alfresco/js-api';
 
-const alfrescoApi = new AlfrescoApi({
-    hostEcm: 'http://127.0.0.1:8080'
-});
-
+const alfrescoApi = new AlfrescoApi(/*..*/);
 const renditionsApi = new RenditionsApi(alfrescoApi);
+const renditionBodyCreate = {};
 
-renditionsApi.createRendition(nodeIdrenditionBodyCreate).then(() => {
+renditionsApi.createRendition(`<nodeId>`, renditionBodyCreate).then(() => {
   console.log('API called successfully.');
 });
 ```
@@ -70,25 +68,22 @@ Get rendition information
 
 **Parameters**
 
-| Name            | Type       | Description                                                        |
-|-----------------|------------|--------------------------------------------------------------------|
-| **nodeId**      | **string** | The identifier of a node.                                          | 
-| **renditionId** | **string** | The name of a thumbnail rendition, for example *doclib*, or *pdf*. | 
+| Name            | Type   | Description                                                        |
+|-----------------|--------|--------------------------------------------------------------------|
+| **nodeId**      | string | The identifier of a node.                                          | 
+| **renditionId** | string | The name of a thumbnail rendition, for example *doclib*, or *pdf*. | 
 
-**Return type**: [**RenditionEntry**](RenditionEntry.md)
+**Return type**: [RenditionEntry](RenditionEntry.md)
 
 **Example**
 
 ```javascript
 import { AlfrescoApi, RenditionsApi } from '@alfresco/js-api';
 
-const alfrescoApi = new AlfrescoApi({
-    hostEcm: 'http://127.0.0.1:8080'
-});
-
+const alfrescoApi = new AlfrescoApi(/*..*/);
 const renditionsApi = new RenditionsApi(alfrescoApi);
 
-renditionsApi.getRendition(nodeIdrenditionId).then((data) => {
+renditionsApi.getRendition(`<nodeId>`, `<renditionId>`).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 });
 ```
@@ -97,36 +92,34 @@ renditionsApi.getRendition(nodeIdrenditionId).then((data) => {
 
 Get rendition content
 
-> **Note:** this endpoint is available in Alfresco 5.2 and newer versions.
+> this endpoint is available in **Alfresco 5.2** and newer versions.
+
+**Parameters**
+
+| Name                 | Type    | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+|----------------------|---------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **nodeId**           | string  | The identifier of a node.                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| **renditionId**      | string  | The name of a thumbnail rendition, for example *doclib*, or *pdf*.                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| opts.attachment      | boolean | **true** (default) enables a web browser to download the file as an attachment. **false** means a web browser may preview the file in a new tab or window, but not download the file. You can only set this parameter to **false** if the content type of the file is in the supported list; for example, certain image files and PDF files. If the content type is not supported for preview, then a value of **false**  is ignored, and the attachment will be returned in the response. |
+| opts.ifModifiedSince | Date    | Only returns the content if it has been modified since the date provided. Use the date format defined by HTTP. For example, `Wed, 09 Mar 2016 16:56:34 GMT`.                                                                                                                                                                                                                                                                                                                               | 
+| opts.range           | string  | Default: true. The Range header indicates the part of a document that the server should return. Single part request supported, for example: bytes=1-10.                                                                                                                                                                                                                                                                                                                                    |
+| opts.placeholder     | boolean | Default: false. If **true** and there is no rendition for this **nodeId** and **renditionId**, then the placeholder image for the mime type of this rendition is returned, rather than a 404 response.                                                                                                                                                                                                                                                                                     |
+
+**Return type**: Blob
 
 **Example**
 
 ```javascript
-import { AlfrescoApi, RenditionsApi} from '@alfresco/js-api';
+import { AlfrescoApi, RenditionsApi } from '@alfresco/js-api';
 
-const alfrescoApi = new AlfrescoApi({
-    hostEcm: 'http://127.0.0.1:8080'
-});
-
+const alfrescoApi = new AlfrescoApi(/*..*/);
 const renditionsApi = new RenditionsApi(alfrescoApi);
+const opts = {};
 
-renditionsApi.getRenditionContent(nodeIdrenditionIdopts).then((data) => {
+renditionsApi.getRenditionContent(`<nodeId>`, `<renditionId>`, opts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 });
 ```
-
-**Parameters**
-
-| Name                | Type        | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                | Notes              |
-|---------------------|-------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------|
-| **nodeId**          | **string**  | The identifier of a node.                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |                    |
-| **renditionId**     | **string**  | The name of a thumbnail rendition, for example *doclib*, or *pdf*.                                                                                                                                                                                                                                                                                                                                                                                                                         |                    |
-| **attachment**      | **boolean** | **true** (default) enables a web browser to download the file as an attachment. **false** means a web browser may preview the file in a new tab or window, but not download the file. You can only set this parameter to **false** if the content type of the file is in the supported list; for example, certain image files and PDF files. If the content type is not supported for preview, then a value of **false**  is ignored, and the attachment will be returned in the response. |                    |
-| **ifModifiedSince** | **Date**    | Only returns the content if it has been modified since the date provided. Use the date format defined by HTTP. For example, `Wed, 09 Mar 2016 16:56:34 GMT`.                                                                                                                                                                                                                                                                                                                               |                    | 
-| **range**           | **string**  | The Range header indicates the part of a document that the server should return. Single part request supported, for example: bytes=1-10.                                                                                                                                                                                                                                                                                                                                                   | [default to true]  |
-| **placeholder**     | **boolean** | If **true** and there is no rendition for this **nodeId** and **renditionId**, then the placeholder image for the mime type of this rendition is returned, rather than a 404 response.                                                                                                                                                                                                                                                                                                     | [default to false] |
-
-**Return type**: **Blob**
 
 ## listRenditions
 
@@ -152,20 +145,17 @@ clause will return just the `CREATED` renditions:
 | **nodeId** | string | The identifier of a node.                                       | 
 | where      | string | A string to restrict the returned objects by using a predicate. |
 
-**Return type**: [**RenditionPaging**](RenditionPaging.md)
+**Return type**: [RenditionPaging](RenditionPaging.md)
 
 **Example**
 
 ```javascript
 import { AlfrescoApi, RenditionsApi } from '@alfresco/js-api';
 
-const alfrescoApi = new AlfrescoApi({
-    hostEcm: 'http://127.0.0.1:8080'
-});
-
+const alfrescoApi = new AlfrescoApi(/*..*/);
 const renditionsApi = new RenditionsApi(alfrescoApi);
 
-renditionsApi.listRenditions(nodeIdopts).then((data) => {
+renditionsApi.listRenditions(`<nodeId>`, opts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 });
 ```
@@ -174,26 +164,23 @@ renditionsApi.listRenditions(nodeIdopts).then((data) => {
 
 Generate a direct access content url for a given rendition of a node
 
-> **Note:** this endpoint is available in Alfresco 7.1 and newer versions.
+> this endpoint is available in **Alfresco 7.1** and newer versions.
 
 **Parameters**
 
-| Name            | Type       | Description                    |
-|-----------------|------------|--------------------------------|
-| **nodeId**      | **string** | The identifier of a node.      |
-| **renditionId** | **string** | The identifier of a rendition. |
+| Name            | Type   | Description                    |
+|-----------------|--------|--------------------------------|
+| **nodeId**      | string | The identifier of a node.      |
+| **renditionId** | string | The identifier of a rendition. |
 
-**Return type**: [**DirectAccessUrlEntry**](DirectAccessUrlEntry.md)
+**Return type**: [DirectAccessUrlEntry](DirectAccessUrlEntry.md)
 
 **Example**
 
 ```javascript
 import { AlfrescoApi, RenditionsApi } from '@alfresco/js-api';
 
-const alfrescoApi = new AlfrescoApi({
-    hostEcm: 'http://127.0.0.1:8080'
-});
-
+const alfrescoApi = new AlfrescoApi(/*..*/);
 const renditionsApi = new RenditionsApi(alfrescoApi);
 
 const nodeId = 'da2e6953-3850-408b-8284-3534dd777417';

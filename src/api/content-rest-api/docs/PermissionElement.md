@@ -1,21 +1,14 @@
 # PermissionElement
 
-## Properties
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**authorityId** | **string** |  | [optional] [default to null]
-**name** | **string** |  | [optional] [default to null]
-**accessStatus** | **string** |  | [optional] [default to null]
+**Properties**
 
+| Name         | Type   |
+|--------------|--------|
+| authorityId  | string |
+| name         | string |
+| accessStatus | string |
 
-<a name="PermissionElement.AccessStatusEnum"></a>
-## Enum: PermissionElement.AccessStatusEnum
-
+## PermissionElement.AccessStatusEnum
 
 * `ALLOWED` (value: `'ALLOWED'`)
-
 * `DENIED` (value: `'DENIED'`)
-
-
-
-

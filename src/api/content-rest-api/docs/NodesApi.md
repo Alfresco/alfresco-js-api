@@ -117,11 +117,11 @@ If you specify a list as input, then a paginated list rather than an entry is re
 
 **Parameters**
 
-| Name                      | Type                                  | Description                                                                                                                                                                                                                                                                                                                                                                                                                             |
-|---------------------------|---------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **nodeId**                | string                                | The identifier of a source node.                                                                                                                                                                                                                                                                                                                                                                                                        |
-| **associationBodyCreate** | [AssociationBody](AssociationBody.md) | The target node id and assoc type.                                                                                                                                                                                                                                                                                                                                                                                                      |
-| opts.fields               | string[]                              | A list of field names. You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth. The list applies to a returned individual entity or entries within a collection. If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter. |
+| Name                      | Type                                | Description                                                                                                                                                                                                                                                                                                                                                                                                                             |
+|---------------------------|-------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **nodeId**                | string                              | The identifier of a source node.                                                                                                                                                                                                                                                                                                                                                                                                        |
+| **associationBodyCreate** | [AssociationBody](#AssociationBody) | The target node id and assoc type.                                                                                                                                                                                                                                                                                                                                                                                                      |
+| opts.fields               | string[]                            | A list of field names. You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth. The list applies to a returned individual entity or entries within a collection. If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter. |
 
 **Return type**: [AssociationEntry](AssociationEntry.md)
 
@@ -373,13 +373,13 @@ If you specify a list as input, then a paginated list rather than an entry is re
 
 **Parameters**
 
-| Name               | Type                                | Description                                                                                                                                                                                                                                                                                                                                                                                                                             |
-|--------------------|-------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **nodeId**         | string                              | The identifier of a node. You can also use one of these well-known aliases: `-my-`, `-shared-`, `-root-`                                                                                                                                                                                                                                                                                                                                |
-| **nodeBodyCreate** | [NodeBodyCreate](NodeBodyCreate.md) | The node information to create.                                                                                                                                                                                                                                                                                                                                                                                                         |
-| opts.autoRename    | boolean                             | If true, then  a name clash will cause an attempt to auto rename by finding a unique name using an integer suffix.                                                                                                                                                                                                                                                                                                                      |
-| opts.include       | string[]                            | Returns additional information about the node. The following optional fields can be requested: `allowableOperations`, `association`, `isLink`, `isFavorite`, `isLocked`, `path`, `permissions`, `definition`                                                                                                                                                                                                                            |
-| opts.fields        | string[]                            | A list of field names. You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth. The list applies to a returned individual entity or entries within a collection. If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter. |
+| Name               | Type                              | Description                                                                                                                                                                                                                                                                                                                                                                                                                             |
+|--------------------|-----------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **nodeId**         | string                            | The identifier of a node. You can also use one of these well-known aliases: `-my-`, `-shared-`, `-root-`                                                                                                                                                                                                                                                                                                                                |
+| **nodeBodyCreate** | [NodeBodyCreate](#NodeBodyCreate) | The node information to create.                                                                                                                                                                                                                                                                                                                                                                                                         |
+| opts.autoRename    | boolean                           | If true, then  a name clash will cause an attempt to auto rename by finding a unique name using an integer suffix.                                                                                                                                                                                                                                                                                                                      |
+| opts.include       | string[]                          | Returns additional information about the node. The following optional fields can be requested: `allowableOperations`, `association`, `isLink`, `isFavorite`, `isLocked`, `path`, `permissions`, `definition`                                                                                                                                                                                                                            |
+| opts.fields        | string[]                          | A list of field names. You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth. The list applies to a returned individual entity or entries within a collection. If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter. |
 
 **Return type**: [NodeEntry](NodeEntry.md)
 
@@ -450,11 +450,11 @@ If you specify a list as input, then a paginated list rather than an entry is re
 
 **Parameters**
 
-| Name                                    | Type                                            | Description                                                                                                                                                                                                                                                                                                                                                                                                                             |
-|-----------------------------------------|-------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **nodeId**                              | string                                          | The identifier of a parent node.                                                                                                                                                                                                                                                                                                                                                                                                        |
-| **secondaryChildAssociationBodyCreate** | [ChildAssociationBody](ChildAssociationBody.md) | The child node id and assoc type.                                                                                                                                                                                                                                                                                                                                                                                                       |
-| opts.fields                             | string[]                                        | A list of field names. You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth. The list applies to a returned individual entity or entries within a collection. If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter. |
+| Name                                    | Type                                          | Description                                                                                                                                                                                                                                                                                                                                                                                                                             |
+|-----------------------------------------|-----------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **nodeId**                              | string                                        | The identifier of a parent node.                                                                                                                                                                                                                                                                                                                                                                                                        |
+| **secondaryChildAssociationBodyCreate** | [ChildAssociationBody](#ChildAssociationBody) | The child node id and assoc type.                                                                                                                                                                                                                                                                                                                                                                                                       |
+| opts.fields                             | string[]                                      | A list of field names. You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth. The list applies to a returned individual entity or entries within a collection. If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter. |
 
 **Return type**: [ChildAssociationEntry](ChildAssociationEntry.md)
 
@@ -1173,13 +1173,13 @@ nodesApi.updateNodeContent(`<nodeId>`, contentBodyUpdate, opts).then((data) => {
 
 **Properties**
 
-| Name        | Type                                  | Description                                                                                                                                                   |
-|-------------|---------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| name        | string                                | The name must not contain spaces or the following special characters: `* \" < > \\ / ? :` and `\|` . The character . must not be used at the end of the name. |
-| nodeType    | string                                |                                                                                                                                                               |
-| aspectNames | string[]                              |                                                                                                                                                               |
-| properties  | Map<string, string>                   |                                                                                                                                                               |
-| permissions | [PermissionsBody](PermissionsBody.md) |                                                                                                                                                               |
+| Name        | Type                                | Description                                                                                                                                                   |
+|-------------|-------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| name        | string                              | The name must not contain spaces or the following special characters: `* \" < > \\ / ? :` and `\|` . The character . must not be used at the end of the name. |
+| nodeType    | string                              |                                                                                                                                                               |
+| aspectNames | string[]                            |                                                                                                                                                               |
+| properties  | Map<string, string>                 |                                                                                                                                                               |
+| permissions | [PermissionsBody](#PermissionsBody) |                                                                                                                                                               |
 
 ## NodeAssociationPaging
 
@@ -1326,4 +1326,59 @@ nodesApi.updateNodeContent(`<nodeId>`, contentBodyUpdate, opts).then((data) => {
 | permissions         | [PermissionsInfo](PermissionsInfo.md)           |                                                                                                                                                               |
 | definition          | [Definition](Definition.md)                     |                                                                                                                                                               |
 | association         | [ChildAssociationInfo](ChildAssociationInfo.md) |                                                                                                                                                               |
+
+## NodeBodyCreate
+
+**Properties**
+
+| Name              | Type                                                    | Description                                                                                                                                                  |
+|-------------------|---------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **name**          | string                                                  | The name must not contain spaces or the following special characters: `* \" < > \\ / ? :` and `\|`. The character . must not be used at the end of the name. |
+| **nodeType**      | string                                                  |                                                                                                                                                              |
+| aspectNames       | string[]                                                |                                                                                                                                                              |
+| properties        | any                                                     |                                                                                                                                                              |
+| permissions       | [PermissionsBody](#PermissionsBody)                     |                                                                                                                                                              |
+| definition        | [Definition](Definition.md)                             |                                                                                                                                                              |
+| relativePath      | string                                                  |                                                                                                                                                              |
+| association       | [NodeBodyCreateAssociation](#NodeBodyCreateAssociation) |                                                                                                                                                              |
+| secondaryChildren | [ChildAssociationBody[]](#ChildAssociationBody)         |                                                                                                                                                              |
+| targets           | [AssociationBody[]](#AssociationBody)                   |                                                                                                                                                              |
+
+## NodeBodyCreateAssociation
+
+**Properties**
+
+| Name      | Type   |
+|-----------|--------|
+| assocType | string |
+
+## AssociationBody
+
+**Properties**
+
+| Name          | Type   |
+|---------------|--------|
+| **targetId**  | string |
+| **assocType** | string |
+
+## ChildAssociationBody
+
+**Properties**
+
+| Name          | Type   |
+|---------------|--------|
+| **childId**   | string |
+| **assocType** | string |
+
+## PermissionsBody
+
+**Properties**
+
+| Name                 | Type                                        |
+|----------------------|---------------------------------------------|
+| isInheritanceEnabled | boolean                                     |
+| locallySet           | [PermissionElement[]](PermissionElement.md) |
+
+
+
 
