@@ -4,8 +4,8 @@ All URIs are relative to */activiti-app/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**getModelHistoryCollection**](ModelshistoryApi.md#getModelHistoryCollection) | **GET** /enterprise/models/{modelId}/history | List a model's historic versions
-[**getProcessModelHistory**](ModelshistoryApi.md#getProcessModelHistory) | **GET** /enterprise/models/{modelId}/history/{modelHistoryId} | Get a historic version of a model
+[**getModelHistoryCollection**](ModelsHistoryApi.md#getModelHistoryCollection) | **GET** /enterprise/models/{modelId}/history | List a model's historic versions
+[**getProcessModelHistory**](ModelsHistoryApi.md#getProcessModelHistory) | **GET** /enterprise/models/{modelId}/history/{modelHistoryId} | Get a historic version of a model
 
 
 <a name="getModelHistoryCollection"></a>
@@ -15,9 +15,10 @@ Method | HTTP request | Description
 List a model's historic versions
 
 ### Example
+
 ```javascript
-import ModelshistoryApi from 'ModelshistoryApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import ModelshistoryApi from 'src/api/activiti-rest-api/docs/ModelsHistoryApi';
+import {AlfrescoApi} from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -26,14 +27,14 @@ this.alfrescoApi.setConfig({
 
 let modelshistoryApi = new ModelshistoryApi(this.alfrescoApi);
 
-let opts = { 
-  'includeLatestVersion': true //  | includeLatestVersion
+let opts = {
+    'includeLatestVersion': true //  | includeLatestVersion
 };
 
 modelshistoryApi.getModelHistoryCollection(modelIdopts).then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
-  console.error(error);
+    console.log('API called successfully. Returned data: ' + data);
+}, function (error) {
+    console.error(error);
 });
 
 ```
@@ -56,9 +57,10 @@ Name | Type | Description  | Notes
 Get a historic version of a model
 
 ### Example
+
 ```javascript
-import ModelshistoryApi from 'ModelshistoryApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import ModelshistoryApi from 'src/api/activiti-rest-api/docs/ModelsHistoryApi';
+import {AlfrescoApi} from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -69,9 +71,9 @@ let modelshistoryApi = new ModelshistoryApi(this.alfrescoApi);
 
 
 modelshistoryApi.getProcessModelHistory(modelIdmodelHistoryId).then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
-  console.error(error);
+    console.log('API called successfully. Returned data: ' + data);
+}, function (error) {
+    console.error(error);
 });
 
 ```

@@ -4,12 +4,12 @@ All URIs are relative to */activiti-app/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**createTaskVariable**](TaskvariablesApi.md#createTaskVariable) | **POST** /enterprise/tasks/{taskId}/variables | Create variables
-[**deleteAllLocalTaskVariables**](TaskvariablesApi.md#deleteAllLocalTaskVariables) | **DELETE** /enterprise/tasks/{taskId}/variables | Create or update variables
-[**deleteVariable**](TaskvariablesApi.md#deleteVariable) | **DELETE** /enterprise/tasks/{taskId}/variables/{variableName} | Delete a variable
-[**getVariable**](TaskvariablesApi.md#getVariable) | **GET** /enterprise/tasks/{taskId}/variables/{variableName} | Get a variable
-[**getVariables**](TaskvariablesApi.md#getVariables) | **GET** /enterprise/tasks/{taskId}/variables | List variables
-[**updateVariable**](TaskvariablesApi.md#updateVariable) | **PUT** /enterprise/tasks/{taskId}/variables/{variableName} | Update a variable
+[**createTaskVariable**](TaskVariablesApi.md#createTaskVariable) | **POST** /enterprise/tasks/{taskId}/variables | Create variables
+[**deleteAllLocalTaskVariables**](TaskVariablesApi.md#deleteAllLocalTaskVariables) | **DELETE** /enterprise/tasks/{taskId}/variables | Create or update variables
+[**deleteVariable**](TaskVariablesApi.md#deleteVariable) | **DELETE** /enterprise/tasks/{taskId}/variables/{variableName} | Delete a variable
+[**getVariable**](TaskVariablesApi.md#getVariable) | **GET** /enterprise/tasks/{taskId}/variables/{variableName} | Get a variable
+[**getVariables**](TaskVariablesApi.md#getVariables) | **GET** /enterprise/tasks/{taskId}/variables | List variables
+[**updateVariable**](TaskVariablesApi.md#updateVariable) | **PUT** /enterprise/tasks/{taskId}/variables/{variableName} | Update a variable
 
 
 <a name="createTaskVariable"></a>
@@ -19,9 +19,10 @@ Method | HTTP request | Description
 Create variables
 
 ### Example
+
 ```javascript
-import TaskvariablesApi from 'TaskvariablesApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import TaskvariablesApi from 'src/api/activiti-rest-api/docs/TaskVariablesApi';
+import {AlfrescoApi} from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -32,9 +33,9 @@ let taskvariablesApi = new TaskvariablesApi(this.alfrescoApi);
 
 
 taskvariablesApi.createTaskVariable(taskIdrestVariables).then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
-  console.error(error);
+    console.log('API called successfully. Returned data: ' + data);
+}, function (error) {
+    console.error(error);
 });
 
 ```
@@ -57,9 +58,10 @@ Name | Type | Description  | Notes
 Create or update variables
 
 ### Example
+
 ```javascript
-import TaskvariablesApi from 'TaskvariablesApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import TaskvariablesApi from 'src/api/activiti-rest-api/docs/TaskVariablesApi';
+import {AlfrescoApi} from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -70,9 +72,9 @@ let taskvariablesApi = new TaskvariablesApi(this.alfrescoApi);
 
 
 taskvariablesApi.deleteAllLocalTaskVariables(taskId).then(() => {
-  console.log('API called successfully.');
-}, function(error) {
-  console.error(error);
+    console.log('API called successfully.');
+}, function (error) {
+    console.error(error);
 });
 
 ```
@@ -94,9 +96,10 @@ null (empty response body)
 Delete a variable
 
 ### Example
+
 ```javascript
-import TaskvariablesApi from 'TaskvariablesApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import TaskvariablesApi from 'src/api/activiti-rest-api/docs/TaskVariablesApi';
+import {AlfrescoApi} from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -105,14 +108,14 @@ this.alfrescoApi.setConfig({
 
 let taskvariablesApi = new TaskvariablesApi(this.alfrescoApi);
 
-let opts = { 
-  'scope': scope_example //  | scope
+let opts = {
+    'scope': scope_example //  | scope
 };
 
 taskvariablesApi.deleteVariable(taskIdvariableNameopts).then(() => {
-  console.log('API called successfully.');
-}, function(error) {
-  console.error(error);
+    console.log('API called successfully.');
+}, function (error) {
+    console.error(error);
 });
 
 ```
@@ -136,9 +139,10 @@ null (empty response body)
 Get a variable
 
 ### Example
+
 ```javascript
-import TaskvariablesApi from 'TaskvariablesApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import TaskvariablesApi from 'src/api/activiti-rest-api/docs/TaskVariablesApi';
+import {AlfrescoApi} from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -147,14 +151,14 @@ this.alfrescoApi.setConfig({
 
 let taskvariablesApi = new TaskvariablesApi(this.alfrescoApi);
 
-let opts = { 
-  'scope': scope_example //  | scope
+let opts = {
+    'scope': scope_example //  | scope
 };
 
 taskvariablesApi.getVariable(taskIdvariableNameopts).then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
-  console.error(error);
+    console.log('API called successfully. Returned data: ' + data);
+}, function (error) {
+    console.error(error);
 });
 
 ```
@@ -178,9 +182,10 @@ Name | Type | Description  | Notes
 List variables
 
 ### Example
+
 ```javascript
-import TaskvariablesApi from 'TaskvariablesApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import TaskvariablesApi from 'src/api/activiti-rest-api/docs/TaskVariablesApi';
+import {AlfrescoApi} from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -189,14 +194,14 @@ this.alfrescoApi.setConfig({
 
 let taskvariablesApi = new TaskvariablesApi(this.alfrescoApi);
 
-let opts = { 
-  'scope': scope_example //  | scope
+let opts = {
+    'scope': scope_example //  | scope
 };
 
 taskvariablesApi.getVariables(taskIdopts).then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
-  console.error(error);
+    console.log('API called successfully. Returned data: ' + data);
+}, function (error) {
+    console.error(error);
 });
 
 ```
@@ -219,9 +224,10 @@ Name | Type | Description  | Notes
 Update a variable
 
 ### Example
+
 ```javascript
-import TaskvariablesApi from 'TaskvariablesApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import TaskvariablesApi from 'src/api/activiti-rest-api/docs/TaskVariablesApi';
+import {AlfrescoApi} from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -232,9 +238,9 @@ let taskvariablesApi = new TaskvariablesApi(this.alfrescoApi);
 
 
 taskvariablesApi.updateVariable(taskIdvariableNamerestVariable).then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
-  console.error(error);
+    console.log('API called successfully. Returned data: ' + data);
+}, function (error) {
+    console.error(error);
 });
 
 ```

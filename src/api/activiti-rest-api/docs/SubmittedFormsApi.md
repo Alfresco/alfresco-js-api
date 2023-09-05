@@ -4,10 +4,10 @@ All URIs are relative to */activiti-app/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**getFormSubmittedForms**](SubmittedformsApi.md#getFormSubmittedForms) | **GET** /enterprise/form-submitted-forms/{formId} | List submissions for a form
-[**getProcessSubmittedForms**](SubmittedformsApi.md#getProcessSubmittedForms) | **GET** /enterprise/process-submitted-forms/{processId} | List submissions for a process instance
-[**getSubmittedFrom**](SubmittedformsApi.md#getSubmittedFrom) | **GET** /enterprise/submitted-forms/{submittedFormId} | Get a form submission
-[**getTaskSubmittedForms**](SubmittedformsApi.md#getTaskSubmittedForms) | **GET** /enterprise/task-submitted-form/{taskId} | Get the submitted form for a task
+[**getFormSubmittedForms**](SubmittedFormsApi.md#getFormSubmittedForms) | **GET** /enterprise/form-submitted-forms/{formId} | List submissions for a form
+[**getProcessSubmittedForms**](SubmittedFormsApi.md#getProcessSubmittedForms) | **GET** /enterprise/process-submitted-forms/{processId} | List submissions for a process instance
+[**getSubmittedFrom**](SubmittedFormsApi.md#getSubmittedFrom) | **GET** /enterprise/submitted-forms/{submittedFormId} | Get a form submission
+[**getTaskSubmittedForms**](SubmittedFormsApi.md#getTaskSubmittedForms) | **GET** /enterprise/task-submitted-form/{taskId} | Get the submitted form for a task
 
 
 <a name="getFormSubmittedForms"></a>
@@ -17,9 +17,10 @@ Method | HTTP request | Description
 List submissions for a form
 
 ### Example
+
 ```javascript
-import SubmittedformsApi from 'SubmittedformsApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import SubmittedformsApi from 'src/api/activiti-rest-api/docs/SubmittedFormsApi';
+import {AlfrescoApi} from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -28,16 +29,16 @@ this.alfrescoApi.setConfig({
 
 let submittedformsApi = new SubmittedformsApi(this.alfrescoApi);
 
-let opts = { 
-  'submittedBy': 789 //  | submittedBy
-  'start': 56 //  | start
-  'size': 56 //  | size
+let opts = {
+    'submittedBy': 789 //  | submittedBy
+    'start': 56 //  | start
+    'size': 56 //  | size
 };
 
 submittedformsApi.getFormSubmittedForms(formIdopts).then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
-  console.error(error);
+    console.log('API called successfully. Returned data: ' + data);
+}, function (error) {
+    console.error(error);
 });
 
 ```
@@ -62,9 +63,10 @@ Name | Type | Description  | Notes
 List submissions for a process instance
 
 ### Example
+
 ```javascript
-import SubmittedformsApi from 'SubmittedformsApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import SubmittedformsApi from 'src/api/activiti-rest-api/docs/SubmittedFormsApi';
+import {AlfrescoApi} from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -75,9 +77,9 @@ let submittedformsApi = new SubmittedformsApi(this.alfrescoApi);
 
 
 submittedformsApi.getProcessSubmittedForms(processId).then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
-  console.error(error);
+    console.log('API called successfully. Returned data: ' + data);
+}, function (error) {
+    console.error(error);
 });
 
 ```
@@ -99,9 +101,10 @@ Name | Type | Description  | Notes
 Get a form submission
 
 ### Example
+
 ```javascript
-import SubmittedformsApi from 'SubmittedformsApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import SubmittedformsApi from 'src/api/activiti-rest-api/docs/SubmittedFormsApi';
+import {AlfrescoApi} from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -112,9 +115,9 @@ let submittedformsApi = new SubmittedformsApi(this.alfrescoApi);
 
 
 submittedformsApi.getSubmittedFrom(submittedFormId).then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
-  console.error(error);
+    console.log('API called successfully. Returned data: ' + data);
+}, function (error) {
+    console.error(error);
 });
 
 ```
@@ -136,9 +139,10 @@ Name | Type | Description  | Notes
 Get the submitted form for a task
 
 ### Example
+
 ```javascript
-import SubmittedformsApi from 'SubmittedformsApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import SubmittedformsApi from 'src/api/activiti-rest-api/docs/SubmittedFormsApi';
+import {AlfrescoApi} from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -149,9 +153,9 @@ let submittedformsApi = new SubmittedformsApi(this.alfrescoApi);
 
 
 submittedformsApi.getTaskSubmittedForms(taskId).then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
-  console.error(error);
+    console.log('API called successfully. Returned data: ' + data);
+}, function (error) {
+    console.error(error);
 });
 
 ```

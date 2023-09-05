@@ -4,11 +4,11 @@ All URIs are relative to */activiti-app/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**changePassword**](UserprofileApi.md#changePassword) | **POST** /enterprise/profile-password | Change user password
-[**getProfilePicture**](UserprofileApi.md#getProfilePicture) | **GET** /enterprise/profile-picture | Retrieve user profile picture
-[**getProfile**](UserprofileApi.md#getProfile) | **GET** /enterprise/profile | Get user profile
-[**updateProfile**](UserprofileApi.md#updateProfile) | **POST** /enterprise/profile | Update user profile
-[**uploadProfilePicture**](UserprofileApi.md#uploadProfilePicture) | **POST** /enterprise/profile-picture | Change user profile picture
+[**changePassword**](UserProfileApi.md#changePassword) | **POST** /enterprise/profile-password | Change user password
+[**getProfilePicture**](UserProfileApi.md#getProfilePicture) | **GET** /enterprise/profile-picture | Retrieve user profile picture
+[**getProfile**](UserProfileApi.md#getProfile) | **GET** /enterprise/profile | Get user profile
+[**updateProfile**](UserProfileApi.md#updateProfile) | **POST** /enterprise/profile | Update user profile
+[**uploadProfilePicture**](UserProfileApi.md#uploadProfilePicture) | **POST** /enterprise/profile-picture | Change user profile picture
 [**getProfilePictureUrl**](ProfileApi.md#getProfile) | **GET** /app/rest/admin/profile-picture | Retrieve Url user profile picture
 
 
@@ -19,9 +19,10 @@ Method | HTTP request | Description
 Change user password
 
 ### Example
+
 ```javascript
-import UserprofileApi from 'UserprofileApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import UserprofileApi from 'src/api/activiti-rest-api/docs/UserProfileApi';
+import {AlfrescoApi} from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -32,9 +33,9 @@ let userprofileApi = new UserprofileApi(this.alfrescoApi);
 
 
 userprofileApi.changePassword(changePasswordRepresentation).then(() => {
-  console.log('API called successfully.');
-}, function(error) {
-  console.error(error);
+    console.log('API called successfully.');
+}, function (error) {
+    console.error(error);
 });
 
 ```
@@ -58,9 +59,10 @@ Retrieve user profile picture
 Generally returns an image file
 
 ### Example
+
 ```javascript
-import UserprofileApi from 'UserprofileApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import UserprofileApi from 'src/api/activiti-rest-api/docs/UserProfileApi';
+import {AlfrescoApi} from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -70,9 +72,9 @@ this.alfrescoApi.setConfig({
 let userprofileApi = new UserprofileApi(this.alfrescoApi);
 
 userprofileApi.getProfilePicture().then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
-  console.error(error);
+    console.log('API called successfully. Returned data: ' + data);
+}, function (error) {
+    console.error(error);
 });
 
 ```
@@ -93,9 +95,10 @@ Get user profile
 This operation returns account information for the current user. This is useful to get the name, email, the groups that the user is part of, the user picture, etc.
 
 ### Example
+
 ```javascript
-import UserprofileApi from 'UserprofileApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import UserprofileApi from 'src/api/activiti-rest-api/docs/UserProfileApi';
+import {AlfrescoApi} from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -105,9 +108,9 @@ this.alfrescoApi.setConfig({
 let userprofileApi = new UserprofileApi(this.alfrescoApi);
 
 userprofileApi.getProfile().then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
-  console.error(error);
+    console.log('API called successfully. Returned data: ' + data);
+}, function (error) {
+    console.error(error);
 });
 
 ```
@@ -128,9 +131,10 @@ Update user profile
 Only a first name, last name, email and company can be updated
 
 ### Example
+
 ```javascript
-import UserprofileApi from 'UserprofileApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import UserprofileApi from 'src/api/activiti-rest-api/docs/UserProfileApi';
+import {AlfrescoApi} from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -141,9 +145,9 @@ let userprofileApi = new UserprofileApi(this.alfrescoApi);
 
 
 userprofileApi.updateProfile(userRepresentation).then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
-  console.error(error);
+    console.log('API called successfully. Returned data: ' + data);
+}, function (error) {
+    console.error(error);
 });
 
 ```
@@ -165,9 +169,10 @@ Name | Type | Description  | Notes
 Change user profile picture
 
 ### Example
+
 ```javascript
-import UserprofileApi from 'UserprofileApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import UserprofileApi from 'src/api/activiti-rest-api/docs/UserProfileApi';
+import {AlfrescoApi} from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -178,9 +183,9 @@ let userprofileApi = new UserprofileApi(this.alfrescoApi);
 
 
 userprofileApi.uploadProfilePicture(file).then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
-  console.error(error);
+    console.log('API called successfully. Returned data: ' + data);
+}, function (error) {
+    console.error(error);
 });
 
 ```
@@ -205,9 +210,10 @@ Retrieve user url profile picture
 Generally returns an URL image file
 
 ### Example
+
 ```javascript
-import UserprofileApi from 'UserprofileApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import UserprofileApi from 'src/api/activiti-rest-api/docs/UserProfileApi';
+import {AlfrescoApi} from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({

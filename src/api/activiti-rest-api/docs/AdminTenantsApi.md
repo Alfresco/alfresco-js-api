@@ -4,14 +4,14 @@ All URIs are relative to */activiti-app/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**createTenant**](AdmintenantsApi.md#createTenant) | **POST** /enterprise/admin/tenants | Create a tenant
-[**deleteTenant**](AdmintenantsApi.md#deleteTenant) | **DELETE** /enterprise/admin/tenants/{tenantId} | Delete a tenant
-[**getTenantEvents**](AdmintenantsApi.md#getTenantEvents) | **GET** /enterprise/admin/tenants/{tenantId}/events | Get tenant events
-[**getTenantLogo**](AdmintenantsApi.md#getTenantLogo) | **GET** /enterprise/admin/tenants/{tenantId}/logo | Get a tenant's logo
-[**getTenant**](AdmintenantsApi.md#getTenant) | **GET** /enterprise/admin/tenants/{tenantId} | Get a tenant
-[**getTenants**](AdmintenantsApi.md#getTenants) | **GET** /enterprise/admin/tenants | List tenants
-[**update**](AdmintenantsApi.md#update) | **PUT** /enterprise/admin/tenants/{tenantId} | Update a tenant
-[**uploadTenantLogo**](AdmintenantsApi.md#uploadTenantLogo) | **POST** /enterprise/admin/tenants/{tenantId}/logo | Update a tenant's logo
+[**createTenant**](AdminTenantsApi.md#createTenant) | **POST** /enterprise/admin/tenants | Create a tenant
+[**deleteTenant**](AdminTenantsApi.md#deleteTenant) | **DELETE** /enterprise/admin/tenants/{tenantId} | Delete a tenant
+[**getTenantEvents**](AdminTenantsApi.md#getTenantEvents) | **GET** /enterprise/admin/tenants/{tenantId}/events | Get tenant events
+[**getTenantLogo**](AdminTenantsApi.md#getTenantLogo) | **GET** /enterprise/admin/tenants/{tenantId}/logo | Get a tenant's logo
+[**getTenant**](AdminTenantsApi.md#getTenant) | **GET** /enterprise/admin/tenants/{tenantId} | Get a tenant
+[**getTenants**](AdminTenantsApi.md#getTenants) | **GET** /enterprise/admin/tenants | List tenants
+[**update**](AdminTenantsApi.md#update) | **PUT** /enterprise/admin/tenants/{tenantId} | Update a tenant
+[**uploadTenantLogo**](AdminTenantsApi.md#uploadTenantLogo) | **POST** /enterprise/admin/tenants/{tenantId}/logo | Update a tenant's logo
 
 
 <a name="createTenant"></a>
@@ -23,9 +23,10 @@ Create a tenant
 Only a tenant manager may access this endpoint
 
 ### Example
+
 ```javascript
-import AdmintenantsApi from 'AdmintenantsApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import AdmintenantsApi from 'src/api/activiti-rest-api/docs/AdminTenantsApi';
+import {AlfrescoApi} from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -36,9 +37,9 @@ let admintenantsApi = new AdmintenantsApi(this.alfrescoApi);
 
 
 admintenantsApi.createTenant(createTenantRepresentation).then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
-  console.error(error);
+    console.log('API called successfully. Returned data: ' + data);
+}, function (error) {
+    console.error(error);
 });
 
 ```
@@ -60,9 +61,10 @@ Name | Type | Description  | Notes
 Delete a tenant
 
 ### Example
+
 ```javascript
-import AdmintenantsApi from 'AdmintenantsApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import AdmintenantsApi from 'src/api/activiti-rest-api/docs/AdminTenantsApi';
+import {AlfrescoApi} from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -73,9 +75,9 @@ let admintenantsApi = new AdmintenantsApi(this.alfrescoApi);
 
 
 admintenantsApi.deleteTenant(tenantId).then(() => {
-  console.log('API called successfully.');
-}, function(error) {
-  console.error(error);
+    console.log('API called successfully.');
+}, function (error) {
+    console.error(error);
 });
 
 ```
@@ -97,9 +99,10 @@ null (empty response body)
 Get tenant events
 
 ### Example
+
 ```javascript
-import AdmintenantsApi from 'AdmintenantsApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import AdmintenantsApi from 'src/api/activiti-rest-api/docs/AdminTenantsApi';
+import {AlfrescoApi} from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -110,9 +113,9 @@ let admintenantsApi = new AdmintenantsApi(this.alfrescoApi);
 
 
 admintenantsApi.getTenantEvents(tenantId).then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
-  console.error(error);
+    console.log('API called successfully. Returned data: ' + data);
+}, function (error) {
+    console.error(error);
 });
 
 ```
@@ -134,9 +137,10 @@ Name | Type | Description  | Notes
 Get a tenant's logo
 
 ### Example
+
 ```javascript
-import AdmintenantsApi from 'AdmintenantsApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import AdmintenantsApi from 'src/api/activiti-rest-api/docs/AdminTenantsApi';
+import {AlfrescoApi} from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -147,9 +151,9 @@ let admintenantsApi = new AdmintenantsApi(this.alfrescoApi);
 
 
 admintenantsApi.getTenantLogo(tenantId).then(() => {
-  console.log('API called successfully.');
-}, function(error) {
-  console.error(error);
+    console.log('API called successfully.');
+}, function (error) {
+    console.error(error);
 });
 
 ```
@@ -171,9 +175,10 @@ null (empty response body)
 Get a tenant
 
 ### Example
+
 ```javascript
-import AdmintenantsApi from 'AdmintenantsApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import AdmintenantsApi from 'src/api/activiti-rest-api/docs/AdminTenantsApi';
+import {AlfrescoApi} from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -184,9 +189,9 @@ let admintenantsApi = new AdmintenantsApi(this.alfrescoApi);
 
 
 admintenantsApi.getTenant(tenantId).then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
-  console.error(error);
+    console.log('API called successfully. Returned data: ' + data);
+}, function (error) {
+    console.error(error);
 });
 
 ```
@@ -210,9 +215,10 @@ List tenants
 Only a tenant manager may access this endpoint
 
 ### Example
+
 ```javascript
-import AdmintenantsApi from 'AdmintenantsApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import AdmintenantsApi from 'src/api/activiti-rest-api/docs/AdminTenantsApi';
+import {AlfrescoApi} from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -222,9 +228,9 @@ this.alfrescoApi.setConfig({
 let admintenantsApi = new AdmintenantsApi(this.alfrescoApi);
 
 admintenantsApi.getTenants().then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
-  console.error(error);
+    console.log('API called successfully. Returned data: ' + data);
+}, function (error) {
+    console.error(error);
 });
 
 ```
@@ -243,9 +249,10 @@ This endpoint does not need any parameter.
 Update a tenant
 
 ### Example
+
 ```javascript
-import AdmintenantsApi from 'AdmintenantsApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import AdmintenantsApi from 'src/api/activiti-rest-api/docs/AdminTenantsApi';
+import {AlfrescoApi} from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -256,9 +263,9 @@ let admintenantsApi = new AdmintenantsApi(this.alfrescoApi);
 
 
 admintenantsApi.update(tenantIdcreateTenantRepresentation).then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
-  console.error(error);
+    console.log('API called successfully. Returned data: ' + data);
+}, function (error) {
+    console.error(error);
 });
 
 ```
@@ -281,9 +288,10 @@ Name | Type | Description  | Notes
 Update a tenant's logo
 
 ### Example
+
 ```javascript
-import AdmintenantsApi from 'AdmintenantsApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import AdmintenantsApi from 'src/api/activiti-rest-api/docs/AdminTenantsApi';
+import {AlfrescoApi} from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -294,9 +302,9 @@ let admintenantsApi = new AdmintenantsApi(this.alfrescoApi);
 
 
 admintenantsApi.uploadTenantLogo(tenantIdfile).then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
-  console.error(error);
+    console.log('API called successfully. Returned data: ' + data);
+}, function (error) {
+    console.error(error);
 });
 
 ```

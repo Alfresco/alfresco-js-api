@@ -4,11 +4,11 @@ All URIs are relative to */activiti-app/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**bulkUpdateUsers**](AdminusersApi.md#bulkUpdateUsers) | **PUT** /enterprise/admin/users | Bulk update a list of users
-[**createNewUser**](AdminusersApi.md#createNewUser) | **POST** /enterprise/admin/users | Create a user
-[**getUser**](AdminusersApi.md#getUser) | **GET** /enterprise/admin/users/{userId} | Get a user
-[**getUsers**](AdminusersApi.md#getUsers) | **GET** /enterprise/admin/users | Query users
-[**updateUserDetails**](AdminusersApi.md#updateUserDetails) | **PUT** /enterprise/admin/users/{userId} | Update a user
+[**bulkUpdateUsers**](AdminUsersApi.md#bulkUpdateUsers) | **PUT** /enterprise/admin/users | Bulk update a list of users
+[**createNewUser**](AdminUsersApi.md#createNewUser) | **POST** /enterprise/admin/users | Create a user
+[**getUser**](AdminUsersApi.md#getUser) | **GET** /enterprise/admin/users/{userId} | Get a user
+[**getUsers**](AdminUsersApi.md#getUsers) | **GET** /enterprise/admin/users | Query users
+[**updateUserDetails**](AdminUsersApi.md#updateUserDetails) | **PUT** /enterprise/admin/users/{userId} | Update a user
 
 
 <a name="bulkUpdateUsers"></a>
@@ -18,9 +18,10 @@ Method | HTTP request | Description
 Bulk update a list of users
 
 ### Example
+
 ```javascript
-import AdminusersApi from 'AdminusersApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import AdminusersApi from 'src/api/activiti-rest-api/docs/AdminUsersApi';
+import {AlfrescoApi} from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -31,9 +32,9 @@ let adminusersApi = new AdminusersApi(this.alfrescoApi);
 
 
 adminusersApi.bulkUpdateUsers(update).then(() => {
-  console.log('API called successfully.');
-}, function(error) {
-  console.error(error);
+    console.log('API called successfully.');
+}, function (error) {
+    console.error(error);
 });
 
 ```
@@ -55,9 +56,10 @@ null (empty response body)
 Create a user
 
 ### Example
+
 ```javascript
-import AdminusersApi from 'AdminusersApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import AdminusersApi from 'src/api/activiti-rest-api/docs/AdminUsersApi';
+import {AlfrescoApi} from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -68,9 +70,9 @@ let adminusersApi = new AdminusersApi(this.alfrescoApi);
 
 
 adminusersApi.createNewUser(userRepresentation).then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
-  console.error(error);
+    console.log('API called successfully. Returned data: ' + data);
+}, function (error) {
+    console.error(error);
 });
 
 ```
@@ -92,9 +94,10 @@ Name | Type | Description  | Notes
 Get a user
 
 ### Example
+
 ```javascript
-import AdminusersApi from 'AdminusersApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import AdminusersApi from 'src/api/activiti-rest-api/docs/AdminUsersApi';
+import {AlfrescoApi} from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -103,14 +106,14 @@ this.alfrescoApi.setConfig({
 
 let adminusersApi = new AdminusersApi(this.alfrescoApi);
 
-let opts = { 
-  'summary': true //  | summary
+let opts = {
+    'summary': true //  | summary
 };
 
 adminusersApi.getUser(userIdopts).then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
-  console.error(error);
+    console.log('API called successfully. Returned data: ' + data);
+}, function (error) {
+    console.error(error);
 });
 
 ```
@@ -133,9 +136,10 @@ Name | Type | Description  | Notes
 Query users
 
 ### Example
+
 ```javascript
-import AdminusersApi from 'AdminusersApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import AdminusersApi from 'src/api/activiti-rest-api/docs/AdminUsersApi';
+import {AlfrescoApi} from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -144,24 +148,24 @@ this.alfrescoApi.setConfig({
 
 let adminusersApi = new AdminusersApi(this.alfrescoApi);
 
-let opts = { 
-  'filter': filter_example //  | filter
-  'status': status_example //  | status
-  'accountType': accountType_example //  | accountType
-  'sort': sort_example //  | sort
-  'company': company_example //  | company
-  'start': 56 //  | start
-  'page': 56 //  | page
-  'size': 56 //  | size
-  'groupId': 789 //  | groupId
-  'tenantId': 789 //  | tenantId
-  'summary': true //  | summary
+let opts = {
+    'filter': filter_example //  | filter
+    'status': status_example //  | status
+    'accountType': accountType_example //  | accountType
+    'sort': sort_example //  | sort
+    'company': company_example //  | company
+    'start': 56 //  | start
+    'page': 56 //  | page
+    'size': 56 //  | size
+    'groupId': 789 //  | groupId
+    'tenantId': 789 //  | tenantId
+    'summary': true //  | summary
 };
 
 adminusersApi.getUsers(opts).then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
-  console.error(error);
+    console.log('API called successfully. Returned data: ' + data);
+}, function (error) {
+    console.error(error);
 });
 
 ```
@@ -193,9 +197,10 @@ Name | Type | Description  | Notes
 Update a user
 
 ### Example
+
 ```javascript
-import AdminusersApi from 'AdminusersApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import AdminusersApi from 'src/api/activiti-rest-api/docs/AdminUsersApi';
+import {AlfrescoApi} from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -206,9 +211,9 @@ let adminusersApi = new AdminusersApi(this.alfrescoApi);
 
 
 adminusersApi.updateUserDetails(userIduserRepresentation).then(() => {
-  console.log('API called successfully.');
-}, function(error) {
-  console.error(error);
+    console.log('API called successfully.');
+}, function (error) {
+    console.error(error);
 });
 
 ```

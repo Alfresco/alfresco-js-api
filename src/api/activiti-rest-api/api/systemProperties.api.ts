@@ -22,16 +22,16 @@ import { BaseApi } from './base.api';
 import { throwIfNotDefined } from '../../../assert';
 
 /**
-* SystemPropertiesApi service.
-* @module SystempropertiesApi
-*/
+ * SystemPropertiesApi service.
+ * @module SystemPropertiesApi
+ */
 export class SystemPropertiesApi extends BaseApi {
     /**
-    * Get global date format
-    *
-    * @param tenantId tenantId
-    * @return Promise<GlobalDateFormatRepresentation>
-    */
+     * Get global date format
+     *
+     * @param tenantId tenantId
+     * @return Promise<GlobalDateFormatRepresentation>
+     */
     getGlobalDateFormat(tenantId: number): Promise<GlobalDateFormatRepresentation> {
         throwIfNotDefined(tenantId, 'tenantId');
 
@@ -47,11 +47,11 @@ export class SystemPropertiesApi extends BaseApi {
     }
 
     /**
-    * Get password validation constraints
-    *
-    * @param tenantId tenantId
-    * @return Promise<PasswordValidationConstraints>
-    */
+     * Get password validation constraints
+     *
+     * @param tenantId tenantId
+     * @return Promise<PasswordValidationConstraints>
+     */
     getPasswordValidationConstraints(tenantId: number): Promise<PasswordValidationConstraints> {
         throwIfNotDefined(tenantId, 'tenantId');
 
@@ -67,12 +67,12 @@ export class SystemPropertiesApi extends BaseApi {
     }
 
     /**
-    * Retrieve system properties
-    *
-    * Typical value is AllowInvolveByEmail
-    *
-    * @return Promise<SystemPropertiesRepresentation>
-    */
+     * Retrieve system properties
+     *
+     * Typical value is AllowInvolveByEmail
+     *
+     * @return Promise<SystemPropertiesRepresentation>
+     */
     getProperties(): Promise<SystemPropertiesRepresentation> {
         return this.get({
             path: '/api/enterprise/system/properties',
@@ -81,11 +81,11 @@ export class SystemPropertiesApi extends BaseApi {
     }
 
     /**
-    * Get involved users who can edit forms
-    *
-    * @param tenantId tenantId
-    * @return Promise<boolean>
-    */
+     * Get involved users who can edit forms
+     *
+     * @param tenantId tenantId
+     * @return Promise<boolean>
+     */
     involvedUsersCanEditForms(tenantId: number): Promise<boolean> {
         throwIfNotDefined(tenantId, 'tenantId');
 
@@ -98,5 +98,4 @@ export class SystemPropertiesApi extends BaseApi {
             pathParams
         });
     }
-
 }

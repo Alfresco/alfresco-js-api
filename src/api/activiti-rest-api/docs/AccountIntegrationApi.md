@@ -4,7 +4,7 @@ All URIs are relative to */activiti-app/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**getAccounts**](AccountintegrationApi.md#getAccounts) | **GET** /enterprise/account/integration | Retrieve external account information
+[**getAccounts**](AccountIntegrationApi.md#getAccounts) | **GET** /enterprise/account/integration | Retrieve external account information
 
 
 <a name="getAccounts"></a>
@@ -16,9 +16,10 @@ Retrieve external account information
 Accounts are used to integrate with third party apps and clients
 
 ### Example
+
 ```javascript
-import AccountintegrationApi from 'AccountintegrationApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import AccountintegrationApi from 'src/api/activiti-rest-api/docs/AccountIntegrationApi';
+import {AlfrescoApi} from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -28,9 +29,9 @@ this.alfrescoApi.setConfig({
 let accountintegrationApi = new AccountintegrationApi(this.alfrescoApi);
 
 accountintegrationApi.getAccounts().then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
-  console.error(error);
+    console.log('API called successfully. Returned data: ' + data);
+}, function (error) {
+    console.error(error);
 });
 
 ```

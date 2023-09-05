@@ -4,8 +4,8 @@ All URIs are relative to */activiti-app/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**getLogFile**](IdmsyncApi.md#getLogFile) | **GET** /enterprise/idm-sync-log-entries/{syncLogEntryId}/logfile | Get log file for a sync log entry
-[**getSyncLogEntries**](IdmsyncApi.md#getSyncLogEntries) | **GET** /enterprise/idm-sync-log-entries | List sync log entries
+[**getLogFile**](IDMSyncApi.md#getLogFile) | **GET** /enterprise/idm-sync-log-entries/{syncLogEntryId}/logfile | Get log file for a sync log entry
+[**getSyncLogEntries**](IDMSyncApi.md#getSyncLogEntries) | **GET** /enterprise/idm-sync-log-entries | List sync log entries
 
 
 <a name="getLogFile"></a>
@@ -15,9 +15,10 @@ Method | HTTP request | Description
 Get log file for a sync log entry
 
 ### Example
+
 ```javascript
-import IdmsyncApi from 'IdmsyncApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import IdmsyncApi from 'src/api/activiti-rest-api/docs/IDMSyncApi';
+import {AlfrescoApi} from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -28,9 +29,9 @@ let idmsyncApi = new IdmsyncApi(this.alfrescoApi);
 
 
 idmsyncApi.getLogFile(syncLogEntryId).then(() => {
-  console.log('API called successfully.');
-}, function(error) {
-  console.error(error);
+    console.log('API called successfully.');
+}, function (error) {
+    console.error(error);
 });
 
 ```
@@ -52,9 +53,10 @@ null (empty response body)
 List sync log entries
 
 ### Example
+
 ```javascript
-import IdmsyncApi from 'IdmsyncApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import IdmsyncApi from 'src/api/activiti-rest-api/docs/IDMSyncApi';
+import {AlfrescoApi} from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -63,17 +65,17 @@ this.alfrescoApi.setConfig({
 
 let idmsyncApi = new IdmsyncApi(this.alfrescoApi);
 
-let opts = { 
-  'tenantId': 789 //  | tenantId
-  'page': 56 //  | page
-  'start': 56 //  | start
-  'size': 56 //  | size
+let opts = {
+    'tenantId': 789 //  | tenantId
+    'page': 56 //  | page
+    'start': 56 //  | start
+    'size': 56 //  | size
 };
 
 idmsyncApi.getSyncLogEntries(opts).then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
-  console.error(error);
+    console.log('API called successfully. Returned data: ' + data);
+}, function (error) {
+    console.error(error);
 });
 
 ```

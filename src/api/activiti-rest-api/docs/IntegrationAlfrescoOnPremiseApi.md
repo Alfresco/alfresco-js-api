@@ -4,11 +4,11 @@ All URIs are relative to */activiti-app/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**getAllSites**](IntegrationalfrescoonpremiseApi.md#getAllSites) | **GET** /enterprise/integration/alfresco/{repositoryId}/sites | List Alfresco sites
-[**getContentInFolderPath**](IntegrationalfrescoonpremiseApi.md#getContentInFolderPath) | **GET** /enterprise/rest/integration/alfresco/{repositoryId}/sites/{siteId}/folderpath/{folderPath}/content | List files and folders inside a specific folder identified by folder path
-[**getContentInFolder**](IntegrationalfrescoonpremiseApi.md#getContentInFolder) | **GET** /enterprise/integration/alfresco/{repositoryId}/folders/{folderId}/content | List files and folders inside a specific folder
-[**getContentInSite**](IntegrationalfrescoonpremiseApi.md#getContentInSite) | **GET** /enterprise/integration/alfresco/{repositoryId}/sites/{siteId}/content | List files and folders inside a specific site
-[**getRepositories**](IntegrationalfrescoonpremiseApi.md#getRepositories) | **GET** /enterprise/profile/accounts/alfresco | List Alfresco repositories
+[**getAllSites**](IntegrationAlfrescoOnPremiseApi.md#getAllSites) | **GET** /enterprise/integration/alfresco/{repositoryId}/sites | List Alfresco sites
+[**getContentInFolderPath**](IntegrationAlfrescoOnPremiseApi.md#getContentInFolderPath) | **GET** /enterprise/rest/integration/alfresco/{repositoryId}/sites/{siteId}/folderpath/{folderPath}/content | List files and folders inside a specific folder identified by folder path
+[**getContentInFolder**](IntegrationAlfrescoOnPremiseApi.md#getContentInFolder) | **GET** /enterprise/integration/alfresco/{repositoryId}/folders/{folderId}/content | List files and folders inside a specific folder
+[**getContentInSite**](IntegrationAlfrescoOnPremiseApi.md#getContentInSite) | **GET** /enterprise/integration/alfresco/{repositoryId}/sites/{siteId}/content | List files and folders inside a specific site
+[**getRepositories**](IntegrationAlfrescoOnPremiseApi.md#getRepositories) | **GET** /enterprise/profile/accounts/alfresco | List Alfresco repositories
 
 
 <a name="getAllSites"></a>
@@ -20,9 +20,10 @@ List Alfresco sites
 Returns ALL Sites
 
 ### Example
+
 ```javascript
-import IntegrationalfrescoonpremiseApi from 'IntegrationalfrescoonpremiseApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import IntegrationalfrescoonpremiseApi from 'src/api/activiti-rest-api/docs/IntegrationAlfrescoOnPremiseApi';
+import {AlfrescoApi} from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -33,9 +34,9 @@ let integrationalfrescoonpremiseApi = new IntegrationalfrescoonpremiseApi(this.a
 
 
 integrationalfrescoonpremiseApi.getAllSites(repositoryId).then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
-  console.error(error);
+    console.log('API called successfully. Returned data: ' + data);
+}, function (error) {
+    console.error(error);
 });
 
 ```
@@ -57,9 +58,10 @@ Name | Type | Description  | Notes
 List files and folders inside a specific folder identified by folder path
 
 ### Example
+
 ```javascript
-import IntegrationalfrescoonpremiseApi from 'IntegrationalfrescoonpremiseApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import IntegrationalfrescoonpremiseApi from 'src/api/activiti-rest-api/docs/IntegrationAlfrescoOnPremiseApi';
+import {AlfrescoApi} from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -70,9 +72,9 @@ let integrationalfrescoonpremiseApi = new IntegrationalfrescoonpremiseApi(this.a
 
 
 integrationalfrescoonpremiseApi.getContentInFolderPath(repositoryIdsiteIdfolderPath).then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
-  console.error(error);
+    console.log('API called successfully. Returned data: ' + data);
+}, function (error) {
+    console.error(error);
 });
 
 ```
@@ -96,9 +98,10 @@ Name | Type | Description  | Notes
 List files and folders inside a specific folder
 
 ### Example
+
 ```javascript
-import IntegrationalfrescoonpremiseApi from 'IntegrationalfrescoonpremiseApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import IntegrationalfrescoonpremiseApi from 'src/api/activiti-rest-api/docs/IntegrationAlfrescoOnPremiseApi';
+import {AlfrescoApi} from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -109,9 +112,9 @@ let integrationalfrescoonpremiseApi = new IntegrationalfrescoonpremiseApi(this.a
 
 
 integrationalfrescoonpremiseApi.getContentInFolder(repositoryIdfolderId).then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
-  console.error(error);
+    console.log('API called successfully. Returned data: ' + data);
+}, function (error) {
+    console.error(error);
 });
 
 ```
@@ -134,9 +137,10 @@ Name | Type | Description  | Notes
 List files and folders inside a specific site
 
 ### Example
+
 ```javascript
-import IntegrationalfrescoonpremiseApi from 'IntegrationalfrescoonpremiseApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import IntegrationalfrescoonpremiseApi from 'src/api/activiti-rest-api/docs/IntegrationAlfrescoOnPremiseApi';
+import {AlfrescoApi} from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -147,9 +151,9 @@ let integrationalfrescoonpremiseApi = new IntegrationalfrescoonpremiseApi(this.a
 
 
 integrationalfrescoonpremiseApi.getContentInSite(repositoryIdsiteId).then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
-  console.error(error);
+    console.log('API called successfully. Returned data: ' + data);
+}, function (error) {
+    console.error(error);
 });
 
 ```
@@ -174,9 +178,10 @@ List Alfresco repositories
 A tenant administrator can configure one or more Alfresco repositories to use when working with content.
 
 ### Example
+
 ```javascript
-import IntegrationalfrescoonpremiseApi from 'IntegrationalfrescoonpremiseApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import IntegrationalfrescoonpremiseApi from 'src/api/activiti-rest-api/docs/IntegrationAlfrescoOnPremiseApi';
+import {AlfrescoApi} from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -185,15 +190,15 @@ this.alfrescoApi.setConfig({
 
 let integrationalfrescoonpremiseApi = new IntegrationalfrescoonpremiseApi(this.alfrescoApi);
 
-let opts = { 
-  'tenantId': 789 //  | tenantId
-  'includeAccounts': true //  | includeAccounts
+let opts = {
+    'tenantId': 789 //  | tenantId
+    'includeAccounts': true //  | includeAccounts
 };
 
 integrationalfrescoonpremiseApi.getRepositories(opts).then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
-  console.error(error);
+    console.log('API called successfully. Returned data: ' + data);
+}, function (error) {
+    console.error(error);
 });
 
 ```

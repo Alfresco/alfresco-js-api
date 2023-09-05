@@ -4,13 +4,13 @@ All URIs are relative to */activiti-app/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**confirmAuthorisation**](IntegrationboxApi.md#confirmAuthorisation) | **GET** /enterprise/integration/box/confirm-auth-request | Box Authorization
-[**createRepositoryAccount**](IntegrationboxApi.md#createRepositoryAccount) | **POST** /enterprise/integration/box/{userId}/account | Add Box account
-[**deleteRepositoryAccount**](IntegrationboxApi.md#deleteRepositoryAccount) | **DELETE** /enterprise/integration/box/{userId}/account | Delete account information
-[**getBoxPluginStatus**](IntegrationboxApi.md#getBoxPluginStatus) | **GET** /enterprise/integration/box/status | Get status information
-[**getFiles**](IntegrationboxApi.md#getFiles) | **GET** /enterprise/integration/box/files | List file and folders
-[**getRepositoryAccount**](IntegrationboxApi.md#getRepositoryAccount) | **GET** /enterprise/integration/box/{userId}/account | Get account information
-[**updateRepositoryAccount**](IntegrationboxApi.md#updateRepositoryAccount) | **PUT** /enterprise/integration/box/{userId}/account | Update account information
+[**confirmAuthorisation**](IntegrationBoxApi.md#confirmAuthorisation) | **GET** /enterprise/integration/box/confirm-auth-request | Box Authorization
+[**createRepositoryAccount**](IntegrationBoxApi.md#createRepositoryAccount) | **POST** /enterprise/integration/box/{userId}/account | Add Box account
+[**deleteRepositoryAccount**](IntegrationBoxApi.md#deleteRepositoryAccount) | **DELETE** /enterprise/integration/box/{userId}/account | Delete account information
+[**getBoxPluginStatus**](IntegrationBoxApi.md#getBoxPluginStatus) | **GET** /enterprise/integration/box/status | Get status information
+[**getFiles**](IntegrationBoxApi.md#getFiles) | **GET** /enterprise/integration/box/files | List file and folders
+[**getRepositoryAccount**](IntegrationBoxApi.md#getRepositoryAccount) | **GET** /enterprise/integration/box/{userId}/account | Get account information
+[**updateRepositoryAccount**](IntegrationBoxApi.md#updateRepositoryAccount) | **PUT** /enterprise/integration/box/{userId}/account | Update account information
 
 
 <a name="confirmAuthorisation"></a>
@@ -22,9 +22,10 @@ Box Authorization
 Returns Box OAuth HTML Page
 
 ### Example
+
 ```javascript
-import IntegrationboxApi from 'IntegrationboxApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import IntegrationboxApi from 'src/api/activiti-rest-api/docs/IntegrationBoxApi';
+import {AlfrescoApi} from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -34,9 +35,9 @@ this.alfrescoApi.setConfig({
 let integrationboxApi = new IntegrationboxApi(this.alfrescoApi);
 
 integrationboxApi.confirmAuthorisation().then(() => {
-  console.log('API called successfully.');
-}, function(error) {
-  console.error(error);
+    console.log('API called successfully.');
+}, function (error) {
+    console.error(error);
 });
 
 ```
@@ -55,9 +56,10 @@ null (empty response body)
 Add Box account
 
 ### Example
+
 ```javascript
-import IntegrationboxApi from 'IntegrationboxApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import IntegrationboxApi from 'src/api/activiti-rest-api/docs/IntegrationBoxApi';
+import {AlfrescoApi} from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -68,9 +70,9 @@ let integrationboxApi = new IntegrationboxApi(this.alfrescoApi);
 
 
 integrationboxApi.createRepositoryAccount(userIdcredentials).then(() => {
-  console.log('API called successfully.');
-}, function(error) {
-  console.error(error);
+    console.log('API called successfully.');
+}, function (error) {
+    console.error(error);
 });
 
 ```
@@ -93,9 +95,10 @@ null (empty response body)
 Delete account information
 
 ### Example
+
 ```javascript
-import IntegrationboxApi from 'IntegrationboxApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import IntegrationboxApi from 'src/api/activiti-rest-api/docs/IntegrationBoxApi';
+import {AlfrescoApi} from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -106,9 +109,9 @@ let integrationboxApi = new IntegrationboxApi(this.alfrescoApi);
 
 
 integrationboxApi.deleteRepositoryAccount(userId).then(() => {
-  console.log('API called successfully.');
-}, function(error) {
-  console.error(error);
+    console.log('API called successfully.');
+}, function (error) {
+    console.error(error);
 });
 
 ```
@@ -130,9 +133,10 @@ null (empty response body)
 Get status information
 
 ### Example
+
 ```javascript
-import IntegrationboxApi from 'IntegrationboxApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import IntegrationboxApi from 'src/api/activiti-rest-api/docs/IntegrationBoxApi';
+import {AlfrescoApi} from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -142,9 +146,9 @@ this.alfrescoApi.setConfig({
 let integrationboxApi = new IntegrationboxApi(this.alfrescoApi);
 
 integrationboxApi.getBoxPluginStatus().then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
-  console.error(error);
+    console.log('API called successfully. Returned data: ' + data);
+}, function (error) {
+    console.error(error);
 });
 
 ```
@@ -163,9 +167,10 @@ This endpoint does not need any parameter.
 List file and folders
 
 ### Example
+
 ```javascript
-import IntegrationboxApi from 'IntegrationboxApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import IntegrationboxApi from 'src/api/activiti-rest-api/docs/IntegrationBoxApi';
+import {AlfrescoApi} from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -174,15 +179,15 @@ this.alfrescoApi.setConfig({
 
 let integrationboxApi = new IntegrationboxApi(this.alfrescoApi);
 
-let opts = { 
-  'filter': filter_example //  | filter
-  'parent': parent_example //  | parent
+let opts = {
+    'filter': filter_example //  | filter
+    'parent': parent_example //  | parent
 };
 
 integrationboxApi.getFiles(opts).then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
-  console.error(error);
+    console.log('API called successfully. Returned data: ' + data);
+}, function (error) {
+    console.error(error);
 });
 
 ```
@@ -205,9 +210,10 @@ Name | Type | Description  | Notes
 Get account information
 
 ### Example
+
 ```javascript
-import IntegrationboxApi from 'IntegrationboxApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import IntegrationboxApi from 'src/api/activiti-rest-api/docs/IntegrationBoxApi';
+import {AlfrescoApi} from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -218,9 +224,9 @@ let integrationboxApi = new IntegrationboxApi(this.alfrescoApi);
 
 
 integrationboxApi.getRepositoryAccount(userId).then(() => {
-  console.log('API called successfully.');
-}, function(error) {
-  console.error(error);
+    console.log('API called successfully.');
+}, function (error) {
+    console.error(error);
 });
 
 ```
@@ -242,9 +248,10 @@ null (empty response body)
 Update account information
 
 ### Example
+
 ```javascript
-import IntegrationboxApi from 'IntegrationboxApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import IntegrationboxApi from 'src/api/activiti-rest-api/docs/IntegrationBoxApi';
+import {AlfrescoApi} from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -255,9 +262,9 @@ let integrationboxApi = new IntegrationboxApi(this.alfrescoApi);
 
 
 integrationboxApi.updateRepositoryAccount(userIdcredentials).then(() => {
-  console.log('API called successfully.');
-}, function(error) {
-  console.error(error);
+    console.log('API called successfully.');
+}, function (error) {
+    console.error(error);
 });
 
 ```

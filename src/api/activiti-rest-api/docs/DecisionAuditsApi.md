@@ -4,8 +4,8 @@ All URIs are relative to */activiti-app/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**getAuditTrail**](DecisionauditsApi.md#getAuditTrail) | **GET** /enterprise/decisions/audits/{auditTrailId} | Get an audit trail
-[**getAuditTrails**](DecisionauditsApi.md#getAuditTrails) | **GET** /enterprise/decisions/audits | Query decision table audit trails
+[**getAuditTrail**](DecisionAuditsApi.md#getAuditTrail) | **GET** /enterprise/decisions/audits/{auditTrailId} | Get an audit trail
+[**getAuditTrails**](DecisionAuditsApi.md#getAuditTrails) | **GET** /enterprise/decisions/audits | Query decision table audit trails
 
 
 <a name="getAuditTrail"></a>
@@ -15,9 +15,10 @@ Method | HTTP request | Description
 Get an audit trail
 
 ### Example
+
 ```javascript
-import DecisionauditsApi from 'DecisionauditsApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import DecisionauditsApi from 'src/api/activiti-rest-api/docs/DecisionAuditsApi';
+import {AlfrescoApi} from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -28,9 +29,9 @@ let decisionauditsApi = new DecisionauditsApi(this.alfrescoApi);
 
 
 decisionauditsApi.getAuditTrail(auditTrailId).then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
-  console.error(error);
+    console.log('API called successfully. Returned data: ' + data);
+}, function (error) {
+    console.error(error);
 });
 
 ```
@@ -52,9 +53,10 @@ Name | Type | Description  | Notes
 Query decision table audit trails
 
 ### Example
+
 ```javascript
-import DecisionauditsApi from 'DecisionauditsApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import DecisionauditsApi from 'src/api/activiti-rest-api/docs/DecisionAuditsApi';
+import {AlfrescoApi} from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -65,9 +67,9 @@ let decisionauditsApi = new DecisionauditsApi(this.alfrescoApi);
 
 
 decisionauditsApi.getAuditTrails(decisionKeydmnDeploymentId).then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
-  console.error(error);
+    console.log('API called successfully. Returned data: ' + data);
+}, function (error) {
+    console.error(error);
 });
 
 ```

@@ -4,17 +4,17 @@ All URIs are relative to */activiti-app/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**createIdentityLink**](ProcessdefinitionsApi.md#createIdentityLink) | **POST** /enterprise/process-definitions/{processDefinitionId}/identitylinks | Add a user or group involvement to a process definition
-[**deleteIdentityLink**](ProcessdefinitionsApi.md#deleteIdentityLink) | **DELETE** /enterprise/process-definitions/{processDefinitionId}/identitylinks/{family}/{identityId} | Remove a user or group involvement from a process definition
-[**getIdentityLinkType**](ProcessdefinitionsApi.md#getIdentityLinkType) | **GET** /enterprise/process-definitions/{processDefinitionId}/identitylinks/{family}/{identityId} | Get a user or group involvement with a process definition
-[**getIdentityLinksForFamily**](ProcessdefinitionsApi.md#getIdentityLinksForFamily) | **GET** /enterprise/process-definitions/{processDefinitionId}/identitylinks/{family} | List either the users or groups involved with a process definition
-[**getIdentityLinks**](ProcessdefinitionsApi.md#getIdentityLinks) | **GET** /enterprise/process-definitions/{processDefinitionId}/identitylinks | List the users and groups involved with a process definition
-[**getProcessDefinitionDecisionTables**](ProcessdefinitionsApi.md#getProcessDefinitionDecisionTables) | **GET** /enterprise/process-definitions/{processDefinitionId}/decision-tables | List the decision tables associated with a process definition
-[**getProcessDefinitionForms**](ProcessdefinitionsApi.md#getProcessDefinitionForms) | **GET** /enterprise/process-definitions/{processDefinitionId}/forms | List the forms associated with a process definition
-[**getProcessDefinitionStartForm**](ProcessdefinitionsApi.md#getProcessDefinitionStartForm) | **GET** /enterprise/process-definitions/{processDefinitionId}/start-form | Retrieve the start form for a process definition
-[**getProcessDefinitions**](ProcessdefinitionsApi.md#getProcessDefinitions) | **GET** /enterprise/process-definitions | Retrieve a list of process definitions
-[**getRestFieldValues**](ProcessdefinitionsApi.md#getRestFieldValues) | **GET** /enterprise/process-definitions/{processDefinitionId}/start-form-values/{field} | Retrieve field values (eg. the typeahead field)
-[**getRestTableFieldValues**](ProcessdefinitionsApi.md#getRestTableFieldValues) | **GET** /enterprise/process-definitions/{processDefinitionId}/start-form-values/{field}/{column} | Retrieve field values (eg. the table field)
+[**createIdentityLink**](ProcessDefinitionsApi.md#createIdentityLink) | **POST** /enterprise/process-definitions/{processDefinitionId}/identitylinks | Add a user or group involvement to a process definition
+[**deleteIdentityLink**](ProcessDefinitionsApi.md#deleteIdentityLink) | **DELETE** /enterprise/process-definitions/{processDefinitionId}/identitylinks/{family}/{identityId} | Remove a user or group involvement from a process definition
+[**getIdentityLinkType**](ProcessDefinitionsApi.md#getIdentityLinkType) | **GET** /enterprise/process-definitions/{processDefinitionId}/identitylinks/{family}/{identityId} | Get a user or group involvement with a process definition
+[**getIdentityLinksForFamily**](ProcessDefinitionsApi.md#getIdentityLinksForFamily) | **GET** /enterprise/process-definitions/{processDefinitionId}/identitylinks/{family} | List either the users or groups involved with a process definition
+[**getIdentityLinks**](ProcessDefinitionsApi.md#getIdentityLinks) | **GET** /enterprise/process-definitions/{processDefinitionId}/identitylinks | List the users and groups involved with a process definition
+[**getProcessDefinitionDecisionTables**](ProcessDefinitionsApi.md#getProcessDefinitionDecisionTables) | **GET** /enterprise/process-definitions/{processDefinitionId}/decision-tables | List the decision tables associated with a process definition
+[**getProcessDefinitionForms**](ProcessDefinitionsApi.md#getProcessDefinitionForms) | **GET** /enterprise/process-definitions/{processDefinitionId}/forms | List the forms associated with a process definition
+[**getProcessDefinitionStartForm**](ProcessDefinitionsApi.md#getProcessDefinitionStartForm) | **GET** /enterprise/process-definitions/{processDefinitionId}/start-form | Retrieve the start form for a process definition
+[**getProcessDefinitions**](ProcessDefinitionsApi.md#getProcessDefinitions) | **GET** /enterprise/process-definitions | Retrieve a list of process definitions
+[**getRestFieldValues**](ProcessDefinitionsApi.md#getRestFieldValues) | **GET** /enterprise/process-definitions/{processDefinitionId}/start-form-values/{field} | Retrieve field values (eg. the typeahead field)
+[**getRestTableFieldValues**](ProcessDefinitionsApi.md#getRestTableFieldValues) | **GET** /enterprise/process-definitions/{processDefinitionId}/start-form-values/{field}/{column} | Retrieve field values (eg. the table field)
 
 
 <a name="createIdentityLink"></a>
@@ -24,9 +24,10 @@ Method | HTTP request | Description
 Add a user or group involvement to a process definition
 
 ### Example
+
 ```javascript
-import ProcessdefinitionsApi from 'ProcessdefinitionsApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import ProcessdefinitionsApi from 'src/api/activiti-rest-api/docs/ProcessDefinitionsApi';
+import {AlfrescoApi} from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -37,9 +38,9 @@ let processdefinitionsApi = new ProcessdefinitionsApi(this.alfrescoApi);
 
 
 processdefinitionsApi.createIdentityLink(processDefinitionIdidentityLinkRepresentation).then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
-  console.error(error);
+    console.log('API called successfully. Returned data: ' + data);
+}, function (error) {
+    console.error(error);
 });
 
 ```
@@ -62,9 +63,10 @@ Name | Type | Description  | Notes
 Remove a user or group involvement from a process definition
 
 ### Example
+
 ```javascript
-import ProcessdefinitionsApi from 'ProcessdefinitionsApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import ProcessdefinitionsApi from 'src/api/activiti-rest-api/docs/ProcessDefinitionsApi';
+import {AlfrescoApi} from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -75,9 +77,9 @@ let processdefinitionsApi = new ProcessdefinitionsApi(this.alfrescoApi);
 
 
 processdefinitionsApi.deleteIdentityLink(processDefinitionIdfamilyidentityId).then(() => {
-  console.log('API called successfully.');
-}, function(error) {
-  console.error(error);
+    console.log('API called successfully.');
+}, function (error) {
+    console.error(error);
 });
 
 ```
@@ -101,9 +103,10 @@ null (empty response body)
 Get a user or group involvement with a process definition
 
 ### Example
+
 ```javascript
-import ProcessdefinitionsApi from 'ProcessdefinitionsApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import ProcessdefinitionsApi from 'src/api/activiti-rest-api/docs/ProcessDefinitionsApi';
+import {AlfrescoApi} from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -114,9 +117,9 @@ let processdefinitionsApi = new ProcessdefinitionsApi(this.alfrescoApi);
 
 
 processdefinitionsApi.getIdentityLinkType(processDefinitionIdfamilyidentityId).then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
-  console.error(error);
+    console.log('API called successfully. Returned data: ' + data);
+}, function (error) {
+    console.error(error);
 });
 
 ```
@@ -140,9 +143,10 @@ Name | Type | Description  | Notes
 List either the users or groups involved with a process definition
 
 ### Example
+
 ```javascript
-import ProcessdefinitionsApi from 'ProcessdefinitionsApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import ProcessdefinitionsApi from 'src/api/activiti-rest-api/docs/ProcessDefinitionsApi';
+import {AlfrescoApi} from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -153,9 +157,9 @@ let processdefinitionsApi = new ProcessdefinitionsApi(this.alfrescoApi);
 
 
 processdefinitionsApi.getIdentityLinksForFamily(processDefinitionIdfamily).then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
-  console.error(error);
+    console.log('API called successfully. Returned data: ' + data);
+}, function (error) {
+    console.error(error);
 });
 
 ```
@@ -178,9 +182,10 @@ Name | Type | Description  | Notes
 List the users and groups involved with a process definition
 
 ### Example
+
 ```javascript
-import ProcessdefinitionsApi from 'ProcessdefinitionsApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import ProcessdefinitionsApi from 'src/api/activiti-rest-api/docs/ProcessDefinitionsApi';
+import {AlfrescoApi} from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -191,9 +196,9 @@ let processdefinitionsApi = new ProcessdefinitionsApi(this.alfrescoApi);
 
 
 processdefinitionsApi.getIdentityLinks(processDefinitionId).then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
-  console.error(error);
+    console.log('API called successfully. Returned data: ' + data);
+}, function (error) {
+    console.error(error);
 });
 
 ```
@@ -215,9 +220,10 @@ Name | Type | Description  | Notes
 List the decision tables associated with a process definition
 
 ### Example
+
 ```javascript
-import ProcessdefinitionsApi from 'ProcessdefinitionsApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import ProcessdefinitionsApi from 'src/api/activiti-rest-api/docs/ProcessDefinitionsApi';
+import {AlfrescoApi} from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -228,9 +234,9 @@ let processdefinitionsApi = new ProcessdefinitionsApi(this.alfrescoApi);
 
 
 processdefinitionsApi.getProcessDefinitionDecisionTables(processDefinitionId).then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
-  console.error(error);
+    console.log('API called successfully. Returned data: ' + data);
+}, function (error) {
+    console.error(error);
 });
 
 ```
@@ -252,9 +258,10 @@ Name | Type | Description  | Notes
 List the forms associated with a process definition
 
 ### Example
+
 ```javascript
-import ProcessdefinitionsApi from 'ProcessdefinitionsApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import ProcessdefinitionsApi from 'src/api/activiti-rest-api/docs/ProcessDefinitionsApi';
+import {AlfrescoApi} from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -265,9 +272,9 @@ let processdefinitionsApi = new ProcessdefinitionsApi(this.alfrescoApi);
 
 
 processdefinitionsApi.getProcessDefinitionForms(processDefinitionId).then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
-  console.error(error);
+    console.log('API called successfully. Returned data: ' + data);
+}, function (error) {
+    console.error(error);
 });
 
 ```
@@ -289,9 +296,10 @@ Name | Type | Description  | Notes
 Retrieve the start form for a process definition
 
 ### Example
+
 ```javascript
-import ProcessdefinitionsApi from 'ProcessdefinitionsApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import ProcessdefinitionsApi from 'src/api/activiti-rest-api/docs/ProcessDefinitionsApi';
+import {AlfrescoApi} from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -301,9 +309,9 @@ this.alfrescoApi.setConfig({
 let processdefinitionsApi = new ProcessdefinitionsApi(this.alfrescoApi);
 
 processdefinitionsApi.getProcessDefinitionStartForm(processDefinitionId).then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
-  console.error(error);
+    console.log('API called successfully. Returned data: ' + data);
+}, function (error) {
+    console.error(error);
 });
 
 ```
@@ -324,9 +332,10 @@ Retrieve a list of process definitions
 Get a list of process definitions (visible within the tenant of the user)
 
 ### Example
+
 ```javascript
-import ProcessdefinitionsApi from 'ProcessdefinitionsApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import ProcessdefinitionsApi from 'src/api/activiti-rest-api/docs/ProcessDefinitionsApi';
+import {AlfrescoApi} from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -335,16 +344,16 @@ this.alfrescoApi.setConfig({
 
 let processdefinitionsApi = new ProcessdefinitionsApi(this.alfrescoApi);
 
-let opts = { 
-  'latest': true //  | latest
-  'appDefinitionId': 789 //  | appDefinitionId
-  'deploymentId': deploymentId_example //  | deploymentId
+let opts = {
+    'latest': true //  | latest
+    'appDefinitionId': 789 //  | appDefinitionId
+    'deploymentId': deploymentId_example //  | deploymentId
 };
 
 processdefinitionsApi.getProcessDefinitions(opts).then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
-  console.error(error);
+    console.log('API called successfully. Returned data: ' + data);
+}, function (error) {
+    console.error(error);
 });
 
 ```
@@ -368,9 +377,10 @@ Name | Type | Description  | Notes
 Retrieve field values (eg. the typeahead field)
 
 ### Example
+
 ```javascript
-import ProcessdefinitionsApi from 'ProcessdefinitionsApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import ProcessdefinitionsApi from 'src/api/activiti-rest-api/docs/ProcessDefinitionsApi';
+import {AlfrescoApi} from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -380,9 +390,9 @@ this.alfrescoApi.setConfig({
 let processdefinitionsApi = new ProcessdefinitionsApi(this.alfrescoApi);
 
 processdefinitionsApi.getRestFieldValues().then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
-  console.error(error);
+    console.log('API called successfully. Returned data: ' + data);
+}, function (error) {
+    console.error(error);
 });
 
 ```
@@ -401,9 +411,10 @@ This endpoint does not need any parameter.
 Retrieve field values (eg. the table field)
 
 ### Example
+
 ```javascript
-import ProcessdefinitionsApi from 'ProcessdefinitionsApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import ProcessdefinitionsApi from 'src/api/activiti-rest-api/docs/ProcessDefinitionsApi';
+import {AlfrescoApi} from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -413,9 +424,9 @@ this.alfrescoApi.setConfig({
 let processdefinitionsApi = new ProcessdefinitionsApi(this.alfrescoApi);
 
 processdefinitionsApi.getRestTableFieldValues().then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
-  console.error(error);
+    console.log('API called successfully. Returned data: ' + data);
+}, function (error) {
+    console.error(error);
 });
 
 ```

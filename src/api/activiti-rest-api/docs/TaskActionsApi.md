@@ -4,18 +4,18 @@ All URIs are relative to */activiti-app/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**assignTask**](TaskactionsApi.md#assignTask) | **PUT** /enterprise/tasks/{taskId}/action/assign | Assign a task to a user
-[**attachForm**](TaskactionsApi.md#attachForm) | **PUT** /enterprise/tasks/{taskId}/action/attach-form | Attach a form to a task
-[**claimTask**](TaskactionsApi.md#claimTask) | **PUT** /enterprise/tasks/{taskId}/action/claim | Claim a task
-[**completeTask**](TaskactionsApi.md#completeTask) | **PUT** /enterprise/tasks/{taskId}/action/complete | Complete a task
-[**delegateTask**](TaskactionsApi.md#delegateTask) | **PUT** /enterprise/tasks/{taskId}/action/delegate | Delegate a task
-[**involveGroup**](TaskactionsApi.md#involveGroup) | **POST** /enterprise/tasks/{taskId}/groups/{groupId} | Involve a group with a task
-[**involveUser**](TaskactionsApi.md#involveUser) | **PUT** /enterprise/tasks/{taskId}/action/involve | Involve a user with a task
-[**removeForm**](TaskactionsApi.md#removeForm) | **DELETE** /enterprise/tasks/{taskId}/action/remove-form | Remove a form from a task
-[**removeInvolvedUser**](TaskactionsApi.md#removeInvolvedUser) | **DELETE** /enterprise/tasks/{taskId}/groups/{groupId} | Remove an involved group from a task
-[**removeInvolvedUser**](TaskactionsApi.md#removeInvolvedUser) | **PUT** /enterprise/tasks/{taskId}/action/remove-involved | Remove an involved user from a task
-[**resolveTask**](TaskactionsApi.md#resolveTask) | **PUT** /enterprise/tasks/{taskId}/action/resolve | Resolve a task
-[**unclaimTask**](TaskactionsApi.md#unclaimTask) | **PUT** /enterprise/tasks/{taskId}/action/unclaim | Unclaim a task
+[**assignTask**](TaskActionsApi.md#assignTask) | **PUT** /enterprise/tasks/{taskId}/action/assign | Assign a task to a user
+[**attachForm**](TaskActionsApi.md#attachForm) | **PUT** /enterprise/tasks/{taskId}/action/attach-form | Attach a form to a task
+[**claimTask**](TaskActionsApi.md#claimTask) | **PUT** /enterprise/tasks/{taskId}/action/claim | Claim a task
+[**completeTask**](TaskActionsApi.md#completeTask) | **PUT** /enterprise/tasks/{taskId}/action/complete | Complete a task
+[**delegateTask**](TaskActionsApi.md#delegateTask) | **PUT** /enterprise/tasks/{taskId}/action/delegate | Delegate a task
+[**involveGroup**](TaskActionsApi.md#involveGroup) | **POST** /enterprise/tasks/{taskId}/groups/{groupId} | Involve a group with a task
+[**involveUser**](TaskActionsApi.md#involveUser) | **PUT** /enterprise/tasks/{taskId}/action/involve | Involve a user with a task
+[**removeForm**](TaskActionsApi.md#removeForm) | **DELETE** /enterprise/tasks/{taskId}/action/remove-form | Remove a form from a task
+[**removeInvolvedUser**](TaskActionsApi.md#removeInvolvedUser) | **DELETE** /enterprise/tasks/{taskId}/groups/{groupId} | Remove an involved group from a task
+[**removeInvolvedUser**](TaskActionsApi.md#removeInvolvedUser) | **PUT** /enterprise/tasks/{taskId}/action/remove-involved | Remove an involved user from a task
+[**resolveTask**](TaskActionsApi.md#resolveTask) | **PUT** /enterprise/tasks/{taskId}/action/resolve | Resolve a task
+[**unclaimTask**](TaskActionsApi.md#unclaimTask) | **PUT** /enterprise/tasks/{taskId}/action/unclaim | Unclaim a task
 
 
 <a name="assignTask"></a>
@@ -25,9 +25,10 @@ Method | HTTP request | Description
 Assign a task to a user
 
 ### Example
+
 ```javascript
-import TaskactionsApi from 'TaskactionsApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import TaskactionsApi from 'src/api/activiti-rest-api/docs/TaskActionsApi';
+import {AlfrescoApi} from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -38,9 +39,9 @@ let taskactionsApi = new TaskactionsApi(this.alfrescoApi);
 
 
 taskactionsApi.assignTask(taskIduserIdentifier).then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
-  console.error(error);
+    console.log('API called successfully. Returned data: ' + data);
+}, function (error) {
+    console.error(error);
 });
 
 ```
@@ -63,9 +64,10 @@ Name | Type | Description  | Notes
 Attach a form to a task
 
 ### Example
+
 ```javascript
-import TaskactionsApi from 'TaskactionsApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import TaskactionsApi from 'src/api/activiti-rest-api/docs/TaskActionsApi';
+import {AlfrescoApi} from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -76,9 +78,9 @@ let taskactionsApi = new TaskactionsApi(this.alfrescoApi);
 
 
 taskactionsApi.attachForm(taskIdformIdentifier).then(() => {
-  console.log('API called successfully.');
-}, function(error) {
-  console.error(error);
+    console.log('API called successfully.');
+}, function (error) {
+    console.error(error);
 });
 
 ```
@@ -103,9 +105,10 @@ Claim a task
 To claim a task (in case the task is assigned to a group)
 
 ### Example
+
 ```javascript
-import TaskactionsApi from 'TaskactionsApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import TaskactionsApi from 'src/api/activiti-rest-api/docs/TaskActionsApi';
+import {AlfrescoApi} from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -116,9 +119,9 @@ let taskactionsApi = new TaskactionsApi(this.alfrescoApi);
 
 
 taskactionsApi.claimTask(taskId).then(() => {
-  console.log('API called successfully.');
-}, function(error) {
-  console.error(error);
+    console.log('API called successfully.');
+}, function (error) {
+    console.error(error);
 });
 
 ```
@@ -142,9 +145,10 @@ Complete a task
 Use this endpoint to complete a standalone task or task without a form
 
 ### Example
+
 ```javascript
-import TaskactionsApi from 'TaskactionsApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import TaskactionsApi from 'src/api/activiti-rest-api/docs/TaskActionsApi';
+import {AlfrescoApi} from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -155,9 +159,9 @@ let taskactionsApi = new TaskactionsApi(this.alfrescoApi);
 
 
 taskactionsApi.completeTask(taskId).then(() => {
-  console.log('API called successfully.');
-}, function(error) {
-  console.error(error);
+    console.log('API called successfully.');
+}, function (error) {
+    console.error(error);
 });
 
 ```
@@ -179,9 +183,10 @@ null (empty response body)
 Delegate a task
 
 ### Example
+
 ```javascript
-import TaskactionsApi from 'TaskactionsApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import TaskactionsApi from 'src/api/activiti-rest-api/docs/TaskActionsApi';
+import {AlfrescoApi} from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -192,9 +197,9 @@ let taskactionsApi = new TaskactionsApi(this.alfrescoApi);
 
 
 taskactionsApi.delegateTask(taskIduserIdentifier).then(() => {
-  console.log('API called successfully.');
-}, function(error) {
-  console.error(error);
+    console.log('API called successfully.');
+}, function (error) {
+    console.error(error);
 });
 
 ```
@@ -217,9 +222,10 @@ null (empty response body)
 Involve a group with a task
 
 ### Example
+
 ```javascript
-import TaskactionsApi from 'TaskactionsApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import TaskactionsApi from 'src/api/activiti-rest-api/docs/TaskActionsApi';
+import {AlfrescoApi} from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -230,9 +236,9 @@ let taskactionsApi = new TaskactionsApi(this.alfrescoApi);
 
 
 taskactionsApi.involveGroup(taskIdgroupId).then(() => {
-  console.log('API called successfully.');
-}, function(error) {
-  console.error(error);
+    console.log('API called successfully.');
+}, function (error) {
+    console.error(error);
 });
 
 ```
@@ -255,9 +261,10 @@ null (empty response body)
 Involve a user with a task
 
 ### Example
+
 ```javascript
-import TaskactionsApi from 'TaskactionsApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import TaskactionsApi from 'src/api/activiti-rest-api/docs/TaskActionsApi';
+import {AlfrescoApi} from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -268,9 +275,9 @@ let taskactionsApi = new TaskactionsApi(this.alfrescoApi);
 
 
 taskactionsApi.involveUser(taskIduserIdentifier).then(() => {
-  console.log('API called successfully.');
-}, function(error) {
-  console.error(error);
+    console.log('API called successfully.');
+}, function (error) {
+    console.error(error);
 });
 
 ```
@@ -293,9 +300,10 @@ null (empty response body)
 Remove a form from a task
 
 ### Example
+
 ```javascript
-import TaskactionsApi from 'TaskactionsApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import TaskactionsApi from 'src/api/activiti-rest-api/docs/TaskActionsApi';
+import {AlfrescoApi} from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -306,9 +314,9 @@ let taskactionsApi = new TaskactionsApi(this.alfrescoApi);
 
 
 taskactionsApi.removeForm(taskId).then(() => {
-  console.log('API called successfully.');
-}, function(error) {
-  console.error(error);
+    console.log('API called successfully.');
+}, function (error) {
+    console.error(error);
 });
 
 ```
@@ -330,9 +338,10 @@ null (empty response body)
 Remove an involved group from a task
 
 ### Example
+
 ```javascript
-import TaskactionsApi from 'TaskactionsApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import TaskactionsApi from 'src/api/activiti-rest-api/docs/TaskActionsApi';
+import {AlfrescoApi} from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -343,9 +352,9 @@ let taskactionsApi = new TaskactionsApi(this.alfrescoApi);
 
 
 taskactionsApi.removeInvolvedUser(taskIdgroupId).then(() => {
-  console.log('API called successfully.');
-}, function(error) {
-  console.error(error);
+    console.log('API called successfully.');
+}, function (error) {
+    console.error(error);
 });
 
 ```
@@ -368,9 +377,10 @@ null (empty response body)
 Remove an involved user from a task
 
 ### Example
+
 ```javascript
-import TaskactionsApi from 'TaskactionsApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import TaskactionsApi from 'src/api/activiti-rest-api/docs/TaskActionsApi';
+import {AlfrescoApi} from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -381,9 +391,9 @@ let taskactionsApi = new TaskactionsApi(this.alfrescoApi);
 
 
 taskactionsApi.removeInvolvedUser(taskIduserIdentifier).then(() => {
-  console.log('API called successfully.');
-}, function(error) {
-  console.error(error);
+    console.log('API called successfully.');
+}, function (error) {
+    console.error(error);
 });
 
 ```
@@ -406,9 +416,10 @@ null (empty response body)
 Resolve a task
 
 ### Example
+
 ```javascript
-import TaskactionsApi from 'TaskactionsApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import TaskactionsApi from 'src/api/activiti-rest-api/docs/TaskActionsApi';
+import {AlfrescoApi} from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -419,9 +430,9 @@ let taskactionsApi = new TaskactionsApi(this.alfrescoApi);
 
 
 taskactionsApi.resolveTask(taskId).then(() => {
-  console.log('API called successfully.');
-}, function(error) {
-  console.error(error);
+    console.log('API called successfully.');
+}, function (error) {
+    console.error(error);
 });
 
 ```
@@ -445,9 +456,10 @@ Unclaim a task
 To unclaim a task (in case the task was assigned to a group)
 
 ### Example
+
 ```javascript
-import TaskactionsApi from 'TaskactionsApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import TaskactionsApi from 'src/api/activiti-rest-api/docs/TaskActionsApi';
+import {AlfrescoApi} from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -458,9 +470,9 @@ let taskactionsApi = new TaskactionsApi(this.alfrescoApi);
 
 
 taskactionsApi.unclaimTask(taskId).then(() => {
-  console.log('API called successfully.');
-}, function(error) {
-  console.error(error);
+    console.log('API called successfully.');
+}, function (error) {
+    console.error(error);
 });
 
 ```

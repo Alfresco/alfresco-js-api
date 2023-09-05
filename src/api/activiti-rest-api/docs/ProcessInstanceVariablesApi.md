@@ -4,11 +4,11 @@ All URIs are relative to */activiti-app/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**createOrUpdateProcessInstanceVariables**](ProcessinstancevariablesApi.md#createOrUpdateProcessInstanceVariables) | **PUT** /enterprise/process-instances/{processInstanceId}/variables | Create or update variables
-[**deleteProcessInstanceVariable**](ProcessinstancevariablesApi.md#deleteProcessInstanceVariable) | **DELETE** /enterprise/process-instances/{processInstanceId}/variables/{variableName} | Delete a variable
-[**getProcessInstanceVariable**](ProcessinstancevariablesApi.md#getProcessInstanceVariable) | **GET** /enterprise/process-instances/{processInstanceId}/variables/{variableName} | Get a variable
-[**getProcessInstanceVariables**](ProcessinstancevariablesApi.md#getProcessInstanceVariables) | **GET** /enterprise/process-instances/{processInstanceId}/variables | List variables
-[**updateProcessInstanceVariable**](ProcessinstancevariablesApi.md#updateProcessInstanceVariable) | **PUT** /enterprise/process-instances/{processInstanceId}/variables/{variableName} | Update a variable
+[**createOrUpdateProcessInstanceVariables**](ProcessInstanceVariablesApi.md#createOrUpdateProcessInstanceVariables) | **PUT** /enterprise/process-instances/{processInstanceId}/variables | Create or update variables
+[**deleteProcessInstanceVariable**](ProcessInstanceVariablesApi.md#deleteProcessInstanceVariable) | **DELETE** /enterprise/process-instances/{processInstanceId}/variables/{variableName} | Delete a variable
+[**getProcessInstanceVariable**](ProcessInstanceVariablesApi.md#getProcessInstanceVariable) | **GET** /enterprise/process-instances/{processInstanceId}/variables/{variableName} | Get a variable
+[**getProcessInstanceVariables**](ProcessInstanceVariablesApi.md#getProcessInstanceVariables) | **GET** /enterprise/process-instances/{processInstanceId}/variables | List variables
+[**updateProcessInstanceVariable**](ProcessInstanceVariablesApi.md#updateProcessInstanceVariable) | **PUT** /enterprise/process-instances/{processInstanceId}/variables/{variableName} | Update a variable
 
 
 <a name="createOrUpdateProcessInstanceVariables"></a>
@@ -18,9 +18,10 @@ Method | HTTP request | Description
 Create or update variables
 
 ### Example
+
 ```javascript
-import ProcessinstancevariablesApi from 'ProcessinstancevariablesApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import ProcessinstancevariablesApi from 'src/api/activiti-rest-api/docs/ProcessInstanceVariablesApi';
+import {AlfrescoApi} from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -31,9 +32,9 @@ let processinstancevariablesApi = new ProcessinstancevariablesApi(this.alfrescoA
 
 
 processinstancevariablesApi.createOrUpdateProcessInstanceVariables(processInstanceIdrestVariables).then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
-  console.error(error);
+    console.log('API called successfully. Returned data: ' + data);
+}, function (error) {
+    console.error(error);
 });
 
 ```
@@ -56,9 +57,10 @@ Name | Type | Description  | Notes
 Delete a variable
 
 ### Example
+
 ```javascript
-import ProcessinstancevariablesApi from 'ProcessinstancevariablesApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import ProcessinstancevariablesApi from 'src/api/activiti-rest-api/docs/ProcessInstanceVariablesApi';
+import {AlfrescoApi} from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -69,9 +71,9 @@ let processinstancevariablesApi = new ProcessinstancevariablesApi(this.alfrescoA
 
 
 processinstancevariablesApi.deleteProcessInstanceVariable(processInstanceIdvariableName).then(() => {
-  console.log('API called successfully.');
-}, function(error) {
-  console.error(error);
+    console.log('API called successfully.');
+}, function (error) {
+    console.error(error);
 });
 
 ```
@@ -94,9 +96,10 @@ null (empty response body)
 Get a variable
 
 ### Example
+
 ```javascript
-import ProcessinstancevariablesApi from 'ProcessinstancevariablesApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import ProcessinstancevariablesApi from 'src/api/activiti-rest-api/docs/ProcessInstanceVariablesApi';
+import {AlfrescoApi} from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -107,9 +110,9 @@ let processinstancevariablesApi = new ProcessinstancevariablesApi(this.alfrescoA
 
 
 processinstancevariablesApi.getProcessInstanceVariable(processInstanceIdvariableName).then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
-  console.error(error);
+    console.log('API called successfully. Returned data: ' + data);
+}, function (error) {
+    console.error(error);
 });
 
 ```
@@ -132,9 +135,10 @@ Name | Type | Description  | Notes
 List variables
 
 ### Example
+
 ```javascript
-import ProcessinstancevariablesApi from 'ProcessinstancevariablesApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import ProcessinstancevariablesApi from 'src/api/activiti-rest-api/docs/ProcessInstanceVariablesApi';
+import {AlfrescoApi} from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -145,9 +149,9 @@ let processinstancevariablesApi = new ProcessinstancevariablesApi(this.alfrescoA
 
 
 processinstancevariablesApi.getProcessInstanceVariables(processInstanceId).then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
-  console.error(error);
+    console.log('API called successfully. Returned data: ' + data);
+}, function (error) {
+    console.error(error);
 });
 
 ```
@@ -169,9 +173,10 @@ Name | Type | Description  | Notes
 Update a variable
 
 ### Example
+
 ```javascript
-import ProcessinstancevariablesApi from 'ProcessinstancevariablesApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import ProcessinstancevariablesApi from 'src/api/activiti-rest-api/docs/ProcessInstanceVariablesApi';
+import {AlfrescoApi} from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -182,9 +187,9 @@ let processinstancevariablesApi = new ProcessinstancevariablesApi(this.alfrescoA
 
 
 processinstancevariablesApi.updateProcessInstanceVariable(processInstanceIdvariableNamerestVariable).then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
-  console.error(error);
+    console.log('API called successfully. Returned data: ' + data);
+}, function (error) {
+    console.error(error);
 });
 
 ```

@@ -4,7 +4,7 @@ All URIs are relative to */activiti-app/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**getDataSources**](DatasourcesApi.md#getDataSources) | **GET** /enterprise/editor/data-sources | Get data sources
+[**getDataSources**](DataSourcesApi.md#getDataSources) | **GET** /enterprise/editor/data-sources | Get data sources
 
 
 <a name="getDataSources"></a>
@@ -14,9 +14,10 @@ Method | HTTP request | Description
 Get data sources
 
 ### Example
+
 ```javascript
-import DatasourcesApi from 'DatasourcesApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import DatasourcesApi from 'src/api/activiti-rest-api/docs/DataSourcesApi';
+import {AlfrescoApi} from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -25,14 +26,14 @@ this.alfrescoApi.setConfig({
 
 let datasourcesApi = new DatasourcesApi(this.alfrescoApi);
 
-let opts = { 
-  'tenantId': 789 //  | tenantId
+let opts = {
+    'tenantId': 789 //  | tenantId
 };
 
 datasourcesApi.getDataSources(opts).then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
-  console.error(error);
+    console.log('API called successfully. Returned data: ' + data);
+}, function (error) {
+    console.error(error);
 });
 
 ```

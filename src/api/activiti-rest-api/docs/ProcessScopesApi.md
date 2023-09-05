@@ -4,7 +4,7 @@ All URIs are relative to */activiti-app/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**getRuntimeProcessScopes**](ProcessscopesApi.md#getRuntimeProcessScopes) | **POST** /enterprise/process-scopes | List runtime process scopes
+[**getRuntimeProcessScopes**](ProcessScopesApi.md#getRuntimeProcessScopes) | **POST** /enterprise/process-scopes | List runtime process scopes
 
 
 <a name="getRuntimeProcessScopes"></a>
@@ -14,9 +14,10 @@ Method | HTTP request | Description
 List runtime process scopes
 
 ### Example
+
 ```javascript
-import ProcessscopesApi from 'ProcessscopesApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import ProcessscopesApi from 'src/api/activiti-rest-api/docs/ProcessScopesApi';
+import {AlfrescoApi} from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -27,9 +28,9 @@ let processscopesApi = new ProcessscopesApi(this.alfrescoApi);
 
 
 processscopesApi.getRuntimeProcessScopes(processScopesRequest).then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
-  console.error(error);
+    console.log('API called successfully. Returned data: ' + data);
+}, function (error) {
+    console.error(error);
 });
 
 ```

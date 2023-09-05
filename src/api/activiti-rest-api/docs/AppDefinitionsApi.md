@@ -4,15 +4,15 @@ All URIs are relative to */activiti-app/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**deleteAppDefinition**](AppdefinitionsApi.md#deleteAppDefinition) | **DELETE** /enterprise/app-definitions/{appDefinitionId} | deleteAppDefinition
-[**exportAppDefinition**](AppdefinitionsApi.md#exportAppDefinition) | **GET** /enterprise/app-definitions/{modelId}/export | Export an app definition
-[**getAppDefinition**](AppdefinitionsApi.md#getAppDefinition) | **GET** /enterprise/app-definitions/{modelId} | Get an app definition
-[**importAndPublishApp**](AppdefinitionsApi.md#importAndPublishApp) | **POST** /enterprise/app-definitions/publish-app | importAndPublishApp
-[**importAndPublishApp**](AppdefinitionsApi.md#importAndPublishApp) | **POST** /enterprise/app-definitions/{modelId}/publish-app | importAndPublishApp
-[**importAppDefinition**](AppdefinitionsApi.md#importAppDefinition) | **POST** /enterprise/app-definitions/import | Import a new app definition
-[**updateAppDefinition**](AppdefinitionsApi.md#importAppDefinition) | **POST** /enterprise/app-definitions/{modelId}/import | Update the content of an existing app
-[**publishAppDefinition**](AppdefinitionsApi.md#publishAppDefinition) | **POST** /enterprise/app-definitions/{modelId}/publish | Publish an app definition
-[**updateAppDefinition**](AppdefinitionsApi.md#updateAppDefinition) | **PUT** /enterprise/app-definitions/{modelId} | Update an app definition
+[**deleteAppDefinition**](AppDefinitionsApi.md#deleteAppDefinition) | **DELETE** /enterprise/app-definitions/{appDefinitionId} | deleteAppDefinition
+[**exportAppDefinition**](AppDefinitionsApi.md#exportAppDefinition) | **GET** /enterprise/app-definitions/{modelId}/export | Export an app definition
+[**getAppDefinition**](AppDefinitionsApi.md#getAppDefinition) | **GET** /enterprise/app-definitions/{modelId} | Get an app definition
+[**importAndPublishApp**](AppDefinitionsApi.md#importAndPublishApp) | **POST** /enterprise/app-definitions/publish-app | importAndPublishApp
+[**importAndPublishApp**](AppDefinitionsApi.md#importAndPublishApp) | **POST** /enterprise/app-definitions/{modelId}/publish-app | importAndPublishApp
+[**importAppDefinition**](AppDefinitionsApi.md#importAppDefinition) | **POST** /enterprise/app-definitions/import | Import a new app definition
+[**updateAppDefinition**](AppDefinitionsApi.md#importAppDefinition) | **POST** /enterprise/app-definitions/{modelId}/import | Update the content of an existing app
+[**publishAppDefinition**](AppDefinitionsApi.md#publishAppDefinition) | **POST** /enterprise/app-definitions/{modelId}/publish | Publish an app definition
+[**updateAppDefinition**](AppDefinitionsApi.md#updateAppDefinition) | **PUT** /enterprise/app-definitions/{modelId} | Update an app definition
 
 
 <a name="deleteAppDefinition"></a>
@@ -22,9 +22,10 @@ Method | HTTP request | Description
 deleteAppDefinition
 
 ### Example
+
 ```javascript
-import AppdefinitionsApi from 'AppdefinitionsApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import AppdefinitionsApi from 'src/api/activiti-rest-api/docs/AppDefinitionsApi';
+import {AlfrescoApi} from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -35,9 +36,9 @@ let appdefinitionsApi = new AppdefinitionsApi(this.alfrescoApi);
 
 
 appdefinitionsApi.deleteAppDefinition(appDefinitionId).then(() => {
-  console.log('API called successfully.');
-}, function(error) {
-  console.error(error);
+    console.log('API called successfully.');
+}, function (error) {
+    console.error(error);
 });
 
 ```
@@ -61,9 +62,10 @@ Export an app definition
 This will return a zip file containing the app definition model and all related models (process definitions and forms).
 
 ### Example
+
 ```javascript
-import AppdefinitionsApi from 'AppdefinitionsApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import AppdefinitionsApi from 'src/api/activiti-rest-api/docs/AppDefinitionsApi';
+import {AlfrescoApi} from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -74,9 +76,9 @@ let appdefinitionsApi = new AppdefinitionsApi(this.alfrescoApi);
 
 
 appdefinitionsApi.exportAppDefinition(modelId).then(() => {
-  console.log('API called successfully.');
-}, function(error) {
-  console.error(error);
+    console.log('API called successfully.');
+}, function (error) {
+    console.error(error);
 });
 
 ```
@@ -98,9 +100,10 @@ null (empty response body)
 Get an app definition
 
 ### Example
+
 ```javascript
-import AppdefinitionsApi from 'AppdefinitionsApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import AppdefinitionsApi from 'src/api/activiti-rest-api/docs/AppDefinitionsApi';
+import {AlfrescoApi} from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -111,9 +114,9 @@ let appdefinitionsApi = new AppdefinitionsApi(this.alfrescoApi);
 
 
 appdefinitionsApi.getAppDefinition(modelId).then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
-  console.error(error);
+    console.log('API called successfully. Returned data: ' + data);
+}, function (error) {
+    console.error(error);
 });
 
 ```
@@ -135,9 +138,10 @@ Name | Type | Description  | Notes
 importAndPublishApp
 
 ### Example
+
 ```javascript
-import AppdefinitionsApi from 'AppdefinitionsApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import AppdefinitionsApi from 'src/api/activiti-rest-api/docs/AppDefinitionsApi';
+import {AlfrescoApi} from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -148,9 +152,9 @@ let appdefinitionsApi = new AppdefinitionsApi(this.alfrescoApi);
 
 
 appdefinitionsApi.importAndPublishApp(file).then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
-  console.error(error);
+    console.log('API called successfully. Returned data: ' + data);
+}, function (error) {
+    console.error(error);
 });
 
 ```
@@ -172,9 +176,10 @@ Name | Type | Description  | Notes
 importAndPublishApp
 
 ### Example
+
 ```javascript
-import AppdefinitionsApi from 'AppdefinitionsApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import AppdefinitionsApi from 'src/api/activiti-rest-api/docs/AppDefinitionsApi';
+import {AlfrescoApi} from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -185,9 +190,9 @@ let appdefinitionsApi = new AppdefinitionsApi(this.alfrescoApi);
 
 
 appdefinitionsApi.importAndPublishApp(modelIdfile).then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
-  console.error(error);
+    console.log('API called successfully. Returned data: ' + data);
+}, function (error) {
+    console.error(error);
 });
 
 ```
@@ -212,9 +217,10 @@ Import a new app definition
 Allows a zip file to be uploaded containing an app definition and any number of included models.<p>This is useful to bootstrap an environment (for users or continuous integration).<p>Before using any processes included in the import the app must be published and deployed.
 
 ### Example
+
 ```javascript
-import AppdefinitionsApi from 'AppdefinitionsApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import AppdefinitionsApi from 'src/api/activiti-rest-api/docs/AppDefinitionsApi';
+import {AlfrescoApi} from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -223,14 +229,14 @@ this.alfrescoApi.setConfig({
 
 let appdefinitionsApi = new AppdefinitionsApi(this.alfrescoApi);
 
-let opts = { 
-  'renewIdmEntries': renewIdmEntries_example //  | Whether to renew user and group identifiers
+let opts = {
+    'renewIdmEntries': renewIdmEntries_example //  | Whether to renew user and group identifiers
 };
 
 appdefinitionsApi.importAppDefinition(fileopts).then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
-  console.error(error);
+    console.log('API called successfully. Returned data: ' + data);
+}, function (error) {
+    console.error(error);
 });
 
 ```
@@ -255,9 +261,10 @@ Update the content of an existing app
 Imports an app inside an existing app definition and creates a new version<p>Before using any new or updated processes included in the import the app must be (re-)published and deployed.
 
 ### Example
+
 ```javascript
-import AppdefinitionsApi from 'AppdefinitionsApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import AppdefinitionsApi from 'src/api/activiti-rest-api/docs/AppDefinitionsApi';
+import {AlfrescoApi} from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -268,9 +275,9 @@ let appdefinitionsApi = new AppdefinitionsApi(this.alfrescoApi);
 
 
 appdefinitionsApi.updateAppDefinition(modelIdfile).then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
-  console.error(error);
+    console.log('API called successfully. Returned data: ' + data);
+}, function (error) {
+    console.error(error);
 });
 
 ```
@@ -295,9 +302,10 @@ Publish an app definition
 Publishing an app definition makes it available for use. The application must not have any validation errors or an error will be returned.<p>Before an app definition can be used by other users, it must also be deployed for their use
 
 ### Example
+
 ```javascript
-import AppdefinitionsApi from 'AppdefinitionsApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import AppdefinitionsApi from 'src/api/activiti-rest-api/docs/AppDefinitionsApi';
+import {AlfrescoApi} from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -308,9 +316,9 @@ let appdefinitionsApi = new AppdefinitionsApi(this.alfrescoApi);
 
 
 appdefinitionsApi.publishAppDefinition(modelIdpublishModel).then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
-  console.error(error);
+    console.log('API called successfully. Returned data: ' + data);
+}, function (error) {
+    console.error(error);
 });
 
 ```
@@ -333,9 +341,10 @@ Name | Type | Description  | Notes
 Update an app definition
 
 ### Example
+
 ```javascript
-import AppdefinitionsApi from 'AppdefinitionsApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import AppdefinitionsApi from 'src/api/activiti-rest-api/docs/AppDefinitionsApi';
+import {AlfrescoApi} from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -346,9 +355,9 @@ let appdefinitionsApi = new AppdefinitionsApi(this.alfrescoApi);
 
 
 appdefinitionsApi.updateAppDefinition(modelIdupdatedModel).then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
-  console.error(error);
+    console.log('API called successfully. Returned data: ' + data);
+}, function (error) {
+    console.error(error);
 });
 
 ```

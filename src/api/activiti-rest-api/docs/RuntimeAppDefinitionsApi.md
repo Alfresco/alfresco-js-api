@@ -4,9 +4,9 @@ All URIs are relative to */activiti-app/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**deployAppDefinitions**](RuntimeappdefinitionsApi.md#deployAppDefinitions) | **POST** /enterprise/runtime-app-definitions | Deploy a published app
-[**getAppDefinition**](RuntimeappdefinitionsApi.md#getAppDefinition) | **GET** /enterprise/runtime-app-definitions/{appDefinitionId} | Get a runtime app
-[**getAppDefinitions**](RuntimeappdefinitionsApi.md#getAppDefinitions) | **GET** /enterprise/runtime-app-definitions | List runtime apps
+[**deployAppDefinitions**](RuntimeAppDefinitionsApi.md#deployAppDefinitions) | **POST** /enterprise/runtime-app-definitions | Deploy a published app
+[**getAppDefinition**](RuntimeAppDefinitionsApi.md#getAppDefinition) | **GET** /enterprise/runtime-app-definitions/{appDefinitionId} | Get a runtime app
+[**getAppDefinitions**](RuntimeAppDefinitionsApi.md#getAppDefinitions) | **GET** /enterprise/runtime-app-definitions | List runtime apps
 
 
 <a name="deployAppDefinitions"></a>
@@ -18,9 +18,10 @@ Deploy a published app
 Deploying an app allows the user to see it on his/her landing page. Apps must be published before they can be deployed.
 
 ### Example
+
 ```javascript
-import RuntimeappdefinitionsApi from 'RuntimeappdefinitionsApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import RuntimeappdefinitionsApi from 'src/api/activiti-rest-api/docs/RuntimeAppDefinitionsApi';
+import {AlfrescoApi} from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -31,9 +32,9 @@ let runtimeappdefinitionsApi = new RuntimeappdefinitionsApi(this.alfrescoApi);
 
 
 runtimeappdefinitionsApi.deployAppDefinitions(saveObject).then(() => {
-  console.log('API called successfully.');
-}, function(error) {
-  console.error(error);
+    console.log('API called successfully.');
+}, function (error) {
+    console.error(error);
 });
 
 ```
@@ -55,9 +56,10 @@ null (empty response body)
 Get a runtime app
 
 ### Example
+
 ```javascript
-import RuntimeappdefinitionsApi from 'RuntimeappdefinitionsApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import RuntimeappdefinitionsApi from 'src/api/activiti-rest-api/docs/RuntimeAppDefinitionsApi';
+import {AlfrescoApi} from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -68,9 +70,9 @@ let runtimeappdefinitionsApi = new RuntimeappdefinitionsApi(this.alfrescoApi);
 
 
 runtimeappdefinitionsApi.getAppDefinition(appDefinitionId).then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
-  console.error(error);
+    console.log('API called successfully. Returned data: ' + data);
+}, function (error) {
+    console.error(error);
 });
 
 ```
@@ -94,9 +96,10 @@ List runtime apps
 When a user logs in into Alfresco Process Services Suite, a landing page is displayed containing all the apps that the user is allowed to see and use. These are referred to as runtime apps.
 
 ### Example
+
 ```javascript
-import RuntimeappdefinitionsApi from 'RuntimeappdefinitionsApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import RuntimeappdefinitionsApi from 'src/api/activiti-rest-api/docs/RuntimeAppDefinitionsApi';
+import {AlfrescoApi} from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -106,9 +109,9 @@ this.alfrescoApi.setConfig({
 let runtimeappdefinitionsApi = new RuntimeappdefinitionsApi(this.alfrescoApi);
 
 runtimeappdefinitionsApi.getAppDefinitions().then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
-  console.error(error);
+    console.log('API called successfully. Returned data: ' + data);
+}, function (error) {
+    console.error(error);
 });
 
 ```

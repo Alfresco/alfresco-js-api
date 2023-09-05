@@ -4,10 +4,10 @@ All URIs are relative to */activiti-app/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**getGlobalDateFormat**](SystempropertiesApi.md#getGlobalDateFormat) | **GET** /enterprise/system/properties/global-date-format/{tenantId} | Get global date format
-[**getPasswordValidationConstraints**](SystempropertiesApi.md#getPasswordValidationConstraints) | **GET** /enterprise/system/properties/password-validation-constraints/{tenantId} | Get password validation constraints
-[**getProperties**](SystempropertiesApi.md#getProperties) | **GET** /enterprise/system/properties | Retrieve system properties
-[**involvedUsersCanEditForms**](SystempropertiesApi.md#involvedUsersCanEditForms) | **GET** /enterprise/system/properties/involved-users-can-edit-forms/{tenantId} | Get involved users who can edit forms
+[**getGlobalDateFormat**](SystemPropertiesApi.md#getGlobalDateFormat) | **GET** /enterprise/system/properties/global-date-format/{tenantId} | Get global date format
+[**getPasswordValidationConstraints**](SystemPropertiesApi.md#getPasswordValidationConstraints) | **GET** /enterprise/system/properties/password-validation-constraints/{tenantId} | Get password validation constraints
+[**getProperties**](SystemPropertiesApi.md#getProperties) | **GET** /enterprise/system/properties | Retrieve system properties
+[**involvedUsersCanEditForms**](SystemPropertiesApi.md#involvedUsersCanEditForms) | **GET** /enterprise/system/properties/involved-users-can-edit-forms/{tenantId} | Get involved users who can edit forms
 
 
 <a name="getGlobalDateFormat"></a>
@@ -17,9 +17,10 @@ Method | HTTP request | Description
 Get global date format
 
 ### Example
+
 ```javascript
-import SystempropertiesApi from 'SystempropertiesApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import SystempropertiesApi from 'src/api/activiti-rest-api/docs/SystemPropertiesApi';
+import {AlfrescoApi} from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -30,9 +31,9 @@ let systempropertiesApi = new SystempropertiesApi(this.alfrescoApi);
 
 
 systempropertiesApi.getGlobalDateFormat(tenantId).then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
-  console.error(error);
+    console.log('API called successfully. Returned data: ' + data);
+}, function (error) {
+    console.error(error);
 });
 
 ```
@@ -54,9 +55,10 @@ Name | Type | Description  | Notes
 Get password validation constraints
 
 ### Example
+
 ```javascript
-import SystempropertiesApi from 'SystempropertiesApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import SystempropertiesApi from 'src/api/activiti-rest-api/docs/SystemPropertiesApi';
+import {AlfrescoApi} from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -67,9 +69,9 @@ let systempropertiesApi = new SystempropertiesApi(this.alfrescoApi);
 
 
 systempropertiesApi.getPasswordValidationConstraints(tenantId).then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
-  console.error(error);
+    console.log('API called successfully. Returned data: ' + data);
+}, function (error) {
+    console.error(error);
 });
 
 ```
@@ -93,9 +95,10 @@ Retrieve system properties
 Typical value is AllowInvolveByEmail
 
 ### Example
+
 ```javascript
-import SystempropertiesApi from 'SystempropertiesApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import SystempropertiesApi from 'src/api/activiti-rest-api/docs/SystemPropertiesApi';
+import {AlfrescoApi} from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -105,9 +108,9 @@ this.alfrescoApi.setConfig({
 let systempropertiesApi = new SystempropertiesApi(this.alfrescoApi);
 
 systempropertiesApi.getProperties().then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
-  console.error(error);
+    console.log('API called successfully. Returned data: ' + data);
+}, function (error) {
+    console.error(error);
 });
 
 ```
@@ -126,9 +129,10 @@ This endpoint does not need any parameter.
 Get involved users who can edit forms
 
 ### Example
+
 ```javascript
-import SystempropertiesApi from 'SystempropertiesApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import SystempropertiesApi from 'src/api/activiti-rest-api/docs/SystemPropertiesApi';
+import {AlfrescoApi} from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -139,9 +143,9 @@ let systempropertiesApi = new SystempropertiesApi(this.alfrescoApi);
 
 
 systempropertiesApi.involvedUsersCanEditForms(tenantId).then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
-  console.error(error);
+    console.log('API called successfully. Returned data: ' + data);
+}, function (error) {
+    console.error(error);
 });
 
 ```

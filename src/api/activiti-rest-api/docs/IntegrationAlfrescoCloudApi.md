@@ -4,12 +4,12 @@ All URIs are relative to */activiti-app/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**confirmAuthorisation**](IntegrationalfrescocloudApi.md#confirmAuthorisation) | **GET** /enterprise/integration/alfresco-cloud/confirm-auth-request | Alfresco Cloud Authorization
-[**getAllNetworks**](IntegrationalfrescocloudApi.md#getAllNetworks) | **GET** /enterprise/integration/alfresco-cloud/networks | List Alfresco networks
-[**getAllSites**](IntegrationalfrescocloudApi.md#getAllSites) | **GET** /enterprise/integration/alfresco-cloud/networks/{networkId}/sites | List Alfresco sites
-[**getContentInFolderPath**](IntegrationalfrescocloudApi.md#getContentInFolderPath) | **GET** /enterprise/integration/alfresco-cloud/networks/{networkId}/sites/{siteId}/folderpath/{folderPath}/content | List files and folders inside a specific folder identified by path
-[**getContentInFolder**](IntegrationalfrescocloudApi.md#getContentInFolder) | **GET** /enterprise/integration/alfresco-cloud/networks/{networkId}/folders/{folderId}/content | List files and folders inside a specific folder
-[**getContentInSite**](IntegrationalfrescocloudApi.md#getContentInSite) | **GET** /enterprise/integration/alfresco-cloud/networks/{networkId}/sites/{siteId}/content | List files and folders inside a specific site
+[**confirmAuthorisation**](IntegrationAlfrescoCloudApi.md#confirmAuthorisation) | **GET** /enterprise/integration/alfresco-cloud/confirm-auth-request | Alfresco Cloud Authorization
+[**getAllNetworks**](IntegrationAlfrescoCloudApi.md#getAllNetworks) | **GET** /enterprise/integration/alfresco-cloud/networks | List Alfresco networks
+[**getAllSites**](IntegrationAlfrescoCloudApi.md#getAllSites) | **GET** /enterprise/integration/alfresco-cloud/networks/{networkId}/sites | List Alfresco sites
+[**getContentInFolderPath**](IntegrationAlfrescoCloudApi.md#getContentInFolderPath) | **GET** /enterprise/integration/alfresco-cloud/networks/{networkId}/sites/{siteId}/folderpath/{folderPath}/content | List files and folders inside a specific folder identified by path
+[**getContentInFolder**](IntegrationAlfrescoCloudApi.md#getContentInFolder) | **GET** /enterprise/integration/alfresco-cloud/networks/{networkId}/folders/{folderId}/content | List files and folders inside a specific folder
+[**getContentInSite**](IntegrationAlfrescoCloudApi.md#getContentInSite) | **GET** /enterprise/integration/alfresco-cloud/networks/{networkId}/sites/{siteId}/content | List files and folders inside a specific site
 
 
 <a name="confirmAuthorisation"></a>
@@ -21,9 +21,10 @@ Alfresco Cloud Authorization
 Returns Alfresco OAuth HTML Page
 
 ### Example
+
 ```javascript
-import IntegrationalfrescocloudApi from 'IntegrationalfrescocloudApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import IntegrationalfrescocloudApi from 'src/api/activiti-rest-api/docs/IntegrationAlfrescoCloudApi';
+import {AlfrescoApi} from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -34,9 +35,9 @@ let integrationalfrescocloudApi = new IntegrationalfrescocloudApi(this.alfrescoA
 
 
 integrationalfrescocloudApi.confirmAuthorisation(code).then(() => {
-  console.log('API called successfully.');
-}, function(error) {
-  console.error(error);
+    console.log('API called successfully.');
+}, function (error) {
+    console.error(error);
 });
 
 ```
@@ -58,9 +59,10 @@ null (empty response body)
 List Alfresco networks
 
 ### Example
+
 ```javascript
-import IntegrationalfrescocloudApi from 'IntegrationalfrescocloudApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import IntegrationalfrescocloudApi from 'src/api/activiti-rest-api/docs/IntegrationAlfrescoCloudApi';
+import {AlfrescoApi} from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -70,9 +72,9 @@ this.alfrescoApi.setConfig({
 let integrationalfrescocloudApi = new IntegrationalfrescocloudApi(this.alfrescoApi);
 
 integrationalfrescocloudApi.getAllNetworks().then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
-  console.error(error);
+    console.log('API called successfully. Returned data: ' + data);
+}, function (error) {
+    console.error(error);
 });
 
 ```
@@ -93,9 +95,10 @@ List Alfresco sites
 Returns ALL Sites
 
 ### Example
+
 ```javascript
-import IntegrationalfrescocloudApi from 'IntegrationalfrescocloudApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import IntegrationalfrescocloudApi from 'src/api/activiti-rest-api/docs/IntegrationAlfrescoCloudApi';
+import {AlfrescoApi} from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -106,9 +109,9 @@ let integrationalfrescocloudApi = new IntegrationalfrescocloudApi(this.alfrescoA
 
 
 integrationalfrescocloudApi.getAllSites(networkId).then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
-  console.error(error);
+    console.log('API called successfully. Returned data: ' + data);
+}, function (error) {
+    console.error(error);
 });
 
 ```
@@ -130,9 +133,10 @@ Name | Type | Description  | Notes
 List files and folders inside a specific folder identified by path
 
 ### Example
+
 ```javascript
-import IntegrationalfrescocloudApi from 'IntegrationalfrescocloudApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import IntegrationalfrescocloudApi from 'src/api/activiti-rest-api/docs/IntegrationAlfrescoCloudApi';
+import {AlfrescoApi} from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -141,15 +145,15 @@ this.alfrescoApi.setConfig({
 
 let integrationalfrescocloudApi = new IntegrationalfrescocloudApi(this.alfrescoApi);
 
-let opts = { 
-  'siteId': siteId_example //  | siteId
-  'path': path_example //  | path
+let opts = {
+    'siteId': siteId_example //  | siteId
+    'path': path_example //  | path
 };
 
 integrationalfrescocloudApi.getContentInFolderPath(networkIdopts).then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
-  console.error(error);
+    console.log('API called successfully. Returned data: ' + data);
+}, function (error) {
+    console.error(error);
 });
 
 ```
@@ -173,9 +177,10 @@ Name | Type | Description  | Notes
 List files and folders inside a specific folder
 
 ### Example
+
 ```javascript
-import IntegrationalfrescocloudApi from 'IntegrationalfrescocloudApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import IntegrationalfrescocloudApi from 'src/api/activiti-rest-api/docs/IntegrationAlfrescoCloudApi';
+import {AlfrescoApi} from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -186,9 +191,9 @@ let integrationalfrescocloudApi = new IntegrationalfrescocloudApi(this.alfrescoA
 
 
 integrationalfrescocloudApi.getContentInFolder(networkIdfolderId).then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
-  console.error(error);
+    console.log('API called successfully. Returned data: ' + data);
+}, function (error) {
+    console.error(error);
 });
 
 ```
@@ -211,9 +216,10 @@ Name | Type | Description  | Notes
 List files and folders inside a specific site
 
 ### Example
+
 ```javascript
-import IntegrationalfrescocloudApi from 'IntegrationalfrescocloudApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import IntegrationalfrescocloudApi from 'src/api/activiti-rest-api/docs/IntegrationAlfrescoCloudApi';
+import {AlfrescoApi} from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -224,9 +230,9 @@ let integrationalfrescocloudApi = new IntegrationalfrescocloudApi(this.alfrescoA
 
 
 integrationalfrescocloudApi.getContentInSite(networkIdsiteId).then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
-  console.error(error);
+    console.log('API called successfully. Returned data: ' + data);
+}, function (error) {
+    console.error(error);
 });
 
 ```

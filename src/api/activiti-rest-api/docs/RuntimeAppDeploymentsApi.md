@@ -4,11 +4,11 @@ All URIs are relative to */activiti-app/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**deleteAppDeployment**](RuntimeappdeploymentsApi.md#deleteAppDeployment) | **DELETE** /enterprise/runtime-app-deployments/{appDeploymentId} | Remove an app deployment
-[**exportAppDefinition**](RuntimeappdeploymentsApi.md#exportAppDefinition) | **GET** /enterprise/export-app-deployment/{deploymentId} | Export the app archive for a deployment
-[**getAppDefinitions**](RuntimeappdeploymentsApi.md#getAppDefinitions) | **GET** /enterprise/runtime-app-deployments | Query app deployments
-[**getAppDeployment**](RuntimeappdeploymentsApi.md#getAppDeployment) | **GET** /enterprise/runtime-app-deployments/{appDeploymentId} | Get an app deployment
-[**getRuntimeAppDeploymentByDeployment**](RuntimeappdeploymentsApi.md#getRuntimeAppDeploymentByDeployment) | **GET** /enterprise/runtime-app-deployment | Get an app by deployment ID or DMN deployment ID
+[**deleteAppDeployment**](RuntimeAppDeploymentsApi.md#deleteAppDeployment) | **DELETE** /enterprise/runtime-app-deployments/{appDeploymentId} | Remove an app deployment
+[**exportAppDefinition**](RuntimeAppDeploymentsApi.md#exportAppDefinition) | **GET** /enterprise/export-app-deployment/{deploymentId} | Export the app archive for a deployment
+[**getAppDefinitions**](RuntimeAppDeploymentsApi.md#getAppDefinitions) | **GET** /enterprise/runtime-app-deployments | Query app deployments
+[**getAppDeployment**](RuntimeAppDeploymentsApi.md#getAppDeployment) | **GET** /enterprise/runtime-app-deployments/{appDeploymentId} | Get an app deployment
+[**getRuntimeAppDeploymentByDeployment**](RuntimeAppDeploymentsApi.md#getRuntimeAppDeploymentByDeployment) | **GET** /enterprise/runtime-app-deployment | Get an app by deployment ID or DMN deployment ID
 
 
 <a name="deleteAppDeployment"></a>
@@ -18,9 +18,10 @@ Method | HTTP request | Description
 Remove an app deployment
 
 ### Example
+
 ```javascript
-import RuntimeappdeploymentsApi from 'RuntimeappdeploymentsApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import RuntimeappdeploymentsApi from 'src/api/activiti-rest-api/docs/RuntimeAppDeploymentsApi';
+import {AlfrescoApi} from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -31,9 +32,9 @@ let runtimeappdeploymentsApi = new RuntimeappdeploymentsApi(this.alfrescoApi);
 
 
 runtimeappdeploymentsApi.deleteAppDeployment(appDeploymentId).then(() => {
-  console.log('API called successfully.');
-}, function(error) {
-  console.error(error);
+    console.log('API called successfully.');
+}, function (error) {
+    console.error(error);
 });
 
 ```
@@ -55,9 +56,10 @@ null (empty response body)
 Export the app archive for a deployment
 
 ### Example
+
 ```javascript
-import RuntimeappdeploymentsApi from 'RuntimeappdeploymentsApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import RuntimeappdeploymentsApi from 'src/api/activiti-rest-api/docs/RuntimeAppDeploymentsApi';
+import {AlfrescoApi} from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -68,9 +70,9 @@ let runtimeappdeploymentsApi = new RuntimeappdeploymentsApi(this.alfrescoApi);
 
 
 runtimeappdeploymentsApi.exportAppDefinition(deploymentId).then(() => {
-  console.log('API called successfully.');
-}, function(error) {
-  console.error(error);
+    console.log('API called successfully.');
+}, function (error) {
+    console.error(error);
 });
 
 ```
@@ -92,9 +94,10 @@ null (empty response body)
 Query app deployments
 
 ### Example
+
 ```javascript
-import RuntimeappdeploymentsApi from 'RuntimeappdeploymentsApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import RuntimeappdeploymentsApi from 'src/api/activiti-rest-api/docs/RuntimeAppDeploymentsApi';
+import {AlfrescoApi} from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -103,20 +106,20 @@ this.alfrescoApi.setConfig({
 
 let runtimeappdeploymentsApi = new RuntimeappdeploymentsApi(this.alfrescoApi);
 
-let opts = { 
-  'nameLike': nameLike_example //  | nameLike
-  'tenantId': 789 //  | tenantId
-  'latest': true //  | latest
-  'start': 56 //  | start
-  'sort': sort_example //  | sort
-  'order': order_example //  | order
-  'size': 56 //  | size
+let opts = {
+    'nameLike': nameLike_example //  | nameLike
+    'tenantId': 789 //  | tenantId
+    'latest': true //  | latest
+    'start': 56 //  | start
+    'sort': sort_example //  | sort
+    'order': order_example //  | order
+    'size': 56 //  | size
 };
 
 runtimeappdeploymentsApi.getAppDefinitions(opts).then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
-  console.error(error);
+    console.log('API called successfully. Returned data: ' + data);
+}, function (error) {
+    console.error(error);
 });
 
 ```
@@ -144,9 +147,10 @@ Name | Type | Description  | Notes
 Get an app deployment
 
 ### Example
+
 ```javascript
-import RuntimeappdeploymentsApi from 'RuntimeappdeploymentsApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import RuntimeappdeploymentsApi from 'src/api/activiti-rest-api/docs/RuntimeAppDeploymentsApi';
+import {AlfrescoApi} from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -157,9 +161,9 @@ let runtimeappdeploymentsApi = new RuntimeappdeploymentsApi(this.alfrescoApi);
 
 
 runtimeappdeploymentsApi.getAppDeployment(appDeploymentId).then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
-  console.error(error);
+    console.log('API called successfully. Returned data: ' + data);
+}, function (error) {
+    console.error(error);
 });
 
 ```
@@ -183,9 +187,10 @@ Get an app by deployment ID or DMN deployment ID
 Either a deploymentId or a dmnDeploymentId must be provided
 
 ### Example
+
 ```javascript
-import RuntimeappdeploymentsApi from 'RuntimeappdeploymentsApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import RuntimeappdeploymentsApi from 'src/api/activiti-rest-api/docs/RuntimeAppDeploymentsApi';
+import {AlfrescoApi} from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -194,15 +199,15 @@ this.alfrescoApi.setConfig({
 
 let runtimeappdeploymentsApi = new RuntimeappdeploymentsApi(this.alfrescoApi);
 
-let opts = { 
-  'deploymentId': deploymentId_example //  | deploymentId
-  'dmnDeploymentId': 789 //  | dmnDeploymentId
+let opts = {
+    'deploymentId': deploymentId_example //  | deploymentId
+    'dmnDeploymentId': 789 //  | dmnDeploymentId
 };
 
 runtimeappdeploymentsApi.getRuntimeAppDeploymentByDeployment(opts).then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
-  console.error(error);
+    console.log('API called successfully. Returned data: ' + data);
+}, function (error) {
+    console.error(error);
 });
 
 ```

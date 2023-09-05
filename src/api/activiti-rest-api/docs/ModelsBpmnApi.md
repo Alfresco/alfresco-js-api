@@ -4,8 +4,8 @@ All URIs are relative to */activiti-app/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**getHistoricProcessModelBpmn20Xml**](ModelsbpmnApi.md#getHistoricProcessModelBpmn20Xml) | **GET** /enterprise/models/{processModelId}/history/{processModelHistoryId}/bpmn20 | Export a historic version of a process definition as BPMN 2.0 XML
-[**getProcessModelBpmn20Xml**](ModelsbpmnApi.md#getProcessModelBpmn20Xml) | **GET** /enterprise/models/{processModelId}/bpmn20 | Export a process definition as BPMN 2.0 XML
+[**getHistoricProcessModelBpmn20Xml**](ModelsBpmnApi.md#getHistoricProcessModelBpmn20Xml) | **GET** /enterprise/models/{processModelId}/history/{processModelHistoryId}/bpmn20 | Export a historic version of a process definition as BPMN 2.0 XML
+[**getProcessModelBpmn20Xml**](ModelsBpmnApi.md#getProcessModelBpmn20Xml) | **GET** /enterprise/models/{processModelId}/bpmn20 | Export a process definition as BPMN 2.0 XML
 
 
 <a name="getHistoricProcessModelBpmn20Xml"></a>
@@ -15,9 +15,10 @@ Method | HTTP request | Description
 Export a historic version of a process definition as BPMN 2.0 XML
 
 ### Example
+
 ```javascript
-import ModelsbpmnApi from 'ModelsbpmnApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import ModelsbpmnApi from 'src/api/activiti-rest-api/docs/ModelsBpmnApi';
+import {AlfrescoApi} from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -28,9 +29,9 @@ let modelsbpmnApi = new ModelsbpmnApi(this.alfrescoApi);
 
 
 modelsbpmnApi.getHistoricProcessModelBpmn20Xml(processModelIdprocessModelHistoryId).then(() => {
-  console.log('API called successfully.');
-}, function(error) {
-  console.error(error);
+    console.log('API called successfully.');
+}, function (error) {
+    console.error(error);
 });
 
 ```
@@ -53,9 +54,10 @@ null (empty response body)
 Export a process definition as BPMN 2.0 XML
 
 ### Example
+
 ```javascript
-import ModelsbpmnApi from 'ModelsbpmnApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import ModelsbpmnApi from 'src/api/activiti-rest-api/docs/ModelsBpmnApi';
+import {AlfrescoApi} from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -66,9 +68,9 @@ let modelsbpmnApi = new ModelsbpmnApi(this.alfrescoApi);
 
 
 modelsbpmnApi.getProcessModelBpmn20Xml(processModelId).then(() => {
-  console.log('API called successfully.');
-}, function(error) {
-  console.error(error);
+    console.log('API called successfully.');
+}, function (error) {
+    console.error(error);
 });
 
 ```

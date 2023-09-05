@@ -4,18 +4,18 @@ All URIs are relative to */activiti-app/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**createUserProcessInstanceFilter**](UserfiltersApi.md#createUserProcessInstanceFilter) | **POST** /enterprise/filters/processes | Create a process instance filter
-[**createUserTaskFilter**](UserfiltersApi.md#createUserTaskFilter) | **POST** /enterprise/filters/tasks | Create a task filter
-[**deleteUserProcessInstanceFilter**](UserfiltersApi.md#deleteUserProcessInstanceFilter) | **DELETE** /enterprise/filters/processes/{userFilterId} | Delete a process instance filter
-[**deleteUserTaskFilter**](UserfiltersApi.md#deleteUserTaskFilter) | **DELETE** /enterprise/filters/tasks/{userFilterId} | Delete a task filter
-[**getUserProcessInstanceFilter**](UserfiltersApi.md#getUserProcessInstanceFilter) | **GET** /enterprise/filters/processes/{userFilterId} | Get a process instance filter
-[**getUserProcessInstanceFilters**](UserfiltersApi.md#getUserProcessInstanceFilters) | **GET** /enterprise/filters/processes | List process instance filters
-[**getUserTaskFilter**](UserfiltersApi.md#getUserTaskFilter) | **GET** /enterprise/filters/tasks/{userFilterId} | Get a task filter
-[**getUserTaskFilters**](UserfiltersApi.md#getUserTaskFilters) | **GET** /enterprise/filters/tasks | List task filters
-[**orderUserProcessInstanceFilters**](UserfiltersApi.md#orderUserProcessInstanceFilters) | **PUT** /enterprise/filters/processes | Re-order the list of user process instance filters
-[**orderUserTaskFilters**](UserfiltersApi.md#orderUserTaskFilters) | **PUT** /enterprise/filters/tasks | Re-order the list of user task filters
-[**updateUserProcessInstanceFilter**](UserfiltersApi.md#updateUserProcessInstanceFilter) | **PUT** /enterprise/filters/processes/{userFilterId} | Update a process instance filter
-[**updateUserTaskFilter**](UserfiltersApi.md#updateUserTaskFilter) | **PUT** /enterprise/filters/tasks/{userFilterId} | Update a task filter
+[**createUserProcessInstanceFilter**](UserFiltersApi.md#createUserProcessInstanceFilter) | **POST** /enterprise/filters/processes | Create a process instance filter
+[**createUserTaskFilter**](UserFiltersApi.md#createUserTaskFilter) | **POST** /enterprise/filters/tasks | Create a task filter
+[**deleteUserProcessInstanceFilter**](UserFiltersApi.md#deleteUserProcessInstanceFilter) | **DELETE** /enterprise/filters/processes/{userFilterId} | Delete a process instance filter
+[**deleteUserTaskFilter**](UserFiltersApi.md#deleteUserTaskFilter) | **DELETE** /enterprise/filters/tasks/{userFilterId} | Delete a task filter
+[**getUserProcessInstanceFilter**](UserFiltersApi.md#getUserProcessInstanceFilter) | **GET** /enterprise/filters/processes/{userFilterId} | Get a process instance filter
+[**getUserProcessInstanceFilters**](UserFiltersApi.md#getUserProcessInstanceFilters) | **GET** /enterprise/filters/processes | List process instance filters
+[**getUserTaskFilter**](UserFiltersApi.md#getUserTaskFilter) | **GET** /enterprise/filters/tasks/{userFilterId} | Get a task filter
+[**getUserTaskFilters**](UserFiltersApi.md#getUserTaskFilters) | **GET** /enterprise/filters/tasks | List task filters
+[**orderUserProcessInstanceFilters**](UserFiltersApi.md#orderUserProcessInstanceFilters) | **PUT** /enterprise/filters/processes | Re-order the list of user process instance filters
+[**orderUserTaskFilters**](UserFiltersApi.md#orderUserTaskFilters) | **PUT** /enterprise/filters/tasks | Re-order the list of user task filters
+[**updateUserProcessInstanceFilter**](UserFiltersApi.md#updateUserProcessInstanceFilter) | **PUT** /enterprise/filters/processes/{userFilterId} | Update a process instance filter
+[**updateUserTaskFilter**](UserFiltersApi.md#updateUserTaskFilter) | **PUT** /enterprise/filters/tasks/{userFilterId} | Update a task filter
 
 
 <a name="createUserProcessInstanceFilter"></a>
@@ -25,9 +25,10 @@ Method | HTTP request | Description
 Create a process instance filter
 
 ### Example
+
 ```javascript
-import UserfiltersApi from 'UserfiltersApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import UserfiltersApi from 'src/api/activiti-rest-api/docs/UserFiltersApi';
+import {AlfrescoApi} from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -38,9 +39,9 @@ let userfiltersApi = new UserfiltersApi(this.alfrescoApi);
 
 
 userfiltersApi.createUserProcessInstanceFilter(userProcessInstanceFilterRepresentation).then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
-  console.error(error);
+    console.log('API called successfully. Returned data: ' + data);
+}, function (error) {
+    console.error(error);
 });
 
 ```
@@ -62,9 +63,10 @@ Name | Type | Description  | Notes
 Create a task filter
 
 ### Example
+
 ```javascript
-import UserfiltersApi from 'UserfiltersApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import UserfiltersApi from 'src/api/activiti-rest-api/docs/UserFiltersApi';
+import {AlfrescoApi} from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -75,9 +77,9 @@ let userfiltersApi = new UserfiltersApi(this.alfrescoApi);
 
 
 userfiltersApi.createUserTaskFilter(userTaskFilterRepresentation).then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
-  console.error(error);
+    console.log('API called successfully. Returned data: ' + data);
+}, function (error) {
+    console.error(error);
 });
 
 ```
@@ -99,9 +101,10 @@ Name | Type | Description  | Notes
 Delete a process instance filter
 
 ### Example
+
 ```javascript
-import UserfiltersApi from 'UserfiltersApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import UserfiltersApi from 'src/api/activiti-rest-api/docs/UserFiltersApi';
+import {AlfrescoApi} from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -112,9 +115,9 @@ let userfiltersApi = new UserfiltersApi(this.alfrescoApi);
 
 
 userfiltersApi.deleteUserProcessInstanceFilter(userFilterId).then(() => {
-  console.log('API called successfully.');
-}, function(error) {
-  console.error(error);
+    console.log('API called successfully.');
+}, function (error) {
+    console.error(error);
 });
 
 ```
@@ -136,9 +139,10 @@ null (empty response body)
 Delete a task filter
 
 ### Example
+
 ```javascript
-import UserfiltersApi from 'UserfiltersApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import UserfiltersApi from 'src/api/activiti-rest-api/docs/UserFiltersApi';
+import {AlfrescoApi} from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -149,9 +153,9 @@ let userfiltersApi = new UserfiltersApi(this.alfrescoApi);
 
 
 userfiltersApi.deleteUserTaskFilter(userFilterId).then(() => {
-  console.log('API called successfully.');
-}, function(error) {
-  console.error(error);
+    console.log('API called successfully.');
+}, function (error) {
+    console.error(error);
 });
 
 ```
@@ -173,9 +177,10 @@ null (empty response body)
 Get a process instance filter
 
 ### Example
+
 ```javascript
-import UserfiltersApi from 'UserfiltersApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import UserfiltersApi from 'src/api/activiti-rest-api/docs/UserFiltersApi';
+import {AlfrescoApi} from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -186,9 +191,9 @@ let userfiltersApi = new UserfiltersApi(this.alfrescoApi);
 
 
 userfiltersApi.getUserProcessInstanceFilter(userFilterId).then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
-  console.error(error);
+    console.log('API called successfully. Returned data: ' + data);
+}, function (error) {
+    console.error(error);
 });
 
 ```
@@ -212,9 +217,10 @@ List process instance filters
 Returns filters for the current user, optionally filtered by *appId*.
 
 ### Example
+
 ```javascript
-import UserfiltersApi from 'UserfiltersApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import UserfiltersApi from 'src/api/activiti-rest-api/docs/UserFiltersApi';
+import {AlfrescoApi} from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -223,14 +229,14 @@ this.alfrescoApi.setConfig({
 
 let userfiltersApi = new UserfiltersApi(this.alfrescoApi);
 
-let opts = { 
-  'appId': 789 //  | appId
+let opts = {
+    'appId': 789 //  | appId
 };
 
 userfiltersApi.getUserProcessInstanceFilters(opts).then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
-  console.error(error);
+    console.log('API called successfully. Returned data: ' + data);
+}, function (error) {
+    console.error(error);
 });
 
 ```
@@ -252,9 +258,10 @@ Name | Type | Description  | Notes
 Get a task filter
 
 ### Example
+
 ```javascript
-import UserfiltersApi from 'UserfiltersApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import UserfiltersApi from 'src/api/activiti-rest-api/docs/UserFiltersApi';
+import {AlfrescoApi} from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -265,9 +272,9 @@ let userfiltersApi = new UserfiltersApi(this.alfrescoApi);
 
 
 userfiltersApi.getUserTaskFilter(userFilterId).then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
-  console.error(error);
+    console.log('API called successfully. Returned data: ' + data);
+}, function (error) {
+    console.error(error);
 });
 
 ```
@@ -291,9 +298,10 @@ List task filters
 Returns filters for the current user, optionally filtered by *appId*.
 
 ### Example
+
 ```javascript
-import UserfiltersApi from 'UserfiltersApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import UserfiltersApi from 'src/api/activiti-rest-api/docs/UserFiltersApi';
+import {AlfrescoApi} from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -302,14 +310,14 @@ this.alfrescoApi.setConfig({
 
 let userfiltersApi = new UserfiltersApi(this.alfrescoApi);
 
-let opts = { 
-  'appId': 789 //  | appId
+let opts = {
+    'appId': 789 //  | appId
 };
 
 userfiltersApi.getUserTaskFilters(opts).then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
-  console.error(error);
+    console.log('API called successfully. Returned data: ' + data);
+}, function (error) {
+    console.error(error);
 });
 
 ```
@@ -331,9 +339,10 @@ Name | Type | Description  | Notes
 Re-order the list of user process instance filters
 
 ### Example
+
 ```javascript
-import UserfiltersApi from 'UserfiltersApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import UserfiltersApi from 'src/api/activiti-rest-api/docs/UserFiltersApi';
+import {AlfrescoApi} from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -344,9 +353,9 @@ let userfiltersApi = new UserfiltersApi(this.alfrescoApi);
 
 
 userfiltersApi.orderUserProcessInstanceFilters(filterOrderRepresentation).then(() => {
-  console.log('API called successfully.');
-}, function(error) {
-  console.error(error);
+    console.log('API called successfully.');
+}, function (error) {
+    console.error(error);
 });
 
 ```
@@ -368,9 +377,10 @@ null (empty response body)
 Re-order the list of user task filters
 
 ### Example
+
 ```javascript
-import UserfiltersApi from 'UserfiltersApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import UserfiltersApi from 'src/api/activiti-rest-api/docs/UserFiltersApi';
+import {AlfrescoApi} from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -381,9 +391,9 @@ let userfiltersApi = new UserfiltersApi(this.alfrescoApi);
 
 
 userfiltersApi.orderUserTaskFilters(filterOrderRepresentation).then(() => {
-  console.log('API called successfully.');
-}, function(error) {
-  console.error(error);
+    console.log('API called successfully.');
+}, function (error) {
+    console.error(error);
 });
 
 ```
@@ -405,9 +415,10 @@ null (empty response body)
 Update a process instance filter
 
 ### Example
+
 ```javascript
-import UserfiltersApi from 'UserfiltersApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import UserfiltersApi from 'src/api/activiti-rest-api/docs/UserFiltersApi';
+import {AlfrescoApi} from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -418,9 +429,9 @@ let userfiltersApi = new UserfiltersApi(this.alfrescoApi);
 
 
 userfiltersApi.updateUserProcessInstanceFilter(userFilterIduserProcessInstanceFilterRepresentation).then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
-  console.error(error);
+    console.log('API called successfully. Returned data: ' + data);
+}, function (error) {
+    console.error(error);
 });
 
 ```
@@ -443,9 +454,10 @@ Name | Type | Description  | Notes
 Update a task filter
 
 ### Example
+
 ```javascript
-import UserfiltersApi from 'UserfiltersApi';
-import { AlfrescoApi } from '@alfresco/js-api';
+import UserfiltersApi from 'src/api/activiti-rest-api/docs/UserFiltersApi';
+import {AlfrescoApi} from '@alfresco/js-api';
 
 this.alfrescoApi = new AlfrescoApi();
 this.alfrescoApi.setConfig({
@@ -456,9 +468,9 @@ let userfiltersApi = new UserfiltersApi(this.alfrescoApi);
 
 
 userfiltersApi.updateUserTaskFilter(userFilterIduserTaskFilterRepresentation).then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
-  console.error(error);
+    console.log('API called successfully. Returned data: ' + data);
+}, function (error) {
+    console.error(error);
 });
 
 ```
