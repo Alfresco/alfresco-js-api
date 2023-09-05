@@ -134,25 +134,7 @@ Get deleted node content
 
 > this endpoint is available in **Alfresco 5.2** and newer versions.
 
-**Example**
-
-```javascript
-import { AlfrescoApi, TrashcanApi} from '@alfresco/js-api';
-
-const alfrescoApi = new AlfrescoApi({
-    hostEcm: 'http://127.0.0.1:8080'
-});
-
-const trashcanApi = new TrashcanApi(alfrescoApi);
-
-trashcanApi.getDeletedNodeContent('nodeId').then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
-}, (error) => {
-  console.error(error);
-});
-```
-
-### Parameters
+**Parameters**
 
 | Name            | Type    | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 |-----------------|---------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -162,6 +144,19 @@ trashcanApi.getDeletedNodeContent('nodeId').then((data) => {
 | range           | string  | The Range header indicates the part of a document that the server should return. Single part request supported, for example: bytes=1-10.                                                                                                                                                                                                                                                                                                                                                  | 
 
 **Return type**: Blob
+
+**Example**
+
+```javascript
+import { AlfrescoApi, TrashcanApi } from '@alfresco/js-api';
+
+const alfrescoApi = new AlfrescoApi(/*..*/);
+const trashcanApi = new TrashcanApi(alfrescoApi);
+
+trashcanApi.getDeletedNodeContent('nodeId').then((data) => {
+  console.log('API called successfully. Returned data: ' + data);
+});
+```
 
 ## listDeletedNodeRenditions
 
@@ -246,9 +241,9 @@ Generate a direct access content url for a given deleted node
 
 **Parameters**
 
-| Name       | Type       | Description               |
-|------------|------------|---------------------------|
-| **nodeId** | **string** | The identifier of a node. |
+| Name       | Type   | Description               |
+|------------|--------|---------------------------|
+| **nodeId** | string | The identifier of a node. |
 
 **Return type**: [DirectAccessUrlEntry](DirectAccessUrlEntry.md)
 
