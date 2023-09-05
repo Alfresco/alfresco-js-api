@@ -34,7 +34,7 @@ import { AlfrescoApi, ProbesApi } from '@alfresco/js-api';
 const alfrescoApi = new AlfrescoApi(/*..*/);
 const probesApi = new ProbesApi(alfrescoApi);
 
-probesApi.getProbe(probeId).then((data) => {
+probesApi.getProbe(`<probeId>`).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 });
 ```
