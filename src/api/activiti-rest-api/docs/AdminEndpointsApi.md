@@ -1,4 +1,4 @@
-# Admin Endpoints Api
+# AdminEndpointsApi
 
 All URIs are relative to */activiti-app/api*
 
@@ -10,11 +10,10 @@ All URIs are relative to */activiti-app/api*
 | [getBasicAuthConfigurations](#getBasicAuthConfigurations)     | **GET** /enterprise/admin/basic-auths                            | List endpoint authorizations     |
 | [getEndpointConfiguration](#getEndpointConfiguration)         | **GET** /enterprise/admin/endpoints/{endpointConfigurationId}    | Get an endpoint                  |
 | [getEndpointConfigurations](#getEndpointConfigurations)       | **GET** /enterprise/admin/endpoints                              | List endpoints                   |
-| [removeBasicAuthonfiguration](#removeBasicAuthonfiguration)   | **DELETE** /enterprise/admin/basic-auths/{basicAuthId}           | Delete an endpoint authorization |
-| [removeEndpointConfiguration](d#removeEndpointConfiguration)  | **DELETE** /enterprise/admin/endpoints/{endpointConfigurationId} | Delete an endpoint               |
+| [removeBasicAuthConfiguration](#removeBasicAuthConfiguration) | **DELETE** /enterprise/admin/basic-auths/{basicAuthId}           | Delete an endpoint authorization |
+| [removeEndpointConfiguration](#removeEndpointConfiguration)   | **DELETE** /enterprise/admin/endpoints/{endpointConfigurationId} | Delete an endpoint               |
 | [updateBasicAuthConfiguration](#updateBasicAuthConfiguration) | **PUT** /enterprise/admin/basic-auths/{basicAuthId}              | Update an endpoint authorization |
 | [updateEndpointConfiguration](#updateEndpointConfiguration)   | **PUT** /enterprise/admin/endpoints/{endpointConfigurationId}    | Update an endpoint               |
-
 
 # createBasicAuthConfiguration
 
@@ -22,22 +21,20 @@ Add an endpoint authorization
 
 **Parameters**
 
-| Name                     | Type                                                                                  | Description          | Notes |
-|--------------------------|---------------------------------------------------------------------------------------|----------------------|-------|
-| **createRepresentation** | [**CreateEndpointBasicAuthRepresentation**](CreateEndpointBasicAuthRepresentation.md) | createRepresentation |       | 
+| Name                     | Type                                                                            |
+|--------------------------|---------------------------------------------------------------------------------|
+| **createRepresentation** | [CreateEndpointBasicAuthRepresentation](#CreateEndpointBasicAuthRepresentation) | 
 
-**Return type**: [**EndpointBasicAuthRepresentation**](EndpointBasicAuthRepresentation.md)
+**Return type**: [EndpointBasicAuthRepresentation](#EndpointBasicAuthRepresentation)
 
 **Example**
 
 ```javascript
 import { AlfrescoApi, AdminEndpointsApi } from '@alfresco/js-api';
 
-const alfrescoApi = new AlfrescoApi({
-    hostEcm: 'http://127.0.0.1:8080'
-});
-
+const alfrescoApi = new AlfrescoApi(/*..*/);
 const adminEndpointsApi = new AdminEndpointsApi(alfrescoApi);
+const createRepresentation = {};
 
 adminEndpointsApi.createBasicAuthConfiguration(createRepresentation).then((data) => {
     console.log('API called successfully. Returned data: ' + data);
@@ -50,22 +47,20 @@ Create an endpoint
 
 **Parameters**
 
-| Name               | Type                                                                              | Description    |
-|--------------------|-----------------------------------------------------------------------------------|----------------|
-| **representation** | [**EndpointConfigurationRepresentation**](EndpointConfigurationRepresentation.md) | representation | 
+| Name               | Type                                                                          |
+|--------------------|-------------------------------------------------------------------------------|
+| **representation** | [EndpointConfigurationRepresentation](EndpointConfigurationRepresentation.md) | 
 
-**Return type**: [**EndpointConfigurationRepresentation**](EndpointConfigurationRepresentation.md)
+**Return type**: [EndpointConfigurationRepresentation](EndpointConfigurationRepresentation.md)
 
 **Example**
 
 ```javascript
 import { AlfrescoApi, AdminEndpointsApi } from '@alfresco/js-api';
 
-const alfrescoApi = new AlfrescoApi({
-    hostEcm: 'http://127.0.0.1:8080'
-});
-
+const alfrescoApi = new AlfrescoApi(/*..*/);
 const adminEndpointsApi = new AdminEndpointsApi(alfrescoApi);
+const representation = {};
 
 adminEndpointsApi.createEndpointConfiguration(representation).then((data) => {
     console.log('API called successfully. Returned data: ' + data);
@@ -83,20 +78,19 @@ Get an endpoint authorization
 | **basicAuthId** | number | basicAuthId | 
 | **tenantId**    | number | tenantId    | 
 
-**Return type**: [**EndpointBasicAuthRepresentation**](EndpointBasicAuthRepresentation.md)
+**Return type**: [EndpointBasicAuthRepresentation](#EndpointBasicAuthRepresentation)
 
 **Example**
 
 ```javascript
-import {AlfrescoApi, AdminEndpointsApi } from '@alfresco/js-api';
+import { AlfrescoApi, AdminEndpointsApi } from '@alfresco/js-api';
 
-const alfrescoApi = new AlfrescoApi({
-    hostEcm: 'http://127.0.0.1:8080'
-});
-
+const alfrescoApi = new AlfrescoApi(/*..*/);
 const adminEndpointsApi = new AdminEndpointsApi(alfrescoApi);
+const authId = 0;
+const tenantId = 0;
 
-adminEndpointsApi.getBasicAuthConfiguration('authId', 'tenantId').then((data) => {
+adminEndpointsApi.getBasicAuthConfiguration(authId, tenantId).then((data) => {
     console.log('API called successfully. Returned data: ' + data);
 });
 ```
@@ -107,22 +101,20 @@ List endpoint authorizations
 
 **Parameters**
 
-| Name         | Type       | Description |
-|--------------|------------|-------------|
-| **tenantId** | **number** | tenantId    | 
+| Name         | Type   |
+|--------------|--------|
+| **tenantId** | number | 
 
-**Return type**: [**EndpointBasicAuthRepresentation**](EndpointBasicAuthRepresentation.md)
+**Return type**: [EndpointBasicAuthRepresentation](#EndpointBasicAuthRepresentation)
 
 **Example**
 
 ```javascript
 import { AlfrescoApi, AdminEndpointsApi } from '@alfresco/js-api';
 
-const alfrescoApi = new AlfrescoApi({
-    hostEcm: 'http://127.0.0.1:8080'
-});
-
+const alfrescoApi = new AlfrescoApi(/*..*/);
 const adminEndpointsApi = new AdminEndpointsApi(alfrescoApi);
+const tenantId = 0;
 
 adminEndpointsApi.getBasicAuthConfigurations(tenantId).then((data) => {
     console.log('API called successfully. Returned data: ' + data);
@@ -135,25 +127,24 @@ Get an endpoint
 
 **Parameters**
 
-| Name                        | Type       | Description             |
-|-----------------------------|------------|-------------------------|
-| **endpointConfigurationId** | **number** | endpointConfigurationId | 
-| **tenantId**                | **number** | tenantId                | 
+| Name                        | Type   |
+|-----------------------------|--------|
+| **endpointConfigurationId** | number | 
+| **tenantId**                | number | 
 
-**Return type**: [**EndpointConfigurationRepresentation**](EndpointConfigurationRepresentation.md)
+**Return type**: [EndpointConfigurationRepresentation](EndpointConfigurationRepresentation.md)
 
 **Example**
 
 ```javascript
 import { AlfrescoApi, AdminEndpointsApi } from '@alfresco/js-api';
 
-const alfrescoApi = new AlfrescoApi({
-    hostEcm: 'http://127.0.0.1:8080'
-});
-
+const alfrescoApi = new AlfrescoApi(/*..*/);
 const adminEndpointsApi = new AdminEndpointsApi(alfrescoApi);
+const endpointConfigurationId = 0;
+const tenantId = 0;
 
-adminEndpointsApi.getEndpointConfiguration(endpointConfigurationIdtenantId).then((data) => {
+adminEndpointsApi.getEndpointConfiguration(endpointConfigurationId, tenantId).then((data) => {
     console.log('API called successfully. Returned data: ' + data);
 });
 ```
@@ -164,24 +155,22 @@ List endpoints
 
 **Parameters**
 
-| Name         | Type       | Description |
-|--------------|------------|-------------|
-| **tenantId** | **number** | tenantId    | 
+| Name         | Type   |
+|--------------|--------|
+| **tenantId** | number | 
 
-**Return type**: [**EndpointConfigurationRepresentation**](EndpointConfigurationRepresentation.md)
+**Return type**: [EndpointConfigurationRepresentation](EndpointConfigurationRepresentation.md)
 
 **Example**
 
 ```javascript
 import { AlfrescoApi, AdminEndpointsApi } from '@alfresco/js-api';
 
-const alfrescoApi = new AlfrescoApi({
-    hostEcm: 'http://127.0.0.1:8080'
-});
-
+const alfrescoApi = new AlfrescoApi(/*..*/);
 const adminEndpointsApi = new AdminEndpointsApi(alfrescoApi);
+const tenantId = 0;
 
-adminEndpointsApi.getEndpointConfigurations(`tenantId`).then((data) => {
+adminEndpointsApi.getEndpointConfigurations(tenantId).then((data) => {
     console.log('API called successfully. Returned data: ' + data);
 });
 ```
@@ -192,23 +181,22 @@ Delete an endpoint authorization
 
 **Parameters**
 
-| Name            | Type       | Description |
-|-----------------|------------|-------------|
-| **basicAuthId** | **number** | basicAuthId | 
-| **tenantId**    | **number** | tenantId    | 
+| Name            | Type   |
+|-----------------|--------|
+| **basicAuthId** | number | 
+| **tenantId**    | number | 
 
 **Example**
 
 ```javascript
 import { AlfrescoApi, AdminEndpointsApi } from '@alfresco/js-api';
 
-const alfrescoApi = new AlfrescoApi({
-    hostEcm: 'http://127.0.0.1:8080'
-});
-
+const alfrescoApi = new AlfrescoApi(/*..*/);
 const adminEndpointsApi = new AdminEndpointsApi(alfrescoApi);
+const basicAuthId = 0;
+const tenantId = 0;
 
-adminEndpointsApi.removeBasicAuthConfiguration(basicAuthIdtenantId).then(() => {
+adminEndpointsApi.removeBasicAuthConfiguration(basicAuthId, tenantId).then(() => {
     console.log('API called successfully.');
 });
 ```
@@ -219,23 +207,22 @@ Delete an endpoint
 
 **Parameters**
 
-| Name                        | Type       | Description             |
-|-----------------------------|------------|-------------------------|
-| **endpointConfigurationId** | **number** | endpointConfigurationId | 
-| **tenantId**                | **number** | tenantId                | 
+| Name                        | Type   |
+|-----------------------------|--------|
+| **endpointConfigurationId** | number | 
+| **tenantId**                | number | 
 
 **Example**
 
 ```javascript
 import { AlfrescoApi, AdminEndpointsApi } from '@alfresco/js-api';
 
-const alfrescoApi = new AlfrescoApi({
-    hostEcm: 'http://127.0.0.1:8080'
-});
-
+const alfrescoApi = new AlfrescoApi(/*..*/);
 const adminEndpointsApi = new AdminEndpointsApi(alfrescoApi);
+const endpointConfigurationId = 0;
+const tenantId = 0;
 
-adminendpointsApi.removeEndpointConfiguration(endpointConfigurationIdtenantId).then(() => {
+adminendpointsApi.removeEndpointConfiguration(endpointConfigurationId, tenantId).then(() => {
     console.log('API called successfully.');
 });
 ```
@@ -244,31 +231,29 @@ adminendpointsApi.removeEndpointConfiguration(endpointConfigurationIdtenantId).t
 
 Update an endpoint authorization
 
+**Parameters**
+
+| Name                     | Type                                                                            |
+|--------------------------|---------------------------------------------------------------------------------|
+| **basicAuthId**          | number                                                                          | 
+| **createRepresentation** | [CreateEndpointBasicAuthRepresentation](#CreateEndpointBasicAuthRepresentation) | 
+
+**Return type**: [EndpointBasicAuthRepresentation](#EndpointBasicAuthRepresentation)
+
 **Example**
 
 ```javascript
 import { AlfrescoApi, AdminEndpointsApi } from '@alfresco/js-api';
 
-const alfrescoApi = new AlfrescoApi({
-    hostEcm: 'http://127.0.0.1:8080'
-});
-
+const alfrescoApi = new AlfrescoApi(/*..*/);
 const adminEndpointsApi = new AdminEndpointsApi(alfrescoApi);
-const payload = {};
+const basicAuthId = 0;
+const createRepresentation = {};
 
-adminEndpointsApi.updateBasicAuthConfiguration('<basicAuthId>', payload).then((data) => {
+adminEndpointsApi.updateBasicAuthConfiguration(basicAuthId, createRepresentation).then((data) => {
     console.log('API called successfully. Returned data: ' + data);
 });
 ```
-
-**Parameters**
-
-| Name                     | Type                                                                                  | Description          |
-|--------------------------|---------------------------------------------------------------------------------------|----------------------|
-| **basicAuthId**          | **number**                                                                            | basicAuthId          | 
-| **createRepresentation** | [**CreateEndpointBasicAuthRepresentation**](CreateEndpointBasicAuthRepresentation.md) | createRepresentation | 
-
-**Return type**: [**EndpointBasicAuthRepresentation**](EndpointBasicAuthRepresentation.md)
 
 # updateEndpointConfiguration
 
@@ -276,27 +261,53 @@ Update an endpoint
 
 **Parameters**
 
-| Name                        | Type                                                                              | Description             | Notes |
-|-----------------------------|-----------------------------------------------------------------------------------|-------------------------|-------|
-| **endpointConfigurationId** | **number**                                                                        | endpointConfigurationId | 
-| **representation**          | [**EndpointConfigurationRepresentation**](EndpointConfigurationRepresentation.md) | representation          | 
+| Name                        | Type                                                                          |
+|-----------------------------|-------------------------------------------------------------------------------|
+| **endpointConfigurationId** | number                                                                        | 
+| **representation**          | [EndpointConfigurationRepresentation](EndpointConfigurationRepresentation.md) | 
 
-**Return type**: [**EndpointConfigurationRepresentation**](EndpointConfigurationRepresentation.md)
+**Return type**: [EndpointConfigurationRepresentation](EndpointConfigurationRepresentation.md)
 
 **Example**
 
 ```javascript
 import { AlfrescoApi, AdminEndpointsApi } from '@alfresco/js-api';
 
-const alfrescoApi = new AlfrescoApi({
-    hostEcm: 'http://127.0.0.1:8080'
-});
+const alfrescoApi = new AlfrescoApi(/*..*/);
+const adminEndpointsApi = new AdminEndpointsApi(alfrescoApi);
+const endpointConfigurationId = 0;
+const representation = {};
 
-const adminendpointsApi = new AdminEndpointsApi(alfrescoApi);
-const endpointConfigurationId = '<id>';
-const payload = {};
-
-adminendpointsApi.updateEndpointConfiguration(endpointConfigurationId, payload).then((data) => {
+adminendpointsApi.updateEndpointConfiguration(endpointConfigurationId, representation).then((data) => {
     console.log('API called successfully. Returned data: ' + data);
 });
 ```
+
+# Models
+
+## CreateEndpointBasicAuthRepresentation
+
+**Properties**
+
+| Name     | Type   |
+|----------|--------|
+| name     | string |
+| password | string |
+| tenantId | number |
+| username | string |
+
+## EndpointBasicAuthRepresentation
+
+**Properties**
+
+| Name        | Type   |
+|-------------|--------|
+| created     | Date   |
+| id          | number |
+| lastUpdated | Date   |
+| name        | string |
+| tenantId    | number |
+| username    | string |
+
+
+

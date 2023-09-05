@@ -1,4 +1,4 @@
-# AccountintegrationApi
+# AccountIntegrationApi
 
 All URIs are relative to */activiti-app/api*
 
