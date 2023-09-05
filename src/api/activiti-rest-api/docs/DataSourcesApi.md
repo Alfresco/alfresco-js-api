@@ -1,4 +1,4 @@
-# DatasourcesApi
+# DataSourcesApi
 
 All URIs are relative to */activiti-app/api*
 
@@ -6,7 +6,7 @@ All URIs are relative to */activiti-app/api*
 |-----------------------------------|-----------------------------------------|------------------|
 | [getDataSources](#getDataSources) | **GET** /enterprise/editor/data-sources | Get data sources |
 
-# **getDataSources**
+# getDataSources
 
 Get data sources
 

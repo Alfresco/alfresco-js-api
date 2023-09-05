@@ -1,87 +1,97 @@
-# DecisionauditsApi
+# DecisionAuditsApi
 
 All URIs are relative to */activiti-app/api*
 
-Method | HTTP request | Description
-------------- | ------------- | -------------
-[**getAuditTrail**](DecisionAuditsApi.md#getAuditTrail) | **GET** /enterprise/decisions/audits/{auditTrailId} | Get an audit trail
-[**getAuditTrails**](DecisionAuditsApi.md#getAuditTrails) | **GET** /enterprise/decisions/audits | Query decision table audit trails
+| Method                            | HTTP request                                        | Description                       |
+|-----------------------------------|-----------------------------------------------------|-----------------------------------|
+| [getAuditTrail](#getAuditTrail)   | **GET** /enterprise/decisions/audits/{auditTrailId} | Get an audit trail                |
+| [getAuditTrails](#getAuditTrails) | **GET** /enterprise/decisions/audits                | Query decision table audit trails |
 
-
-<a name="getAuditTrail"></a>
-# **getAuditTrail**
-> DecisionAuditRepresentation getAuditTrail(auditTrailId)
+# getAuditTrail
 
 Get an audit trail
 
-### Example
+**Parameters**
+
+| Name             | Type   |
+|------------------|--------|
+| **auditTrailId** | number |
+
+**Return type**: [DecisionAuditRepresentation](#DecisionAuditRepresentation)
+
+**Example**
 
 ```javascript
-import DecisionauditsApi from 'src/api/activiti-rest-api/docs/DecisionAuditsApi';
-import {AlfrescoApi} from '@alfresco/js-api';
+import { AlfrescoApi, DecisionAuditsApi } from '@alfresco/js-api';
 
-this.alfrescoApi = new AlfrescoApi();
-this.alfrescoApi.setConfig({
-    hostEcm: 'http://127.0.0.1:8080'
-});
-
-let decisionauditsApi = new DecisionauditsApi(this.alfrescoApi);
-
+const alfrescoApi = new AlfrescoApi(/*..*/);
+const decisionAuditsApi = new DecisionAuditsApi(this.alfrescoApi);
+const auditTrailId = 0;
 
 decisionauditsApi.getAuditTrail(auditTrailId).then((data) => {
     console.log('API called successfully. Returned data: ' + data);
-}, function (error) {
-    console.error(error);
 });
-
 ```
 
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **auditTrailId** | **number**| auditTrailId | 
-
-### Return type
-
-[**DecisionAuditRepresentation**](DecisionAuditRepresentation.md)
-
-<a name="getAuditTrails"></a>
-# **getAuditTrails**
-> ResultListDataRepresentationDecisionAuditRepresentation getAuditTrails(decisionKeydmnDeploymentId)
+# getAuditTrails
 
 Query decision table audit trails
 
-### Example
+**Parameters**
+
+| Name                | Type   |
+|---------------------|--------|
+| **decisionKey**     | string |
+| **dmnDeploymentId** | number |
+
+**Return type**: [ResultListDataRepresentationDecisionAuditRepresentation](#ResultListDataRepresentationDecisionAuditRepresentation)
+
+**Example**
 
 ```javascript
-import DecisionauditsApi from 'src/api/activiti-rest-api/docs/DecisionAuditsApi';
-import {AlfrescoApi} from '@alfresco/js-api';
+import { AlfrescoApi, DecisionAuditsApi } from '@alfresco/js-api';
 
-this.alfrescoApi = new AlfrescoApi();
-this.alfrescoApi.setConfig({
-    hostEcm: 'http://127.0.0.1:8080'
-});
+const alfrescoApi = new AlfrescoApi(/*..*/);
+const decisionAuditsApi = new DecisionAuditsApi(this.alfrescoApi);
+const dmnDeploymentId = 0;
 
-let decisionauditsApi = new DecisionauditsApi(this.alfrescoApi);
-
-
-decisionauditsApi.getAuditTrails(decisionKeydmnDeploymentId).then((data) => {
+decisionauditsApi.getAuditTrails(`<decisionKey>`, dmnDeploymentId).then((data) => {
     console.log('API called successfully. Returned data: ' + data);
-}, function (error) {
-    console.error(error);
 });
-
 ```
 
-### Parameters
+# Models
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **decisionKey** | **string**| decisionKey | 
- **dmnDeploymentId** | **number**| dmnDeploymentId | 
+## ResultListDataRepresentationDecisionAuditRepresentation
 
-### Return type
+**Properties**
 
-[**ResultListDataRepresentationDecisionAuditRepresentation**](ResultListDataRepresentationDecisionAuditRepresentation.md)
+| Name  | Type                                                          |
+|-------|---------------------------------------------------------------|
+| data  | [DecisionAuditRepresentation[]](#DecisionAuditRepresentation) |
+| size  | number                                                        |
+| start | number                                                        |
+| total | number                                                        |
+
+## DecisionAuditRepresentation
+
+**Properties**
+
+| Name                    | Type    |
+|-------------------------|---------|
+| activityId              | string  |
+| activityName            | string  |
+| auditTrailJson          | string  |
+| created                 | Date    |
+| decisionExecutionFailed | boolean |
+| decisionKey             | string  |
+| decisionModelJson       | string  |
+| decisionName            | string  |
+| dmnDeploymentId         | number  |
+| executionId             | string  |
+| id                      | number  |
+| processDefinitionId     | string  |
+| processInstanceId       | string  |
+| renderedVariables       | any     |
+
 
