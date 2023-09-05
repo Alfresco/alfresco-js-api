@@ -41,12 +41,12 @@ If the source **nodeId** is a file, it's properties, aspects and tags are copied
 
 **Parameters**
 
-| Name             | Type                            | Description                                                                                                                                                                                                                                                                                                                                                                                                                             |
-|------------------|---------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **nodeId**       | string                          | The identifier of a node.                                                                                                                                                                                                                                                                                                                                                                                                               |
-| **nodeBodyCopy** | [NodeBodyCopy](NodeBodyCopy.md) | The targetParentId and, optionally, a new name which should include the file extension.                                                                                                                                                                                                                                                                                                                                                 |
-| opts.include     | string[]                        | Returns additional information about the node. The following optional fields can be requested: `allowableOperations`, `association`, `isLink`, `isFavorite`, `isLocked`, `path`, `permissions`, `definition`                                                                                                                                                                                                                            |
-| opts.fields      | string[]                        | A list of field names. You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth. The list applies to a returned individual entity or entries within a collection. If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter. |
+| Name             | Type                          | Description                                                                                                                                                                                                                                                                                                                                                                                                                             |
+|------------------|-------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **nodeId**       | string                        | The identifier of a node.                                                                                                                                                                                                                                                                                                                                                                                                               |
+| **nodeBodyCopy** | [NodeBodyCopy](#NodeBodyCopy) | The targetParentId and, optionally, a new name which should include the file extension.                                                                                                                                                                                                                                                                                                                                                 |
+| opts.include     | string[]                      | Returns additional information about the node. The following optional fields can be requested: `allowableOperations`, `association`, `isLink`, `isFavorite`, `isLocked`, `path`, `permissions`, `definition`                                                                                                                                                                                                                            |
+| opts.fields      | string[]                      | A list of field names. You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth. The list applies to a returned individual entity or entries within a collection. If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter. |
 
 **Return type**: [NodeEntry](NodeEntry.md)
 
@@ -703,7 +703,7 @@ You can use any of the following fields to order the results:
 | includeSource | boolean  | Also include **source** in addition to **entries** with folder information on the parent node – either the specified parent **nodeId**, or as resolved by **relativePath**.                                                                                                                                                                                                                                                                                      |
 | fields        | string[] | A list of field names. You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth. The list applies to a returned individual entity or entries within a collection. If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter.                          |
 
-**Return type**: [NodeChildAssociationPaging](NodeChildAssociationPaging.md)
+**Return type**: [NodeChildAssociationPaging](#NodeChildAssociationPaging)
 
 **Example**
 
@@ -741,7 +741,7 @@ The list includes both the primary parent and any secondary parents.
 | includeSource | boolean    | Also include **source** (in addition to **entries**) with folder information on **nodeId**                                                                                                                                                                                                                                                                                                                                              |                |
 | fields        | string[]   | A list of field names. You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth. The list applies to a returned individual entity or entries within a collection. If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter. |                |
 
-**Return type**: [NodeAssociationPaging](NodeAssociationPaging.md)
+**Return type**: [NodeAssociationPaging](#NodeAssociationPaging)
 
 **Example**
 
@@ -777,7 +777,7 @@ Gets a list of secondary child nodes that are associated with the current parent
 | opts.includeSource | boolean  | Also include **source** (in addition to **entries**) with folder information on **nodeId**                                                                                                                                                                                                                                                                                                                                              |
 | opts.fields        | string[] | A list of field names. You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth. The list applies to a returned individual entity or entries within a collection. If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter. |
 
-**Return type**: [NodeChildAssociationPaging](NodeChildAssociationPaging.md)
+**Return type**: [NodeChildAssociationPaging](#NodeChildAssociationPaging)
 
 **Example**
 
@@ -810,7 +810,7 @@ Gets a list of source nodes that are associated with the current target **nodeId
 | opts.include | string[] | Returns additional information about the node. The following optional fields can be requested: `allowableOperations`, `aspectNames`, `isLink`, `isFavorite`, `isLocked`, `path`, `properties`                                                                                                                                                                                                                                           |
 | opts.fields  | string[] | A list of field names. You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth. The list applies to a returned individual entity or entries within a collection. If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter. |
 
-**Return type**: [NodeAssociationPaging](NodeAssociationPaging.md)
+**Return type**: [NodeAssociationPaging](#NodeAssociationPaging)
 
 **Example**
 
@@ -843,7 +843,7 @@ Gets a list of target nodes that are associated with the current source **nodeId
 | opts.include | string[] | Returns additional information about the node. The following optional fields can be requested: `allowableOperations`, `aspectNames`, `isLink`, `isFavorite`, `isLocked`, `path`, `properties`                                                                                                                                                                                                                                           |
 | opts.fields  | string[] | A list of field names. You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth. The list applies to a returned individual entity or entries within a collection. If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter. |
 
-**Return type**: [NodeAssociationPaging](NodeAssociationPaging.md)
+**Return type**: [NodeAssociationPaging](#NodeAssociationPaging)
 
 **Example**
 
@@ -893,12 +893,12 @@ If a lock on the node cannot be taken, then an error is returned.
 
 **Parameters**
 
-| Name             | Type                            | Description                                                                                                                                                                                                                                                                                                                                                                                                                             |
-|------------------|---------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **nodeId**       | string                          | The identifier of a node.                                                                                                                                                                                                                                                                                                                                                                                                               |
-| **nodeBodyLock** | [NodeBodyLock](NodeBodyLock.md) | Lock details.                                                                                                                                                                                                                                                                                                                                                                                                                           |
-| include          | string[]                        | Returns additional information about the node. The following optional fields can be requested: `allowableOperations`, `association`, `isLink`, `isFavorite`, `isLocked`, `path`, `permissions`, `definition`                                                                                                                                                                                                                            |
-| fields           | string[]                        | A list of field names. You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth. The list applies to a returned individual entity or entries within a collection. If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter. |
+| Name             | Type                          | Description                                                                                                                                                                                                                                                                                                                                                                                                                             |
+|------------------|-------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **nodeId**       | string                        | The identifier of a node.                                                                                                                                                                                                                                                                                                                                                                                                               |
+| **nodeBodyLock** | [NodeBodyLock](#NodeBodyLock) | Lock details.                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| include          | string[]                      | Returns additional information about the node. The following optional fields can be requested: `allowableOperations`, `association`, `isLink`, `isFavorite`, `isLocked`, `path`, `permissions`, `definition`                                                                                                                                                                                                                            |
+| fields           | string[]                      | A list of field names. You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth. The list applies to a returned individual entity or entries within a collection. If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter. |
 
 **Return type**: [NodeEntry](NodeEntry.md)
 
@@ -935,12 +935,12 @@ The move will effectively change the primary parent.
 
 **Parameters**
 
-| Name             | Type                            | Description                                                                                                                                                                                                                                                                                                                                                                                                                             |
-|------------------|---------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **nodeId**       | string                          | The identifier of a node.                                                                                                                                                                                                                                                                                                                                                                                                               |
-| **nodeBodyMove** | [NodeBodyMove](NodeBodyMove.md) | The targetParentId and, optionally, a new name which should include the file extension.                                                                                                                                                                                                                                                                                                                                                 |
-| opts.include     | string[]                        | Returns additional information about the node. The following optional fields can be requested: `allowableOperations`, `association`, `isLink`, `isFavorite`, `isLocked`, `path`, `permissions`, `definition`                                                                                                                                                                                                                            |
-| opts.fields      | string[]                        | A list of field names. You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth. The list applies to a returned individual entity or entries within a collection. If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter. |
+| Name             | Type                          | Description                                                                                                                                                                                                                                                                                                                                                                                                                             |
+|------------------|-------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **nodeId**       | string                        | The identifier of a node.                                                                                                                                                                                                                                                                                                                                                                                                               |
+| **nodeBodyMove** | [NodeBodyMove](#NodeBodyMove) | The targetParentId and, optionally, a new name which should include the file extension.                                                                                                                                                                                                                                                                                                                                                 |
+| opts.include     | string[]                      | Returns additional information about the node. The following optional fields can be requested: `allowableOperations`, `association`, `isLink`, `isFavorite`, `isLocked`, `path`, `permissions`, `definition`                                                                                                                                                                                                                            |
+| opts.fields      | string[]                      | A list of field names. You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth. The list applies to a returned individual entity or entries within a collection. If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter. |
 
 **Return type**: [NodeEntry](NodeEntry.md)
 
@@ -1094,12 +1094,12 @@ You can also optionally disable (or re-enable) inherited permissions via *isInhe
 
 **Parameters**
 
-| Name               | Type                                | Description                                                                                                                                                                                                                                                                                                                                                                                                                             |
-|--------------------|-------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **nodeId**         | string                              | The identifier of a node.                                                                                                                                                                                                                                                                                                                                                                                                               |
-| **nodeBodyUpdate** | [NodeBodyUpdate](NodeBodyUpdate.md) | The node information to update.                                                                                                                                                                                                                                                                                                                                                                                                         |
-| opts.include       | string[]                            | Returns additional information about the node. The following optional fields can be requested: `allowableOperations`, `association`, `isLink`, `isFavorite`, `isLocked`, `path`, `permissions`, `definition`                                                                                                                                                                                                                            |
-| opts.fields        | string[]                            | A list of field names. You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth. The list applies to a returned individual entity or entries within a collection. If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter. |
+| Name               | Type                              | Description                                                                                                                                                                                                                                                                                                                                                                                                                             |
+|--------------------|-----------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **nodeId**         | string                            | The identifier of a node.                                                                                                                                                                                                                                                                                                                                                                                                               |
+| **nodeBodyUpdate** | [NodeBodyUpdate](#NodeBodyUpdate) | The node information to update.                                                                                                                                                                                                                                                                                                                                                                                                         |
+| opts.include       | string[]                          | Returns additional information about the node. The following optional fields can be requested: `allowableOperations`, `association`, `isLink`, `isFavorite`, `isLocked`, `path`, `permissions`, `definition`                                                                                                                                                                                                                            |
+| opts.fields        | string[]                          | A list of field names. You can use this parameter to restrict the fields returned within a response if, for example, you want to save on overall bandwidth. The list applies to a returned individual entity or entries within a collection. If the API method also supports the **include** parameter, then the fields specified in the **include** parameter are returned in addition to those specified in the **fields** parameter. |
 
 **Return type**: [NodeEntry](NodeEntry.md)
 
@@ -1166,3 +1166,164 @@ nodesApi.updateNodeContent(`<nodeId>`, contentBodyUpdate, opts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 });
 ```
+
+# Models
+
+## NodeBodyUpdate
+
+**Properties**
+
+| Name        | Type                                  | Description                                                                                                                                                   |
+|-------------|---------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| name        | string                                | The name must not contain spaces or the following special characters: `* \" < > \\ / ? :` and `\|` . The character . must not be used at the end of the name. |
+| nodeType    | string                                |                                                                                                                                                               |
+| aspectNames | string[]                              |                                                                                                                                                               |
+| properties  | Map<string, string>                   |                                                                                                                                                               |
+| permissions | [PermissionsBody](PermissionsBody.md) |                                                                                                                                                               |
+
+## NodeAssociationPaging
+
+**Properties**
+
+| Name | Type                                                    |
+|------|---------------------------------------------------------|
+| list | [NodeAssociationPagingList](#NodeAssociationPagingList) |
+
+## NodeAssociationPagingList
+
+**Properties**
+
+| Name       | Type                                            |
+|------------|-------------------------------------------------|
+| pagination | [Pagination](Pagination.md)                     |
+| entries    | [NodeAssociationEntry[]](#NodeAssociationEntry) |
+| source     | [Node](Node.md)                                 |
+
+## NodeAssociationEntry
+
+**Properties**
+
+| Name      | Type                                |
+|-----------|-------------------------------------|
+| **entry** | [NodeAssociation](#NodeAssociation) |
+
+## NodeAssociation
+
+**Properties**
+
+| Name                | Type                                  | Description                                                                                                                                                   |
+|---------------------|---------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **id**              | string                                |                                                                                                                                                               |
+| **name**            | string                                | The name must not contain spaces or the following special characters: `* \" < > \\ / ? :` and `\|` . The character . must not be used at the end of the name. |
+| **nodeType**        | string                                |                                                                                                                                                               |
+| **isFolder**        | boolean                               |                                                                                                                                                               |
+| **isFile**          | boolean                               |                                                                                                                                                               |
+| isLocked            | boolean                               |                                                                                                                                                               |
+| **modifiedAt**      | Date                                  |                                                                                                                                                               |
+| **modifiedByUser**  | [UserInfo](UserInfo.md)               |                                                                                                                                                               |
+| **createdAt**       | Date                                  |                                                                                                                                                               |
+| **createdByUser**   | [UserInfo](UserInfo.md)               |                                                                                                                                                               |
+| parentId            | string                                |                                                                                                                                                               |
+| isLink              | boolean                               |                                                                                                                                                               |
+| isFavorite          | boolean                               |                                                                                                                                                               |
+| content             | [ContentInfo](ContentInfo.md)         |                                                                                                                                                               |
+| aspectNames         | string[]                              |                                                                                                                                                               |
+| properties          | any                                   |                                                                                                                                                               |
+| allowableOperations | string[]                              |                                                                                                                                                               |
+| path                | [PathInfo](PathInfo.md)               |                                                                                                                                                               |
+| permissions         | [PermissionsInfo](PermissionsInfo.md) |                                                                                                                                                               |
+| definition          | [Definition](Definition.md)           |                                                                                                                                                               |
+| association         | [AssociationInfo](AssociationInfo.md) |                                                                                                                                                               |
+
+## NodeBodyMove
+
+**Properties**
+
+| Name               | Type   | Description                                                                                                                                                   |
+|--------------------|--------|---------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **targetParentId** | string |                                                                                                                                                               |
+| name               | string | The name must not contain spaces or the following special characters: `* \" < > \\ / ? :` and `\|` . The character . must not be used at the end of the name. |
+
+## NodeBodyLock
+
+**Properties**
+
+| Name         | Type   |
+|--------------|--------|
+| timeToExpire | number |
+| type         | string |
+| lifetime     | string |
+
+### NodeBodyLock.TypeEnum
+
+* `ALLOWOWNERCHANGES` (value: `'ALLOW_OWNER_CHANGES'`)
+* `FULL` (value: `'FULL'`)
+
+### NodeBodyLock.LifetimeEnum
+
+* `PERSISTENT` (value: `'PERSISTENT'`)
+* `EPHEMERAL` (value: `'EPHEMERAL'`)
+
+## NodeBodyCopy
+
+**Properties**
+
+| Name               | Type   | Description                                                                                                                                                   |
+|--------------------|--------|---------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **targetParentId** | string |                                                                                                                                                               |
+| name               | string | The name must not contain spaces or the following special characters: `* \" < > \\ / ? :` and `\|` . The character . must not be used at the end of the name. |
+
+## NodeChildAssociationPaging
+
+**Properties**
+
+| Name | Type                                                              |
+|------|-------------------------------------------------------------------|
+| list | [NodeChildAssociationPagingList](#NodeChildAssociationPagingList) |
+
+## NodeChildAssociationPagingList
+
+**Properties**
+
+| Name       | Type                                                      |
+|------------|-----------------------------------------------------------|
+| pagination | [Pagination](Pagination.md)                               |
+| entries    | [NodeChildAssociationEntry[]](#NodeChildAssociationEntry) |
+| source     | [Node](Node.md)                                           |
+
+## NodeChildAssociationEntry
+
+**Properties**
+
+| Name      | Type                                          |
+|-----------|-----------------------------------------------|
+| **entry** | [NodeChildAssociation](#NodeChildAssociation) |
+
+## NodeChildAssociation
+
+**Properties**
+
+| Name                | Type                                            | Description                                                                                                                                                   |
+|---------------------|-------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **id**              | string                                          |                                                                                                                                                               |
+| **name**            | string                                          | The name must not contain spaces or the following special characters: `* \" < > \\ / ? :` and `\|` . The character . must not be used at the end of the name. |
+| **nodeType**        | string                                          |                                                                                                                                                               |
+| **isFolder**        | boolean                                         |                                                                                                                                                               |
+| **isFile**          | boolean                                         |                                                                                                                                                               |
+| isLocked            | boolean                                         |                                                                                                                                                               |
+| **modifiedAt**      | Date                                            |                                                                                                                                                               |
+| **modifiedByUser**  | [UserInfo](UserInfo.md)                         |                                                                                                                                                               |
+| **createdAt**       | Date                                            |                                                                                                                                                               |
+| **createdByUser**   | [UserInfo](UserInfo.md)                         |                                                                                                                                                               |
+| parentId            | string                                          |                                                                                                                                                               |
+| isLink              | boolean                                         |                                                                                                                                                               |
+| isFavorite          | boolean                                         |                                                                                                                                                               |
+| content             | [ContentInfo](ContentInfo.md)                   |                                                                                                                                                               |
+| aspectNames         | string[]                                        |                                                                                                                                                               |
+| properties          | any                                             |                                                                                                                                                               |
+| allowableOperations | string[]                                        |                                                                                                                                                               |
+| path                | [PathInfo](PathInfo.md)                         |                                                                                                                                                               |
+| permissions         | [PermissionsInfo](PermissionsInfo.md)           |                                                                                                                                                               |
+| definition          | [Definition](Definition.md)                     |                                                                                                                                                               |
+| association         | [ChildAssociationInfo](ChildAssociationInfo.md) |                                                                                                                                                               |
+
