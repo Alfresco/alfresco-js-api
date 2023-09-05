@@ -1,142 +1,136 @@
-# DecisiontablesApi
+# DecisionTablesApi
 
 All URIs are relative to */activiti-app/api*
 
-Method | HTTP request | Description
-------------- | ------------- | -------------
-[**getDecisionTableEditorJson**](DecisionTablesApi.md#getDecisionTableEditorJson) | **GET** /enterprise/decisions/decision-tables/{decisionTableId}/editorJson | Get definition for a decision table
-[**getDecisionTable**](DecisionTablesApi.md#getDecisionTable) | **GET** /enterprise/decisions/decision-tables/{decisionTableId} | Get a decision table
-[**getDecisionTables**](DecisionTablesApi.md#getDecisionTables) | **GET** /enterprise/decisions/decision-tables | Query decision tables
+| Method                                                    | HTTP request                                                               | Description                         |
+|-----------------------------------------------------------|----------------------------------------------------------------------------|-------------------------------------|
+| [getDecisionTableEditorJson](#getDecisionTableEditorJson) | **GET** /enterprise/decisions/decision-tables/{decisionTableId}/editorJson | Get definition for a decision table |
+| [getDecisionTable](#getDecisionTable)                     | **GET** /enterprise/decisions/decision-tables/{decisionTableId}            | Get a decision table                |
+| [getDecisionTables](#getDecisionTables)                   | **GET** /enterprise/decisions/decision-tables                              | Query decision tables               |
 
-
-<a name="getDecisionTableEditorJson"></a>
-# **getDecisionTableEditorJson**
-> JsonNode getDecisionTableEditorJson(decisionTableId)
+# getDecisionTableEditorJson
 
 Get definition for a decision table
 
-### Example
+**Parameters**
+
+| Name                | Type   |
+|---------------------|--------|
+| **decisionTableId** | number |
+
+**Return type**: [JsonNode](#JsonNode)
+
+**Example**
 
 ```javascript
-import DecisiontablesApi from 'src/api/activiti-rest-api/docs/DecisionTablesApi';
-import {AlfrescoApi} from '@alfresco/js-api';
+import { AlfrescoApi, DecisionTablesApi } from '@alfresco/js-api';
 
-this.alfrescoApi = new AlfrescoApi();
-this.alfrescoApi.setConfig({
-    hostEcm: 'http://127.0.0.1:8080'
-});
+const alfrescoApi = new AlfrescoApi(/*..*/);
+const decisionTablesApi = new DecisionTablesApi(alfrescoApi);
+const decisionTableId = 0;
 
-let decisiontablesApi = new DecisiontablesApi(this.alfrescoApi);
-
-
-decisiontablesApi.getDecisionTableEditorJson(decisionTableId).then((data) => {
+decisionTablesApi.getDecisionTableEditorJson(decisionTableId).then((data) => {
     console.log('API called successfully. Returned data: ' + data);
-}, function (error) {
-    console.error(error);
 });
-
 ```
 
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **decisionTableId** | **number**| decisionTableId | 
-
-### Return type
-
-[**JsonNode**](JsonNode.md)
-
-<a name="getDecisionTable"></a>
-# **getDecisionTable**
-> RuntimeDecisionTableRepresentation getDecisionTable(decisionTableId)
+# getDecisionTable
 
 Get a decision table
 
-### Example
+**Parameters**
+
+| Name                | Type   |
+|---------------------|--------|
+| **decisionTableId** | number |
+
+**Return type**: [RuntimeDecisionTableRepresentation](RuntimeDecisionTableRepresentation.md)
+
+**Example**
 
 ```javascript
-import DecisiontablesApi from 'src/api/activiti-rest-api/docs/DecisionTablesApi';
-import {AlfrescoApi} from '@alfresco/js-api';
+import { AlfrescoApi, DecisionTablesApi } from '@alfresco/js-api';
 
-this.alfrescoApi = new AlfrescoApi();
-this.alfrescoApi.setConfig({
-    hostEcm: 'http://127.0.0.1:8080'
-});
+const alfrescoApi = new AlfrescoApi(/*..*/);
+const decisionTablesApi = new DecisionTablesApi(alfrescoApi);
+const decisionTableId = 0;
 
-let decisiontablesApi = new DecisiontablesApi(this.alfrescoApi);
-
-
-decisiontablesApi.getDecisionTable(decisionTableId).then((data) => {
+decisionTablesApi.getDecisionTable(decisionTableId).then((data) => {
     console.log('API called successfully. Returned data: ' + data);
-}, function (error) {
-    console.error(error);
 });
-
 ```
 
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **decisionTableId** | **number**| decisionTableId | 
-
-### Return type
-
-[**RuntimeDecisionTableRepresentation**](RuntimeDecisionTableRepresentation.md)
-
-<a name="getDecisionTables"></a>
-# **getDecisionTables**
-> ResultListDataRepresentationRuntimeDecisionTableRepresentation getDecisionTables(opts)
+# getDecisionTables
 
 Query decision tables
 
-### Example
+**Parameters**
+
+| Name         | Type   |
+|--------------|--------|
+| nameLike     | string |
+| keyLike      | string |
+| tenantIdLike | string |
+| deploymentId | number |
+| sort         | string |
+| order        | string |
+| start        | number |
+| size         | number |
+
+**Return type**: [ResultListDataRepresentationRuntimeDecisionTableRepresentation](ResultListDataRepresentationRuntimeDecisionTableRepresentation.md)
+
+**Example**
 
 ```javascript
-import DecisiontablesApi from 'src/api/activiti-rest-api/docs/DecisionTablesApi';
-import {AlfrescoApi} from '@alfresco/js-api';
+import { AlfrescoApi, DecisionTablesApi } from '@alfresco/js-api';
 
-this.alfrescoApi = new AlfrescoApi();
-this.alfrescoApi.setConfig({
-    hostEcm: 'http://127.0.0.1:8080'
-});
+const alfrescoApi = new AlfrescoApi(/*..*/);
+const decisionTablesApi = new DecisionTablesApi(alfrescoApi);
+const opts = {};
 
-let decisiontablesApi = new DecisiontablesApi(this.alfrescoApi);
-
-let opts = {
-    'nameLike': nameLike_example //  | nameLike
-    'keyLike': keyLike_example //  | keyLike
-    'tenantIdLike': tenantIdLike_example //  | tenantIdLike
-    'deploymentId': 789 //  | deploymentId
-    'sort': sort_example //  | sort
-    'order': order_example //  | order
-    'start': 56 //  | start
-    'size': 56 //  | size
-};
-
-decisiontablesApi.getDecisionTables(opts).then((data) => {
+decisionTablesApi.getDecisionTables(opts).then((data) => {
     console.log('API called successfully. Returned data: ' + data);
-}, function (error) {
-    console.error(error);
 });
-
 ```
 
-### Parameters
+# Models
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **nameLike** | **string**| nameLike | [optional] 
- **keyLike** | **string**| keyLike | [optional] 
- **tenantIdLike** | **string**| tenantIdLike | [optional] 
- **deploymentId** | **number**| deploymentId | [optional] 
- **sort** | **string**| sort | [optional] 
- **order** | **string**| order | [optional] 
- **start** | **number**| start | [optional] 
- **size** | **number**| size | [optional] 
+## JsonNode
 
-### Return type
+**Properties**
 
-[**ResultListDataRepresentationRuntimeDecisionTableRepresentation**](ResultListDataRepresentationRuntimeDecisionTableRepresentation.md)
+| Name                | Type    |
+|---------------------|---------|
+| array               | boolean |
+| bigDecimal          | boolean |
+| bigInteger          | boolean |
+| binary              | boolean |
+| boolean             | boolean |
+| containerNode       | boolean |
+| double              | boolean |
+| float               | boolean |
+| floatingPointNumber | boolean |
+| int                 | boolean |
+| integralNumber      | boolean |
+| long                | boolean |
+| missingNode         | boolean |
+| nodeType            | string  |
+| null                | boolean |
+| number              | boolean |
+| object              | boolean |
+| pojo                | boolean |
+| short               | boolean |
+| textual             | boolean |
+| valueNode           | boolean |
 
+### JsonNode.NodeTypeEnum
+
+* `ARRAY` (value: `'ARRAY'`)
+* `BINARY` (value: `'BINARY'`)
+* `BOOLEAN` (value: `'BOOLEAN'`)
+* `MISSING` (value: `'MISSING'`)
+* `NULL` (value: `'NULL'`)
+* `NUMBER` (value: `'NUMBER'`)
+* `OBJECT` (value: `'OBJECT'`)
+* `POJO` (value: `'POJO'`)
+* `STRING` (value: `'STRING'`)
