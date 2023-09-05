@@ -15,18 +15,15 @@
  * limitations under the License.
  */
 
-import { Site } from './site';
-import { SiteEntryRelations } from './siteEntryRelations';
+import { SiteMemberPaging } from './siteMemberPaging';
 
-export class SiteEntry {
-    entry: Site;
-    relations?: SiteEntryRelations;
+export class SiteEntryRelations {
+    members: SiteMemberPaging;
 
-    constructor(input?: Partial<SiteEntry>) {
+    constructor(input?: Partial<SiteEntryRelations>) {
         if (input) {
             Object.assign(this, input);
-            this.entry = input.entry ? new Site(input.entry) : undefined;
-            this.relations = input.relations ? new SiteEntryRelations(input.relations) : undefined;
+            this.members = input.members ? new SiteMemberPaging(input.members) : undefined;
         }
     }
 
