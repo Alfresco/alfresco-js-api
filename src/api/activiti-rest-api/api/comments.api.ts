@@ -63,7 +63,7 @@ export class ActivitiCommentsApi extends BaseApi {
             taskId
         };
 
-        return this.get({
+        return this.post({
             path: '/api/enterprise/tasks/{taskId}/comments',
             pathParams,
             bodyParam: commentRequest,
