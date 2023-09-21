@@ -288,7 +288,7 @@ export class ContentApi extends BaseApi {
         throwIfNotDefined(content, 'content');
 
         return this.get({
-            path: '/api/enterprise/content/document-details',
+            path: '/api/enterprise/content/document-runtime',
             bodyParam: content,
             returnType: RelatedProcessTask
         });

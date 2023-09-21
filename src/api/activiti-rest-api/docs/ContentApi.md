@@ -16,7 +16,7 @@ Method | HTTP request | Description
 [**getRawContent**](ContentApi.md#getRawContent) | **GET** /enterprise/content/{contentId}/raw | Stream content from a local content representation
 [**getRelatedContentForProcessInstance**](ContentApi.md#getRelatedContentForProcessInstance) | **GET** /enterprise/process-instances/{processInstanceId}/content | List content attached to a process instance
 [**getRelatedContentForTask**](ContentApi.md#getRelatedContentForTask) | **GET** /enterprise/tasks/{taskId}/content | List content attached to a task
-[**getProcessesAndTasksOnContent**](ContentApi.md#getProcessesAndTasksOnContent) | **GET** enterprise/content/document-details | Lists processes and tasks on workflow started with provided document
+[**getProcessesAndTasksOnContent**](ContentApi.md#getProcessesAndTasksOnContent) | **GET** enterprise/content/document-runtime | Lists processes and tasks on workflow started with provided document
 
 <a name="createRelatedContentOnProcessInstance"></a>
 # **createRelatedContentOnProcessInstance**
@@ -511,9 +511,7 @@ const contentApi = new ContentApi(alfrescoApi);
 
 const content = { 
   'source': 'testSource',
-  'mimeType': 'application/pdf',
-  'sourceId': 'testId',
-  'name': 'dummyName.pdf'
+  'sourceId': 'testId'
 };
 
 contentApi.getProcessesAndTasksOnContent(content).then((data) => {

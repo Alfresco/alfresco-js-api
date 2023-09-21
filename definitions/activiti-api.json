@@ -2454,7 +2454,7 @@
                 ]
             }
         },
-        "/enterprise/content/document-details": {
+        "/enterprise/content/document-runtime": {
             "get": {
                 "tags": [
                     "content"
@@ -2469,6 +2469,7 @@
                 ],
                 "parameters": [
                     {
+                        "in": "body",
                         "name": "content",
                         "description": "content that workflow was started with",
                         "required": true,
