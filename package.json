@@ -20,7 +20,6 @@
     "toc": "markdown-toc -i README.md && markdown-toc -i test/mockObjects/README.md && markdown-toc -i bpm-example.md && markdown-toc -i ecm-example.md",
     "generate-ts": "jsdoc -c config.json .",
     "generate-api": "mvn install",
-    "spellcheck": "cspell '{src,test}/**/*.ts'",
     "lint": "eslint . --ext .js,.ts"
   },
   "sideEffects": false,
@@ -37,6 +36,7 @@
     "tslib": "^2.6.1"
   },
   "devDependencies": {
+    "@cspell/eslint-plugin": "^7.3.6",
     "@types/chai": "^4.2.3",
     "@types/chai-spies": "^1.0.3",
     "@types/event-emitter": "^0.3.3",
@@ -48,7 +48,6 @@
     "chai": "4.3.8",
     "chai-spies": "^1.0.0",
     "commander": "^11.0.0",
-    "cspell": "^7.0.0",
     "eslint": "^8.46.0",
     "eslint-plugin-license-header": "^0.6.0",
     "markdown-toc": "^1.2.0",

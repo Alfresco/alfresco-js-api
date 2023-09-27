@@ -6,13 +6,14 @@
     },
     "parser": "@typescript-eslint/parser",
     "plugins": [
-      "@typescript-eslint",
-      "license-header"
-
+        "@typescript-eslint",
+        "license-header",
+        "@cspell"
     ],
     "extends": [
-      "eslint:recommended",
-      "plugin:@typescript-eslint/recommended"
+        "eslint:recommended",
+        "plugin:@typescript-eslint/recommended",
+        "plugin:@cspell/recommended"
     ],
     // TODO: consider removing these rules and improving the source code
     "rules": {
