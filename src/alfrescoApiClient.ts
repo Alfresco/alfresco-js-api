@@ -368,22 +368,22 @@ export class AlfrescoApiClient implements ee.Emitter, LegacyHttpClient {
     private addPromiseListeners<T = any>(promise: Promise<T>, eventEmitter: ee.Emitter): AlfrescoApiClientPromise<T> {
         return Object.assign(promise, {
             on: function () {
-                // eslint-disable-next-line prefer-spread
+                // eslint-disable-next-line prefer-spread,prefer-rest-params
                 eventEmitter.on.apply(eventEmitter, arguments);
                 return this;
             },
             once: function () {
-                // eslint-disable-next-line prefer-spread
+                // eslint-disable-next-line prefer-spread,prefer-rest-params
                 eventEmitter.once.apply(eventEmitter, arguments);
                 return this;
             },
             emit: function () {
-                // eslint-disable-next-line prefer-spread
+                // eslint-disable-next-line prefer-spread,prefer-rest-params
                 eventEmitter.emit.apply(eventEmitter, arguments);
                 return this;
             },
             off: function () {
-                // eslint-disable-next-line prefer-spread
+                // eslint-disable-next-line prefer-spread,prefer-rest-params
                 eventEmitter.off.apply(eventEmitter, arguments);
                 return this;
             }
