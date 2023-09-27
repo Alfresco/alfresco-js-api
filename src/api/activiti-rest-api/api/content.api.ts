@@ -19,7 +19,7 @@ import { RelatedContentRepresentation } from '../model/relatedContentRepresentat
 import { ResultListDataRepresentationRelatedContentRepresentation } from '../model/resultListDataRepresentationRelatedContentRepresentation';
 import { BaseApi } from './base.api';
 import { throwIfNotDefined } from '../../../assert';
-import { RelatedProcessTask } from '../model/relatedProcessTask';
+import { ResultListDataRepresentationRelatedProcessTask } from '../model/resultListDataRepresentationRelatedProcessTask';
 
 /**
  * Content service.
@@ -281,16 +281,25 @@ export class ContentApi extends BaseApi {
     /**
      * Lists processes and tasks on workflow started with provided document
      *
-     * @param content - content that workflow was started with
-     * @return Promise<ResultListDataRepresentationRelatedContentRepresentation>
+     * @param sourceId - id of the document that workflow or task has been started with
+     * @param source - source of the document that workflow or task has been started with
+     * @param size - size of the entries to get
+     * @param page - page number
+     * @return Promise<ResultListDataRepresentationRelatedProcessTask>
      */
-    getProcessesAndTasksOnContent(content: RelatedContentRepresentation): Promise<RelatedProcessTask[]> {
-        throwIfNotDefined(content, 'content');
+    getProcessesAndTasksOnContent(sourceId: string, source: string, size?: number, page?: number): Promise<ResultListDataRepresentationRelatedProcessTask> {
+        throwIfNotDefined(sourceId, 'sourceId');
+        throwIfNotDefined(source, 'source');
 
         return this.get({
             path: '/api/enterprise/content/document-runtime',
-            bodyParam: content,
-            returnType: RelatedProcessTask
+            queryParams: {
+                sourceId,
+                source,
+                size,
+                page
+            },
+            returnType: ResultListDataRepresentationRelatedProcessTask
         });
     }
 }
