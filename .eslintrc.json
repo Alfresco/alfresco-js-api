@@ -6,20 +6,20 @@
     },
     "parser": "@typescript-eslint/parser",
     "plugins": [
-      "@typescript-eslint",
-      "license-header"
-
+        "@typescript-eslint",
+        "license-header",
+        "@cspell",
+        "eslint-plugin-import",
+        "prettier"
     ],
     "extends": [
-      "eslint:recommended",
-      "plugin:@typescript-eslint/recommended"
+        "eslint:recommended",
+        "plugin:@typescript-eslint/recommended",
+        "plugin:@cspell/recommended"
     ],
     // TODO: consider removing these rules and improving the source code
     "rules": {
-        "prefer-rest-params": "off",
-        "prefer-spread": "off",
         "@typescript-eslint/explicit-module-boundary-types": "off",
-        "@typescript-eslint/no-var-requires": "off",
         "@typescript-eslint/no-explicit-any": "off",
         "@typescript-eslint/no-empty-function": "off",
         "@typescript-eslint/no-namespace": "off",

@@ -15,11 +15,12 @@
  * limitations under the License.
  */
 
-import { expect } from 'chai';
-import sinon from 'sinon';
+import chai, { expect } from 'chai';
 import { ProcessAuth } from '../src/authentication/processAuth';
 import { SuperagentHttpClient } from '../src/superagentHttpClient';
 import { BpmAuthMock } from './mockObjects';
+import spies from 'chai-spies';
+chai.use(spies);
 
 describe('Bpm Auth test', () => {
     const hostBpm = 'http://127.0.0.1:9999';
@@ -260,14 +261,14 @@ describe('Bpm Auth test', () => {
         });
 
         describe('CSRF Token', () => {
-            let setCsrfTokenStub: sinon.SinonStub;
+            let setCsrfTokenStub: any;
 
             beforeEach(() => {
-                setCsrfTokenStub = sinon.stub(SuperagentHttpClient.prototype, 'setCsrfToken');
+                setCsrfTokenStub = chai.spy.on(SuperagentHttpClient.prototype, 'setCsrfToken');
             });
 
             afterEach(() => {
-                setCsrfTokenStub.restore();
+                chai.spy.restore(SuperagentHttpClient.prototype, 'setCsrfToken');
             });
 
             it('should be enabled by default', (done) => {
@@ -279,7 +280,7 @@ describe('Bpm Auth test', () => {
                 });
 
                 processAuth.login('admin', 'admin').then(() => {
-                    expect(setCsrfTokenStub.called).to.be.equal(true);
+                    expect(setCsrfTokenStub).to.have.been.called();
                     done();
                 });
             });
@@ -294,7 +295,7 @@ describe('Bpm Auth test', () => {
                 });
 
                 processAuth.login('admin', 'admin').then(() => {
-                    expect(setCsrfTokenStub.called).to.be.equal(false);
+                    expect(setCsrfTokenStub).not.to.have.been.called();
                     done();
                 });
             });

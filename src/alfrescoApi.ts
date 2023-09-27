@@ -52,7 +52,10 @@ export class AlfrescoApi implements Emitter, AlfrescoApiType {
 
     username: string;
 
-    constructor(config?: AlfrescoApiConfig, public httpClient?: HttpClient) {
+    constructor(
+        config?: AlfrescoApiConfig,
+        public httpClient?: HttpClient
+    ) {
         ee(this);
 
         if (config) {
@@ -73,10 +76,10 @@ export class AlfrescoApi implements Emitter, AlfrescoApiType {
         this.clientsFactory();
 
         this.errorListeners();
-        if(this.config.oauthInit){
+        if (this.config.oauthInit) {
             this.initAuth(config);
 
-            if(this.isLoggedIn()){
+            if (this.isLoggedIn()) {
                 this.emitBuffer('logged-in');
             }
         }
@@ -86,7 +89,6 @@ export class AlfrescoApi implements Emitter, AlfrescoApiType {
 
     private initAuth(config: AlfrescoApiConfig): void {
         if (this.isOauthConfiguration()) {
-
             if (!this.oauth2Auth) {
                 this.oauth2Auth = new Oauth2Auth(this.config, this, this.httpClient);
             } else {
@@ -99,7 +101,6 @@ export class AlfrescoApi implements Emitter, AlfrescoApiType {
 
             this.setAuthenticationClientECMBPM(this.oauth2Auth.getAuthentication(), this.oauth2Auth.getAuthentication());
         } else {
-
             if (!this.processAuth) {
                 this.processAuth = new ProcessAuth(this.config, this.httpClient);
             } else {
@@ -122,7 +123,6 @@ export class AlfrescoApi implements Emitter, AlfrescoApiType {
 
             this.setAuthenticationClientECMBPM(this.contentAuth.getAuthentication(), this.processAuth.getAuthentication());
         }
-
     }
 
     private clientsFactory() {
@@ -247,7 +247,6 @@ export class AlfrescoApi implements Emitter, AlfrescoApiType {
      * @returns {Promise} A promise that returns {new authentication ticket} if resolved and {error} if rejected.
      * */
     login(username: string, password: string): Promise<any> {
-
         if (!this.isCredentialValid(username) || !this.isCredentialValid(password)) {
             return Promise.reject('missing username or password');
         }
@@ -260,29 +259,23 @@ export class AlfrescoApi implements Emitter, AlfrescoApiType {
 
         if (this.isOauthConfiguration()) {
             const promise = this.oauth2Auth.login(username, password);
-            promise.then(
-                (accessToken) => {
-                    this.config.accessToken = accessToken;
-                }
-            );
+            promise.then((accessToken) => {
+                this.config.accessToken = accessToken;
+            });
             return promise;
         } else {
             if (this.isBpmConfiguration()) {
                 const promise = this.processAuth.login(username, password);
-                promise.then(
-                    (ticketBpm) => {
-                        this.config.ticketBpm = ticketBpm;
-                    }
-                );
+                promise.then((ticketBpm) => {
+                    this.config.ticketBpm = ticketBpm;
+                });
                 return promise;
             } else if (this.isEcmConfiguration()) {
                 const promise = this.contentAuth.login(username, password);
-                promise.then(
-                    (ticketEcm) => {
-                        this.setAuthenticationClientECMBPM(this.contentAuth.getAuthentication(), null);
-                        this.config.ticketEcm = ticketEcm;
-                    }
-                );
+                promise.then((ticketEcm) => {
+                    this.setAuthenticationClientECMBPM(this.contentAuth.getAuthentication(), null);
+                    this.config.ticketEcm = ticketEcm;
+                });
                 return promise;
             } else if (this.isEcmBpmConfiguration()) {
                 const contentProcessPromise = this.loginBPMECM(username, password);
@@ -356,7 +349,8 @@ export class AlfrescoApi implements Emitter, AlfrescoApiType {
                     }
                     promise.emit('error');
                     reject(error);
-                });
+                }
+            );
         });
 
         ee(promise); // jshint ignore:line
@@ -377,7 +371,7 @@ export class AlfrescoApi implements Emitter, AlfrescoApiType {
             } else if (this.isEcmConfiguration()) {
                 const contentPromise = this.contentAuth.logout();
                 contentPromise.then(
-                    () => this.config.ticket = undefined,
+                    () => (this.config.ticket = undefined),
                     () => {}
                 );
                 return contentPromise;
@@ -405,7 +399,8 @@ export class AlfrescoApi implements Emitter, AlfrescoApiType {
                     }
                     promise.emit('error');
                     reject(error);
-                });
+                }
+            );
         });
 
         ee(promise); // jshint ignore:line
@@ -424,7 +419,7 @@ export class AlfrescoApi implements Emitter, AlfrescoApiType {
             } else if (this.isEcmConfiguration()) {
                 return this.config.withCredentials ? true : this.contentAuth.isLoggedIn();
             } else if (this.isEcmBpmConfiguration()) {
-                return this.config.withCredentials ? true : (this.contentAuth.isLoggedIn() && this.processAuth.isLoggedIn());
+                return this.config.withCredentials ? true : this.contentAuth.isLoggedIn() && this.processAuth.isLoggedIn();
             } else {
                 return false;
             }
@@ -559,13 +554,14 @@ export class AlfrescoApi implements Emitter, AlfrescoApiType {
         return this.config.provider && this.config.provider.toUpperCase() === 'ALL';
     }
 
-    private emitBuffer(event: string, callback ?: any): void {
+    private emitBuffer(event: string, callback?: any): void {
         this.emit(event, callback);
         this.bufferEvents.push(event);
     }
 
-    reply(event: string, callback ?: any): void {
+    reply(event: string, callback?: any): void {
         if (this.bufferEvents.indexOf(event) >= 0) {
+            // eslint-disable-next-line prefer-rest-params
             Function.prototype.apply.call(callback, this, arguments);
         } else {
             this.on(event, callback);
