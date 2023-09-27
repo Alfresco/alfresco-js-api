@@ -18,10 +18,7 @@
 import { AlfrescoApi } from '../../src/alfrescoApi';
 import { NodesApi } from '../../src/api/content-rest-api';
 import { EcmAuthMock, NodeMock } from '../../test/mockObjects';
-
-const chai = require('chai');
-const expect = chai.expect;
-chai.use(require('chai-datetime'));
+import { expect } from 'chai';
 
 describe('Node', () => {
     let authResponseMock: EcmAuthMock;
@@ -61,7 +58,6 @@ describe('Node', () => {
                 expect(data.list.entries[0].entry.name).to.be.equal('dataLists');
                 done();
             });
-
         });
 
         it('information for the node with identifier nodeId should return 404 if the id is does not exist', (done) => {
@@ -88,10 +84,13 @@ describe('Node', () => {
         it('should return dates as timezone-aware', (done) => {
             nodeMock.get200ResponseChildrenNonUTCTimes();
 
+            const equalTime = (actual: Date, expected: Date) => actual.getTime() == expected.getTime();
+
             nodesApi.listNodeChildren('b4cff62a-664d-4d45-9302-98723eac1320').then(
                 (data) => {
                     expect(data.list.entries.length).to.be.equal(1);
-                    expect(data.list.entries[0].entry.createdAt).to.equalTime(new Date(Date.UTC(2011, 2, 15, 17, 4, 54, 290)));
+                    const isEqual = equalTime(data.list.entries[0].entry.createdAt, new Date(Date.UTC(2011, 2, 15, 17, 4, 54, 290)));
+                    expect(isEqual).to.equal(true);
                     done();
                 },
                 (error: any) => {
@@ -105,11 +104,9 @@ describe('Node', () => {
         it('delete the node with identifier nodeId', (done) => {
             nodeMock.get204SuccessfullyDeleted();
 
-            nodesApi.deleteNode('80a94ac8-3ece-47ad-864e-5d939424c47c').then(
-                () => {
-                    done();
-                }
-            );
+            nodesApi.deleteNode('80a94ac8-3ece-47ad-864e-5d939424c47c').then(() => {
+                done();
+            });
         });
 
         it('delete the node with identifier nodeId should return 404 if the id is does not exist', (done) => {
