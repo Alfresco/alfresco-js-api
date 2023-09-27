@@ -292,7 +292,7 @@ export class ContentApi extends BaseApi {
         throwIfNotDefined(source, 'source');
 
         return this.get({
-            path: '/api/enterprise/content/document-runtime',
+            path: '/api/enterprise/document-runtime',
             queryParams: {
                 sourceId,
                 source,
