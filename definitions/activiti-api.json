@@ -2469,21 +2469,40 @@
                 ],
                 "parameters": [
                     {
-                        "in": "body",
-                        "name": "content",
-                        "description": "content that workflow was started with",
+                        "name": "sourceId",
+                        "in": "query",
+                        "description": "sourceId",
                         "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/RelatedContentRepresentation"
-                        }
+                        "type": "string"
+                    },
+                    {
+                        "name": "source",
+                        "in": "query",
+                        "description": "source",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "size",
+                        "in": "query",
+                        "description": "size",
+                        "required": false,
+                        "type": "number"
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "page",
+                        "required": false,
+                        "type": "number"
                     }
                 ],
                 "responses": {
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "type": "array",
-                            "$ref": "#/definitions/RelatedProcessTask"
+                            "type": "object",
+                            "$ref": "#/definitions/ResultListDataRepresentationRelatedProcessTask"
                         }
                     }
                 },
@@ -15040,6 +15059,26 @@
                 },
                 "taskId": {
                     "type": "string"
+                }
+            }
+        },
+        "ResultListDataRepresentationRelatedProcessTask": {
+            "type": "object",
+            "properties": {
+                "data": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/RelatedProcessTask"
+                    }
+                },
+                "size": {
+                    "type": "number"
+                },
+                "start": {
+                    "type": "number"
+                },
+                "total": {
+                    "type": "number"
                 }
             }
         }

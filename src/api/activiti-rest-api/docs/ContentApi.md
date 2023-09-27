@@ -493,7 +493,7 @@ Name | Type | Description  | Notes
 
 <a name="getProcessesAndTasksOnContent"></a>
 # **getProcessesAndTasksOnContent**
-> RelatedProcessTask[] getProcessesAndTasksOnContent(content)
+> ResultListDataRepresentationRelatedProcessTask getProcessesAndTasksOnContent(sourceId, source, size, page)
 
 Lists processes and tasks on workflow started with provided document
 
@@ -509,12 +509,7 @@ alfrescoApi.setConfig({
 
 const contentApi = new ContentApi(alfrescoApi);
 
-const content = { 
-  'source': 'testSource',
-  'sourceId': 'testId'
-};
-
-contentApi.getProcessesAndTasksOnContent(content).then((data) => {
+contentApi.getProcessesAndTasksOnContent('sourceId', 'source').then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -526,11 +521,14 @@ contentApi.getProcessesAndTasksOnContent(content).then((data) => {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **content** | **RelatedContentRepresentation** | content that workflow was started with | |
+| **sourceId** | **string** | id of the document that workflow or task was started with | |
+| **source** | **string** | source of the document that workflow or task was started with | |
+| **sourceId** | **number** | size of the entries to get | optional param |
+| **sourceId** | **number** | page number | optional param |
 
 ### Return type
 
-[**RelatedProcessTask[]**](RelatedProcessTask.md)
+[**ResultListDataRepresentationRelatedProcessTask**](ResultListDataRepresentationRelatedProcessTask.md)
 
 
 
