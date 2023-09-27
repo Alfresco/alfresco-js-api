@@ -15,8 +15,8 @@
  * limitations under the License.
  */
 
-module.exports = async ({github, context}) => {
-
+module.exports = async ({ github, context }) => {
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
     const tagName = require('../package.json').version;
     const tagSHA = context.payload.after;
 
@@ -41,4 +41,4 @@ module.exports = async ({github, context}) => {
     if (createdRef.status === 201) {
         console.log(`Tag ${tagName} was created successfully`);
     }
-}
+};
