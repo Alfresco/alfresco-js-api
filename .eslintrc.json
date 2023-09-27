@@ -9,7 +9,8 @@
         "@typescript-eslint",
         "license-header",
         "@cspell",
-        "eslint-plugin-import"
+        "eslint-plugin-import",
+        "prettier"
     ],
     "extends": [
         "eslint:recommended",
