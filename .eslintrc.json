@@ -20,7 +20,6 @@
     // TODO: consider removing these rules and improving the source code
     "rules": {
         "prefer-rest-params": "off",
-        "prefer-spread": "off",
         "@typescript-eslint/explicit-module-boundary-types": "off",
         "@typescript-eslint/no-explicit-any": "off",
         "@typescript-eslint/no-empty-function": "off",

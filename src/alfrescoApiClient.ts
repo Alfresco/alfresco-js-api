@@ -19,7 +19,7 @@ import ee from 'event-emitter';
 import { AlfrescoApiConfig } from './alfrescoApiConfig';
 import { Authentication } from './authentication/authentication';
 import { SuperagentHttpClient } from './superagentHttpClient';
-import { Emitters, HttpClient, RequestOptions, LegacyHttpClient, SecurityOptions } from './api-clients/http-client.interface';
+import { Emitters, HttpClient, LegacyHttpClient, RequestOptions, SecurityOptions } from './api-clients/http-client.interface';
 import { paramToString } from './utils';
 import { Storage } from './storage';
 
@@ -366,25 +366,27 @@ export class AlfrescoApiClient implements ee.Emitter, LegacyHttpClient {
     }
 
     private addPromiseListeners<T = any>(promise: Promise<T>, eventEmitter: ee.Emitter): AlfrescoApiClientPromise<T> {
-        const alfrescoPromise: AlfrescoApiClientPromise<T> = Object.assign(promise, {
+        return Object.assign(promise, {
             on: function () {
+                // eslint-disable-next-line prefer-spread
                 eventEmitter.on.apply(eventEmitter, arguments);
                 return this;
             },
             once: function () {
+                // eslint-disable-next-line prefer-spread
                 eventEmitter.once.apply(eventEmitter, arguments);
                 return this;
             },
             emit: function () {
+                // eslint-disable-next-line prefer-spread
                 eventEmitter.emit.apply(eventEmitter, arguments);
                 return this;
             },
             off: function () {
+                // eslint-disable-next-line prefer-spread
                 eventEmitter.off.apply(eventEmitter, arguments);
                 return this;
             }
         });
-
-        return alfrescoPromise;
     }
 }
