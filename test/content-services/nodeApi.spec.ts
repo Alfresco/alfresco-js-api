@@ -18,7 +18,7 @@
 import { AlfrescoApi } from '../../src/alfrescoApi';
 import { NodesApi } from '../../src/api/content-rest-api';
 import { EcmAuthMock, NodeMock } from '../../test/mockObjects';
-import { expect } from 'chai';
+import chai, { expect } from 'chai';
 
 describe('Node', () => {
     let authResponseMock: EcmAuthMock;
@@ -112,7 +112,7 @@ describe('Node', () => {
         it('delete the node with identifier nodeId should return 404 if the id is does not exist', (done) => {
             nodeMock.get404DeleteNotFound();
 
-            nodesApi.deleteNode('80a94ac8-3ece-47ad-864e-5d939424c47c').then(
+            nodesApi.deleteNode('80a94ac8-test-47ad-864e-5d939424c47c').then(
                 () => {},
                 (error: any) => {
                     expect(error.status).to.be.equal(404);
@@ -127,6 +127,30 @@ describe('Node', () => {
             nodesApi.deleteNode('80a94ac8-3ece-47ad-864e-5d939424c47c').then(
                 () => {},
                 () => {
+                    done();
+                }
+            );
+        });
+    });
+
+    describe('Delete nodes', () => {
+        it('should call deleteNode for every id in the given array', (done) => {
+            const deleteNodeSpy = chai.spy.on(nodesApi, 'deleteNode', () => Promise.resolve());
+
+            nodesApi.deleteNodes(['80a94ac8-3ece-47ad-864e-5d939424c47c', '80a94ac8-3ece-47ad-864e-5d939424c47d']).then(() => {
+                expect(deleteNodeSpy).to.have.been.called.exactly(2);
+                done();
+            });
+        });
+
+        it('should return throw an error if one of the promises fails', (done) => {
+            nodeMock.get204SuccessfullyDeleted();
+            nodeMock.get404DeleteNotFound();
+
+            nodesApi.deleteNodes(['80a94ac8-3ece-47ad-864e-5d939424c47c', '80a94ac8-test-47ad-864e-5d939424c47c']).then(
+                () => {},
+                (error: any) => {
+                    expect(error.status).to.be.equal(404);
                     done();
                 }
             );
