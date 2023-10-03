@@ -134,7 +134,7 @@ describe('Node', () => {
     });
 
     describe('Delete nodes', () => {
-        it('should call deleteNode for every id in given array', (done) => {
+        it('should call deleteNode for every id in the given array', (done) => {
             const deleteNodeSpy = chai.spy.on(nodesApi, 'deleteNode', () => Promise.resolve());
 
             nodesApi.deleteNodes(['80a94ac8-3ece-47ad-864e-5d939424c47c', '80a94ac8-3ece-47ad-864e-5d939424c47d']).then(() => {
@@ -143,7 +143,7 @@ describe('Node', () => {
             });
         });
 
-        it('should return an error if one of the promises fails', (done) => {
+        it('should return throw an error if one of the promises fails', (done) => {
             nodeMock.get204SuccessfullyDeleted();
             nodeMock.get404DeleteNotFound();
 

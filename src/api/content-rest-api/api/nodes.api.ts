@@ -674,7 +674,7 @@ Only the owner of the node or an admin can permanently delete the node.
     /**
      * Delete multiple nodes
 
-     Deletes nodes specified in the **nodeIds** array.
+     Deletes the nodes specified in the **nodeIds** array.
 
      *
      * @param nodeIds The list of node IDs to delete.

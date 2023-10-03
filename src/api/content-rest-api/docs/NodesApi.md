@@ -558,7 +558,7 @@ Delete multiple nodes
 
 > this endpoint is available in **Alfresco 5.2** and newer versions.
 
-Deletes nodes specified in the **nodeIds** array.
+Deletes the nodes specified in the **nodeIds** array.
 
 **Parameters**
 
