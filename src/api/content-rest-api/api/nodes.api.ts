@@ -672,6 +672,24 @@ Only the owner of the node or an admin can permanently delete the node.
         });
     }
     /**
+     * Delete multiple nodes
+
+     Deletes nodes specified in the **nodeIds** array.
+
+     *
+     * @param nodeIds The list of node IDs to delete.
+     * @param opts Optional parameters
+     * @param opts.permanent If **true** then nodes are deleted permanently, without moving to the trashcan.
+     Only the owner of the node or an admin can permanently delete the node.
+     (default to false)
+     * @return Promise<[]>
+     */
+    deleteNodes(nodeIds: string[], opts?: { permanent?: boolean }): Promise<void[]> {
+        throwIfNotDefined(nodeIds, 'nodeIds');
+
+        return Promise.all(nodeIds.map(id => this.deleteNode(id, opts)));
+    }
+    /**
     * Delete secondary child or children
     *
     * **Note:** this endpoint is available in Alfresco 5.2 and newer versions.

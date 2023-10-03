@@ -10,6 +10,7 @@ All URIs are relative to *https://localhost/alfresco/api/-default-/public/alfres
 | [createSecondaryChildAssociation](#createSecondaryChildAssociation) | **POST** /nodes/{nodeId}/secondary-children             | Create secondary child                                |
 | [deleteAssociation](#deleteAssociation)                             | **DELETE** /nodes/{nodeId}/targets/{targetId}           | Delete node association(s)                            |
 | [deleteNode](#deleteNode)                                           | **DELETE** /nodes/{nodeId}                              | Delete a node                                         |
+| [deleteNodes](#deleteNodes)                                         |                                                         | Deletes multiple nodes                                |
 | [deleteSecondaryChildAssociation](#deleteSecondaryChildAssociation) | **DELETE** /nodes/{nodeId}/secondary-children/{childId} | Delete secondary child or children                    |
 | [getNode](#getNode)                                                 | **GET** /nodes/{nodeId}                                 | Get a node                                            |
 | [getNodeContent](#getNodeContent)                                   | **GET** /nodes/{nodeId}/content                         | Get node content                                      |
@@ -547,6 +548,35 @@ const nodesApi = new NodesApi(alfrescoApi);
 const opts = { };
 
 nodesApi.deleteNode(`<nodeId>`, opts).then(() => {
+  console.log('API called successfully.');
+});
+```
+
+## deleteNodes
+
+Delete multiple nodes
+
+> this endpoint is available in **Alfresco 5.2** and newer versions.
+
+Deletes nodes specified in the **nodeIds** array.
+
+**Parameters**
+
+| Name           | Type     | Description                                                                                                                                             |
+|----------------|----------|---------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **nodeIds**    | string[] | The list of node IDs to delete.                                                                                                                         |
+| opts.permanent | boolean  | If **true** then nodes are deleted permanently, without moving to the trashcan. Only the owner of the node or an admin can permanently delete the node. |
+
+**Example**
+
+```javascript
+import { AlfrescoApi, NodesApi } from '@alfresco/js-api';
+
+const alfrescoApi = new AlfrescoApi(/*..*/);
+const nodesApi = new NodesApi(alfrescoApi);
+const opts = { };
+
+nodesApi.deleteNodes(`[<nodeId1>, <nodeId2>]`, opts).then(() => {
   console.log('API called successfully.');
 });
 ```
