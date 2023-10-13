@@ -21,8 +21,8 @@ import { ContentApi } from '../src/api/content-custom-api/api/content.api';
 import { EcmAuthMock, OAuthMock } from '../test/mockObjects';
 import { PathMatcher } from '../src/utils/path-matcher';
 import chai, { expect } from 'chai';
+import jsdom from 'jsdom';
 
-const jsdom = require('jsdom');
 const { JSDOM } = jsdom;
 const globalAny: any = global;
 
