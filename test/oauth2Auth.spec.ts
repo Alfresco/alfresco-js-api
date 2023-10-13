@@ -509,8 +509,8 @@ describe('Oauth2  test', () => {
         describe('With mocked DOM', () => {
             beforeEach(() => {
                 const dom = new JSDOM('', { url: 'http://localhost' });
-                global.window = dom.window;
-                global.document = dom.window.document;
+                globalAny.window = dom.window;
+                globalAny.document = dom.window.document;
             });
 
             it('a failed hash check calls the logout', () => {
@@ -545,7 +545,7 @@ describe('Oauth2  test', () => {
             });
 
             afterEach(() => {
-                global.window = undefined;
+                globalAny.window = undefined;
             });
         });
 
