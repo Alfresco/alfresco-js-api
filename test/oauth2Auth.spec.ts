@@ -21,8 +21,9 @@ import { ContentApi } from '../src/api/content-custom-api/api/content.api';
 import { EcmAuthMock, OAuthMock } from '../test/mockObjects';
 import { PathMatcher } from '../src/utils/path-matcher';
 import chai, { expect } from 'chai';
+import jsdom from 'jsdom';
 
-// const jsdom = require('mocha-jsdom');
+const { JSDOM } = jsdom;
 const globalAny: any = global;
 
 describe('Oauth2  test', () => {
@@ -505,8 +506,13 @@ describe('Oauth2  test', () => {
             });
         });
 
-        describe.skip('With mocked DOM', () => {
-            // jsdom({ url: 'http://localhost' });
+        describe('With mocked DOM', () => {
+            beforeEach(() => {
+                const dom = new JSDOM('', { url: 'http://localhost' });
+                globalAny.window = dom.window;
+                globalAny.document = dom.window.document;
+            });
+
             it('a failed hash check calls the logout', () => {
                 const oauth2Auth = new Oauth2Auth(
                     {
@@ -536,6 +542,10 @@ describe('Oauth2  test', () => {
                 setTimeout(() => {
                     expect(logoutSpy).to.have.been.called();
                 }, 500);
+            });
+
+            afterEach(() => {
+                globalAny.window = undefined;
             });
         });
 
