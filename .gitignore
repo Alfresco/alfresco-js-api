@@ -17,3 +17,4 @@ target
 *.d.ts
 /bundles/
 .env
+.nyc_output
