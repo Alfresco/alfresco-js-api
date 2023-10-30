@@ -13,13 +13,8 @@
     "build_types": "shx rm -rf ./dist/typings && tsc -p ./tsconfig/tsconfig.types.json",
     "generate_packages": "node .make-packages.js",
     "prepublish": "shx rm -rf ./typings && npm run build",
-    "format-ts": "tsfmt -r",
     "test": "mocha --full-trace -r ts-node/register test/*.spec.ts test/**/*.spec.ts",
     "coverage": "NODE_OPTIONS=--max_old_space_size=8192 nyc --reporter=lcov mocha -r ts-node/register --full-trace --bail  test/*.spec.ts ./test/**/*.spec.ts",
-    "generate": "mvn clean generate-sources",
-    "toc": "markdown-toc -i README.md && markdown-toc -i test/mockObjects/README.md && markdown-toc -i docs/bpm-example.md && markdown-toc -i docs/ecm-example.md",
-    "generate-ts": "jsdoc -c config.json .",
-    "generate-api": "mvn install",
     "lint": "eslint . --ext .js,.ts"
   },
   "sideEffects": false,
@@ -53,7 +48,6 @@
     "eslint-plugin-license-header": "^0.6.0",
     "eslint-plugin-prettier": "^5.0.0",
     "jsdom": "^22.1.0",
-    "markdown-toc": "^1.2.0",
     "mocha": "^10.2.0",
     "nock": "^13.3.2",
     "npm-run-all": "^4.1.5",
@@ -61,8 +55,7 @@
     "prettier": "^3.0.3",
     "shx": "^0.3.2",
     "ts-node": "^10.9.1",
-    "typescript": "^5.1.6",
-    "typescript-formatter": "^7.2.2"
+    "typescript": "^5.1.6"
   },
   "license": "Apache-2.0",
   "nyc": {
