@@ -17,12 +17,7 @@
 
 import { expect } from 'chai';
 import { BpmAuthMock, ProcessMock } from '../mockObjects';
-import {
-    AlfrescoApi,
-    ProcessDefinitionsApi,
-    ProcessInstanceQueryRepresentation,
-    ProcessInstancesApi
-} from '../../index';
+import { AlfrescoApi, ProcessDefinitionsApi, ProcessInstanceQueryRepresentation, ProcessInstancesApi } from '../../src';
 
 describe('Activiti Process Api', () => {
     let authResponseBpmMock: BpmAuthMock;
@@ -88,5 +83,4 @@ describe('Activiti Process Api', () => {
             done();
         });
     });
-
 });

@@ -31,24 +31,24 @@ describe('Security Mark API test', () => {
     let securityGroupMock: SecurityGroupApiMock;
     let securityGroupApi: SecurityGroupsApi;
     let securityMarksApi: SecurityMarksApi;
-    let securityGroupId: string = 'a0a7b107-84ba-4c3d-b0b7-a8509e8c1c33';
-    let securityMarkId: string = 'Sh1G8vTQ';
+    let securityGroupId = 'a0a7b107-84ba-4c3d-b0b7-a8509e8c1c33';
+    let securityMarkId = 'Sh1G8vTQ';
     const securityMarksBodySingle: SecurityMarksBody = [
         {
-            name: 'SecurityMarkTest',
+            name: 'SecurityMarkTest'
         }
     ];
     const securityGroupBody: SecurityGroupBody = {
         groupName: 'Alfresco',
-        groupType: 'HIERARCHICAL',
+        groupType: 'HIERARCHICAL'
     };
     const securityMarksBody: SecurityMarksBody = [
         {
-            name: 'SecurityMark3',
+            name: 'SecurityMark3'
         },
         {
-            name: 'SecurityMark4',
-        },
+            name: 'SecurityMark4'
+        }
     ];
 
     beforeEach(async () => {
@@ -58,7 +58,7 @@ describe('Security Mark API test', () => {
         securityGroupMock = new SecurityGroupApiMock(hostEcm);
         securityMarkApiMock = new SecurityMarkApiMock(hostEcm);
         const alfrescoApi = new AlfrescoApi({
-            hostEcm: hostEcm,
+            hostEcm: hostEcm
         });
         securityGroupApi = new SecurityGroupsApi(alfrescoApi);
         securityMarksApi = new SecurityMarksApi(alfrescoApi);
@@ -112,7 +112,7 @@ describe('Security Mark API test', () => {
 
     it('update Security Mark', async () => {
         const updatedSecurityMarkBody: SecurityMarkBody = {
-            name: 'AlfrescoSecurityMark',
+            name: 'AlfrescoSecurityMark'
         };
         securityMarkApiMock.put200UpdateSecurityMarkResponse(securityGroupId, securityMarkId);
         await securityMarksApi.updateSecurityMark(securityGroupId, securityMarkId, updatedSecurityMarkBody).then((data) => {

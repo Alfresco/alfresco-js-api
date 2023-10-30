@@ -16,15 +16,7 @@
  */
 
 import { expect } from 'chai';
-import {
-    AlfrescoApi,
-    TaskFilterRequestRepresentation,
-    TaskRepresentation,
-    TaskFormsApi,
-    TaskActionsApi,
-    TasksApi,
-    TaskQueryRepresentation
-} from '../../index';
+import { AlfrescoApi, TaskFilterRequestRepresentation, TaskRepresentation, TaskFormsApi, TaskActionsApi, TasksApi, TaskQueryRepresentation } from '../../src';
 import { BpmAuthMock, TasksMock } from '../mockObjects';
 
 describe('Activiti Task Api', () => {
@@ -35,7 +27,9 @@ describe('Activiti Task Api', () => {
     let taskFormsApi: TaskFormsApi;
     let taskActionsApi: TaskActionsApi;
 
-    const NOOP = () => {/* empty */};
+    const NOOP = () => {
+        /* empty */
+    };
 
     beforeEach(async () => {
         const BPM_HOST = 'http://127.0.0.1:9999';
@@ -61,7 +55,7 @@ describe('Activiti Task Api', () => {
         tasksMock.get200Response();
 
         const requestNode = new TaskQueryRepresentation();
-        const data = await tasksApi.listTasks(requestNode)
+        const data = await tasksApi.listTasks(requestNode);
 
         expect(data.data[0].processDefinitionName).equal('Process Test Api');
         expect(data.data[1].processDefinitionName).equal('Process Test Api');
@@ -91,7 +85,7 @@ describe('Activiti Task Api', () => {
         const requestNode = new TaskFilterRequestRepresentation();
         requestNode.appDefinitionId = 1;
 
-        const data = await tasksApi.filterTasks(requestNode)
+        const data = await tasksApi.filterTasks(requestNode);
         expect(data.size).equal(2);
         expect(data.data[0].id).equal('7506');
     });
@@ -103,7 +97,6 @@ describe('Activiti Task Api', () => {
         taskActionsApi.completeTask(taskId).then(NOOP, () => {
             done();
         });
-
     });
 
     it('complete Task ', async () => {
