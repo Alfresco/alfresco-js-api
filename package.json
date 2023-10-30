@@ -7,7 +7,6 @@
   "type": "module",
   "scripts": {
     "build": "nx build",
-    "prepublish": "npm run build",
     "test": "nx test",
     "coverage": "nx exec -- NODE_OPTIONS=--max_old_space_size=8192 nyc --reporter=lcov mocha -r ts-node/register --full-trace --bail  test/*.spec.ts ./test/**/*.spec.ts",
     "lint": "nx lint"
