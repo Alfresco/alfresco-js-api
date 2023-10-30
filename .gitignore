@@ -18,3 +18,4 @@ target
 /bundles/
 .env
 .nyc_output
+.nx

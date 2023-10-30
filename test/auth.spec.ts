@@ -17,9 +17,11 @@
 
 import { expect } from 'chai';
 import { EcmAuthMock, BpmAuthMock, NodeMock, ProfileMock } from '../test/mockObjects';
-import { NodesApi, UserProfileApi, AlfrescoApi } from '../index';
+import { NodesApi, UserProfileApi, AlfrescoApi } from '../src';
 
-const NOOP = () => { /* empty */ };
+const NOOP = () => {
+    /* empty */
+};
 const ECM_HOST = 'http://127.0.0.1:8080';
 const BPM_HOST = 'http://127.0.0.1:9999';
 
@@ -28,7 +30,6 @@ interface ErrorResponse {
 }
 
 describe('Auth', () => {
-
     describe('ECM Provider config', () => {
         let authResponseEcmMock: EcmAuthMock;
         let nodeMock: NodeMock;
@@ -42,7 +43,6 @@ describe('Auth', () => {
         describe('With Authentication', () => {
             let alfrescoJsApi: AlfrescoApi;
 
-
             beforeEach(() => {
                 alfrescoJsApi = new AlfrescoApi({
                     hostEcm: ECM_HOST
@@ -52,9 +52,7 @@ describe('Auth', () => {
             });
 
             describe('login', () => {
-
                 it('should return the Ticket if all is ok', (done) => {
-
                     authResponseEcmMock.get201Response();
 
                     alfrescoJsApi.login('admin', 'admin').then((data: string) => {
@@ -71,12 +69,10 @@ describe('Auth', () => {
                         done();
                     });
                 });
-
             });
 
             describe('isLoggedIn', () => {
                 it('should return true if the api is logged in', (done) => {
-
                     authResponseEcmMock.get201Response();
 
                     alfrescoJsApi.login('admin', 'admin').then(() => {
@@ -174,7 +170,6 @@ describe('Auth', () => {
             });
 
             describe('Logout Api', () => {
-
                 beforeEach(async () => {
                     authResponseEcmMock.get201Response('TICKET_22d7a5a83d78b9cc9666ec4e412475e5455b33bd');
                     await alfrescoJsApi.login('admin', 'admin');
@@ -199,7 +194,6 @@ describe('Auth', () => {
             });
 
             describe('Unauthorized', () => {
-
                 beforeEach((done) => {
                     authResponseEcmMock.get201Response('TICKET_22d7a5a83d78b9cc9666ec4e412475e5455b33bd');
 
@@ -215,7 +209,6 @@ describe('Auth', () => {
                         expect(alfrescoJsApi.contentAuth.authentications.basicAuth.password).to.be.equal(null);
                         done();
                     });
-
                 });
 
                 it('should 401 invalidate the session and logout', (done) => {
@@ -237,7 +230,6 @@ describe('Auth', () => {
                     nodesApi.createFolder('newFolder', null, null).then(NOOP);
                 });
             });
-
         });
     });
 
@@ -261,7 +253,6 @@ describe('Auth', () => {
 
         describe('With Authentication', () => {
             describe('login', () => {
-
                 it('should return the Ticket if all is ok', (done) => {
                     authResponseBpmMock.get200Response();
 
@@ -287,16 +278,13 @@ describe('Auth', () => {
             });
 
             describe('isLoggedIn', () => {
-
                 it('should return true if the api is logged in', (done) => {
-
                     authResponseBpmMock.get200Response();
 
                     alfrescoJsApi.login('admin', 'admin').then(() => {
                         expect(alfrescoJsApi.isLoggedIn()).to.be.equal(true);
                         done();
-                    },
-                    NOOP);
+                    }, NOOP);
                 });
 
                 it('should return false if the api is logged out', (done) => {
@@ -355,7 +343,6 @@ describe('Auth', () => {
             });
 
             describe('Unauthorized', () => {
-
                 beforeEach((done) => {
                     authResponseBpmMock.get200Response();
 
@@ -371,16 +358,18 @@ describe('Auth', () => {
                         expect(alfrescoJsApi.processAuth.authentications.basicAuth.ticket).to.be.equal(null);
                         done();
                     });
-
                 });
 
                 it('should 401 invalidate the session and logout', (done) => {
                     profileMock.get401getProfile();
 
-                    profileApi.getProfile().then(() => NOOP, () => {
-                        expect(alfrescoJsApi.isLoggedIn()).to.be.equal(false);
-                        done();
-                    });
+                    profileApi.getProfile().then(
+                        () => NOOP,
+                        () => {
+                            expect(alfrescoJsApi.isLoggedIn()).to.be.equal(false);
+                            done();
+                        }
+                    );
                 });
             });
         });
@@ -406,7 +395,6 @@ describe('Auth', () => {
         });
 
         describe('With Authentication', () => {
-
             it('should Ticket be present in the client', () => {
                 authResponseBpmMock.get200Response();
                 authResponseEcmMock.get201Response();
@@ -424,7 +412,6 @@ describe('Auth', () => {
             });
 
             describe('login', () => {
-
                 it('should return the Ticket if all is ok', (done) => {
                     authResponseBpmMock.get200Response();
                     authResponseEcmMock.get201Response();
@@ -497,7 +484,6 @@ describe('Auth', () => {
             });
 
             describe('Events ', () => {
-
                 it('should login fire an event if is unauthorized  401', (done) => {
                     authResponseBpmMock.get401Response();
                     authResponseEcmMock.get401Response();
@@ -538,5 +524,4 @@ describe('Auth', () => {
             });
         });
     });
-
 });

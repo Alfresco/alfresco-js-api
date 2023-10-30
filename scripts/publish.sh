@@ -10,7 +10,7 @@ if [[ $GITHUB_BRANCH == "refs/heads/master" ]]; then
     TAG_NPM=latest
 fi
 
-cd dist/
+cd dist/js-api
 
 echo "Publishing on npm with tag $TAG_NPM"
 
