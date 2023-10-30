@@ -17,7 +17,7 @@
         "paths": {
             "@alfresco/js-api": ["src/index.ts"]
         },
-        "types": ["vitest", "mocha"]
+        "types": ["mocha"]
     },
     "files": [],
     "include": [],
