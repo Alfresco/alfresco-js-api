@@ -15,7 +15,7 @@
         "baseUrl": ".",
         "allowSyntheticDefaultImports": true,
         "paths": {
-            "@alfresco/js-api": ["index.ts"]
+            "@alfresco/js-api": ["src/index.ts"]
         },
         "types": ["vitest", "mocha"]
     },
