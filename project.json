@@ -24,14 +24,6 @@
                 "lintFilePatterns": ["./**/*.ts", "./package.json"]
             }
         },
-        "__test": {
-            "executor": "@nx/vite:test",
-            "outputs": ["{options.reportsDirectory}"],
-            "options": {
-                "passWithNoTests": true,
-                "reportsDirectory": "coverage/js-api"
-            }
-        },
         "test": {
             "executor": "nx:run-commands",
             "options": {
