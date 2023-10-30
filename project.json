@@ -11,14 +11,11 @@
                 "outputPath": "dist/js-api",
                 "main": "./src/index.ts",
                 "tsConfig": "./tsconfig.lib.json",
-                "assets": [
-                    "*.md",
-                    "LICENSE.txt"
-                ]
+                "assets": ["*.md", "LICENSE.txt"]
             }
         },
         "lint": {
-            "executor": "@nx/linter:eslint",
+            "executor": "@nx/eslint:lint",
             "outputs": ["{options.outputFile}"],
             "options": {
                 "lintFilePatterns": ["./**/*.ts", "./package.json"]
@@ -27,9 +24,7 @@
         "test": {
             "executor": "nx:run-commands",
             "options": {
-                "commands": [
-                    "mocha"
-                ]
+                "commands": ["mocha"]
             }
         }
     },
