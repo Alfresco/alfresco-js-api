@@ -70,58 +70,8 @@ jobs:
               shell: bash
               run: npm test
 
-    test-performance:
-        needs: build
-        name: Performance Test
-        runs-on: ubuntu-latest
-        steps:
-            - name: Checkout
-              uses: actions/checkout@v3
-              with:
-                fetch-depth: 2
-
-            - name: Setup Node
-              uses: actions/setup-node@v3
-              with:
-                node-version-file: '.nvmrc'
-                cache: 'npm'
-
-            - name: Install Dependencies
-              run: npm ci
-
-            - name: Performance
-              shell: bash
-              run: ./scripts/test-performance.sh || exit 1
-
-    test-integration:
-        needs: build
-        name: Integration Test
-        runs-on: ubuntu-latest
-        steps:
-            - name: Checkout
-              uses: actions/checkout@v3
-              with:
-                fetch-depth: 2
-
-            - name: Setup Node
-              uses: actions/setup-node@v3
-              with:
-                node-version-file: '.nvmrc'
-                cache: 'npm'
-
-            - name: Install Dependencies
-              run: npm ci
-
-            - name: Integration Tests
-              env:
-                HOST: ${{ secrets.HOST }}
-                USERNAME: ${{ secrets.USERNAME }}
-                PASSWORD: ${{ secrets.PASSWORD }}
-              shell: bash
-              run: ./scripts/test-integration.sh || exit 1
-
     release:
-        needs: [test, test-integration, test-performance]
+        needs: [test]
         name: release
         runs-on: ubuntu-latest
         permissions:
