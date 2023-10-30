@@ -8,7 +8,7 @@
   "scripts": {
     "build": "nx build",
     "test": "nx test",
-    "coverage": "NODE_OPTIONS=--max_old_space_size=8192 nyc --reporter=lcov mocha -r ts-node/register --full-trace --bail  test/*.spec.ts ./test/**/*.spec.ts",
+    "coverage": "NODE_OPTIONS=--max_old_space_size=8192 nyc --reporter=lcov mocha",
     "lint": "nx lint"
   },
   "sideEffects": false,
