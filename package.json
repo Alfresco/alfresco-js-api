@@ -17,7 +17,7 @@
     "test": "mocha --full-trace -r ts-node/register test/*.spec.ts test/**/*.spec.ts",
     "coverage": "NODE_OPTIONS=--max_old_space_size=8192 nyc --reporter=lcov mocha -r ts-node/register --full-trace --bail  test/*.spec.ts ./test/**/*.spec.ts",
     "generate": "mvn clean generate-sources",
-    "toc": "markdown-toc -i README.md && markdown-toc -i test/mockObjects/README.md && markdown-toc -i bpm-example.md && markdown-toc -i ecm-example.md",
+    "toc": "markdown-toc -i README.md && markdown-toc -i test/mockObjects/README.md && markdown-toc -i docs/bpm-example.md && markdown-toc -i docs/ecm-example.md",
     "generate-ts": "jsdoc -c config.json .",
     "generate-api": "mvn install",
     "lint": "eslint . --ext .js,.ts"

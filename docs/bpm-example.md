@@ -32,13 +32,13 @@
 
 # BPM
 
-A complete list of all the BPM methods is available here: [Activiti API](src/api/activiti-rest-api/README.md).
+A complete list of all the BPM methods is available here: [Activiti API](../src/api/activiti-rest-api/README.md).
 
 Below you can find some common examples.
 
 ## Task Api
 
-Below you can find some example relative to the Activiti process api for all the possible method go to [Tasks Api](src/api/activiti-rest-api/docs/TasksApi.md) documentation.
+Below you can find some example relative to the Activiti process api for all the possible method go to [Tasks Api](../src/api/activiti-rest-api/docs/TasksApi.md) documentation.
 
 ### List Task
 
@@ -103,13 +103,13 @@ taskApi.getTask(taskId).then(
 TasksApi.filterTasks(requestTasks)
 ```
 
-Returns the [ResultListDataRepresentation](src/api/activiti-rest-api/docs/ResultListDataRepresentation«TaskRepresentation».md) that is a filtered list of all the tasks.
+Returns the [ResultListDataRepresentation](../src/api/activiti-rest-api/docs/ResultListDataRepresentation«TaskRepresentation».md) that is a filtered list of all the tasks.
 
 **Parameters**
 
 | Name         | Type                                                                                                 | Description  |
 |--------------|------------------------------------------------------------------------------------------------------|--------------|
-| requestTasks | [TaskFilterRequestRepresentation](src/api/activiti-rest-api/docs/TaskFilterRequestRepresentation.md) | requestTasks |
+| requestTasks | [TaskFilterRequestRepresentation](../src/api/activiti-rest-api/docs/TaskFilterRequestRepresentation.md) | requestTasks |
 
 
 **Example**
@@ -167,7 +167,7 @@ taskApi.taskApi.completeTask(taskId).then(
 TasksApi.getTaskForm(taskId)
 ```
 
-Retrieve the [Task Form](src/api/activiti-rest-api/docs/FormDefinitionRepresentation.md) representation.
+Retrieve the [Task Form](../src/api/activiti-rest-api/docs/FormDefinitionRepresentation.md) representation.
 
 **Parameters**
 
@@ -203,7 +203,7 @@ Complete a Task Form
 | Name                           | Type                                                                                       | Description                    |
 |--------------------------------|--------------------------------------------------------------------------------------------|--------------------------------|
 | taskId                         | String                                                                                     | taskId                         |
-| completeTaskFormRepresentation | [CompleteFormRepresentation](src/api/activiti-rest-api/docs/CompleteFormRepresentation.md) | completeTaskFormRepresentation |
+| completeTaskFormRepresentation | [CompleteFormRepresentation](../src/api/activiti-rest-api/docs/CompleteFormRepresentation.md) | completeTaskFormRepresentation |
 
 **Example**
 
@@ -230,13 +230,13 @@ taskApi.completeTaskForm(taskId, completeTaskFormRepresentation).then(
 ProcessInstancesApi.getProcessInstances(requestNode)
 ```
 
-Retrieve a list of process instances, see [ResultListDataRepresentationProcessInstanceRepresentation](src/api/activiti-rest-api/docs/ResultListDataRepresentation«ProcessInstanceRepresentation».md)
+Retrieve a list of process instances, see [ResultListDataRepresentationProcessInstanceRepresentation](../src/api/activiti-rest-api/docs/ResultListDataRepresentation«ProcessInstanceRepresentation».md)
 
 **Parameters**
 
 | Name        | Type                                                                                                       | Description |
 |-------------|------------------------------------------------------------------------------------------------------------|-------------|
-| requestNode | [ProcessInstanceQueryRepresentation](src/api/activiti-rest-api/docs/ProcessInstanceQueryRepresentation.md) | requestNode |
+| requestNode | [ProcessInstanceQueryRepresentation](../src/api/activiti-rest-api/docs/ProcessInstanceQueryRepresentation.md) | requestNode |
 
 **Example**
 
@@ -277,13 +277,13 @@ processApi.getProcessInstances(requestNode).then(
 
 ## Models Api
 
-Below you can find some example relative to the Activiti process api for all the possible method go to [Models Api](src/api/activiti-rest-api/docs/ModelsApi.md) documentation.
+Below you can find some example relative to the Activiti process api for all the possible method go to [Models Api](../src/api/activiti-rest-api/docs/ModelsApi.md) documentation.
 
 ### Get Model
 
 getModel(modelId, opts)
 
-To retrieve details about a particular model (process, form, decision rule or app) return a [ModelRepresentation](src/api/activiti-rest-api/docs/ModelRepresentation.md)
+To retrieve details about a particular model (process, form, decision rule or app) return a [ModelRepresentation](../src/api/activiti-rest-api/docs/ModelRepresentation.md)
 
 **Parameters**
 
@@ -314,7 +314,7 @@ modelsApi.getModels(opts).then(
 
 ## Report Api
 
-Below you can find some example relative to the Activiti report api for all the possible method go to [Report Api documentation](src/api/activiti-rest-api/docs/ReportApi.md)
+Below you can find some example relative to the Activiti report api for all the possible method go to [Report Api documentation](../src/api/activiti-rest-api/docs/ReportApi.md)
 
 ### Create Default Reports
 

@@ -22,7 +22,7 @@
 
 # ECM
 
-A complete list of all the ECM methods is available here: [Content API](src/api/content-rest-api/README.md).
+A complete list of all the ECM methods is available here: [Content API](../src/api/content-rest-api/README.md).
 Below you can find some common examples.
 
 ## Get Node Content
@@ -267,7 +267,7 @@ This parameter will basically perform also a call to the Rendition API.
 
 For more information about the Rendition API :
 
-* [Rendition API](src/api/content-rest-api/docs/RenditionsApi.md)
+* [Rendition API](../src/api/content-rest-api/docs/RenditionsApi.md)
 * [Rendition service Wiki](https://wiki.alfresco.com/wiki/Rendition_Service)
 
 ```javascript

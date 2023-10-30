@@ -18,8 +18,8 @@ JavaScript client API for the Alfresco REST API and Activiti REST API.
 - [Authentication](docs/authentication.md)
 - [Calling Custom Endpoints](docs/calling-custom-endpoints.md)
 - [Error Events](docs/error-events.md)
-- [ECM Examples](ecm-example.md), full docs: [Content API](src/api/content-rest-api/README.md)
-- [BPM Examples](bpm-example.md), full docs: [APS 2.X API](src/api/activiti-rest-api/README.md)
+- [ECM Examples](docs/ecm-example.md), full docs: [Content API](src/api/content-rest-api/README.md)
+- [BPM Examples](docs/bpm-example.md), full docs: [APS 2.X API](src/api/activiti-rest-api/README.md)
 
 ## Prerequisites
 

@@ -5,8 +5,8 @@
 /pom.xml
 *.iml
 .mergify.yml
-bpm-example.md
-ecm-example.md
+docs/bpm-example.md
+docs/ecm-example.md
 cspell.json
 /.idea
 /test/
