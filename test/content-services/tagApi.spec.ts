@@ -16,9 +16,8 @@
  */
 
 import { expect } from 'chai';
-import { AlfrescoApi } from '../../src/alfrescoApi';
-import { TagBody, TagEntry, TagPaging, TagsApi } from '../../src/api/content-rest-api';
-import { EcmAuthMock, TagMock } from '../../test/mockObjects';
+import { AlfrescoApi, TagBody, TagEntry, TagPaging, TagsApi } from '../../src';
+import { EcmAuthMock, TagMock } from '../mockObjects';
 
 describe('Tags', () => {
     let authResponseMock: EcmAuthMock;
@@ -67,7 +66,7 @@ describe('Tags', () => {
             );
         });
 
-        it.skip('should return specified tag', (done) => {
+        it('should return specified tag', (done) => {
             tagMock.getTagsByNamesFilterByExactTag200Response();
 
             tagsApi
@@ -75,15 +74,13 @@ describe('Tags', () => {
                     tag: 'tag-test-1'
                 })
                 .then((data) => {
-                    expect(data.list.entries[0].entry).deep.equal({
-                        tag: 'tag-test-1',
-                        id: '0d89aa82-f2b8-4a37-9a54-f4c5148174d6'
-                    });
+                    expect(data.list.entries[0].entry.tag).to.equal('tag-test-1');
+                    expect(data.list.entries[0].entry.id).to.equal('0d89aa82-f2b8-4a37-9a54-f4c5148174d6');
                     done();
                 });
         });
 
-        it.skip('should return tags contained specified value', (done) => {
+        it('should return tags contained specified value', (done) => {
             tagMock.getTagsByNameFilteredByMatching200Response();
 
             tagsApi
@@ -92,14 +89,14 @@ describe('Tags', () => {
                     matching: true
                 })
                 .then((data) => {
-                    expect(data.list.entries[0].entry).deep.equal({
-                        tag: 'tag-test-1',
-                        id: '0d89aa82-f2b8-4a37-9a54-f4c5148174d6'
-                    });
-                    expect(data.list.entries[1].entry).deep.equal({
-                        tag: 'tag-test-2',
-                        id: 'd79bdbd0-9f55-45bb-9521-811e15bf48f6'
-                    });
+                    expect(data?.list.entries.length).to.equal(2);
+
+                    expect(data.list.entries[0].entry.tag).to.equal('tag-test-1');
+                    expect(data.list.entries[0].entry.id).to.equal('0d89aa82-f2b8-4a37-9a54-f4c5148174d6');
+
+                    expect(data.list.entries[1].entry.tag).to.equal('tag-test-2');
+                    expect(data.list.entries[1].entry.id).to.equal('d79bdbd0-9f55-45bb-9521-811e15bf48f6');
+
                     done();
                 });
         });
