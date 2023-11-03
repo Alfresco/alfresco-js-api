@@ -17,7 +17,7 @@
 
 import { expect } from 'chai';
 import { BpmAuthMock, ReportsMock } from '../mockObjects';
-import { ReportApi, AlfrescoApi } from '../../src';
+import { ReportApi, AlfrescoApi, ReportQuery } from '../../src';
 
 describe('Activiti Report Api', () => {
     let authResponseBpmMock: BpmAuthMock;
@@ -63,7 +63,7 @@ describe('Activiti Report Api', () => {
 
     it('should return the chart reports', async () => {
         const reportId = '11015';
-        const paramsQuery = { status: 'All' };
+        const paramsQuery = { status: 'All' } as ReportQuery;
 
         reportsMock.get200ResponseReportsByParams(reportId, paramsQuery);
 
@@ -125,7 +125,7 @@ describe('Activiti Report Api', () => {
         reportsMock.get200ResponseReportParams(reportId);
 
         const res = await reportApi.getReportParams(reportId);
-        const paramsDefinition = JSON.parse(res.definition);
+        const paramsDefinition = res.definition;
 
         expect(res.id).equal(11013);
         expect(res.name).equal('Process instances overview');
@@ -168,7 +168,7 @@ describe('Activiti Report Api', () => {
             slowProcessInstanceInteger: 10,
             status: 'All',
             reportName: 'FAKE_REPORT_NAME'
-        };
+        } as ReportQuery;
         reportsMock.get200ResponseExportReport(reportId);
 
         const response = await reportApi.exportToCsv(reportId, queryParams);
@@ -188,7 +188,7 @@ describe('Activiti Report Api', () => {
             slowProcessInstanceInteger: 10,
             status: 'All',
             reportName: 'FAKE_REPORT_NAME'
-        };
+        } as ReportQuery;
         reportsMock.get200ResponseSaveReport(reportId);
 
         await reportApi.saveReport(reportId, queryParams);
