@@ -18,7 +18,7 @@
 import { expect } from 'chai';
 import { EcmAuthMock, UploadMock } from '../test/mockObjects';
 import fs from 'fs';
-import { UploadApi, AlfrescoApi, NodeEntry } from '../index';
+import { UploadApi, AlfrescoApi, NodeEntry } from '../src';
 
 describe('Upload', () => {
     let authResponseMock: EcmAuthMock;
@@ -74,12 +74,11 @@ describe('Upload', () => {
 
             const file = fs.createReadStream('./test/mockObjects/assets/testFile.txt');
 
-            uploadApi.uploadFile(file, null, null, null, { autoRename: true })
-                .then((data: NodeEntry) => {
-                    expect(data.entry.isFile).to.be.equal(true);
-                    expect(data.entry.name).to.be.equal('testFile-2.txt');
-                    done();
-                });
+            uploadApi.uploadFile(file, null, null, null, { autoRename: true }).then((data: NodeEntry) => {
+                expect(data.entry.isFile).to.be.equal(true);
+                expect(data.entry.name).to.be.equal('testFile-2.txt');
+                done();
+            });
         });
 
         it('Abort should stop the  file file upload', (done) => {
@@ -142,7 +141,8 @@ describe('Upload', () => {
             uploadPromise.catch((error: any) => {
                 console.log('error' + error);
             });
-            uploadPromise.once('progress',
+            uploadPromise.once(
+                'progress',
                 () => done(),
                 (error: any) => console.log('error' + error)
             );
@@ -317,20 +317,21 @@ describe('Upload', () => {
             const uploadPromise: any = uploadApi.uploadFile(file);
             uploadPromise.catch(() => {});
 
-            uploadPromise.once('error', () => {
-                promiseProgressOne = new Promise((resolve) => {
-                    resolve('Resolving');
+            uploadPromise
+                .once('error', () => {
+                    promiseProgressOne = new Promise((resolve) => {
+                        resolve('Resolving');
+                    });
+                })
+                .once('unauthorized', () => {
+                    promiseProgressTwo = new Promise((resolve) => {
+                        resolve('Resolving');
+                    });
                 });
-            }).once('unauthorized', () => {
-                promiseProgressTwo = new Promise((resolve) => {
-                    resolve('Resolving');
-                });
-            });
 
             Promise.all([promiseProgressOne, promiseProgressTwo]).then(() => {
                 done();
             });
         });
-
     });
 });

@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-import { AlfrescoApi, DateAlfresco } from '../index';
+import { AlfrescoApi, DateAlfresco } from '../src';
 import { EcmAuthMock } from '../test/mockObjects';
 import { expect } from 'chai';
 

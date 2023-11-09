@@ -17,19 +17,22 @@
 
 import { BaseApi } from './base.api';
 import { throwIfNotDefined } from '../../../assert';
+import { ReportParametersDefinition } from './reportParametersDefinition';
+import { ReportParameterValue } from './reportParameterValue';
+import { ReportQuery } from './reportQuery';
 
 export class ReportApi extends BaseApi {
 
     /**
      * Create the default reports
      */
-    createDefaultReports() {
+    createDefaultReports(): Promise<any> {
         return this.post({
             path: '/app/rest/reporting/default-reports'
         });
     }
 
-    getTasksByProcessDefinitionId(reportId: string, processDefinitionId: string) {
+    getTasksByProcessDefinitionId(reportId: string, processDefinitionId: string): Promise<string[]> {
         throwIfNotDefined(reportId, 'reportId');
         throwIfNotDefined(processDefinitionId, 'processDefinitionId');
 
@@ -47,7 +50,7 @@ export class ReportApi extends BaseApi {
         });
     }
 
-    getReportsByParams(reportId: string, bodyParam: any) {
+    getReportsByParams(reportId: string, bodyParam: ReportQuery) {
         throwIfNotDefined(reportId, 'reportId');
 
         const pathParams = {
@@ -61,13 +64,13 @@ export class ReportApi extends BaseApi {
         });
     }
 
-    getProcessDefinitions() {
+    getProcessDefinitions(): Promise<ReportParameterValue[]> {
         return this.get({
             path: '/app/rest/reporting/process-definitions'
         });
     }
 
-    getReportParams(reportId: string) {
+    getReportParams(reportId: string): Promise<ReportParametersDefinition> {
         throwIfNotDefined(reportId, 'reportId');
 
         const pathParams = {
@@ -76,17 +79,18 @@ export class ReportApi extends BaseApi {
 
         return this.get({
             path: '/app/rest/reporting/report-params/{reportId}',
-            pathParams
+            pathParams,
+            returnType: ReportParametersDefinition
         });
     }
 
-    getReportList() {
+    getReportList(): Promise<ReportParametersDefinition[]> {
         return this.get({
             path: '/app/rest/reporting/reports',
         });
     }
 
-    updateReport(reportId: string, name: string) {
+    updateReport(reportId: string, name: string): Promise<any> {
         throwIfNotDefined(reportId, 'reportId');
 
         const postBody = {
@@ -109,7 +113,7 @@ export class ReportApi extends BaseApi {
      * @param {string} reportId
      * @param bodyParam
      */
-    exportToCsv(reportId: string, bodyParam: { reportName?: string }) {
+    exportToCsv(reportId: string, bodyParam: ReportQuery): Promise<any> {
         throwIfNotDefined(reportId, 'reportId');
         throwIfNotDefined(bodyParam, 'bodyParam');
         throwIfNotDefined(bodyParam.reportName, 'reportName');
@@ -130,7 +134,7 @@ export class ReportApi extends BaseApi {
      * @param {string} reportId
      * @param opts
      */
-    saveReport(reportId: string, opts: { reportName?: string }) {
+    saveReport(reportId: string, opts: ReportQuery): Promise<any> {
         throwIfNotDefined(reportId, 'reportId');
         throwIfNotDefined(opts, 'opts');
         throwIfNotDefined(opts.reportName, 'reportName');
@@ -155,7 +159,7 @@ export class ReportApi extends BaseApi {
      * Delete a report
      * @param {string} reportId
      */
-    deleteReport(reportId: string) {
+    deleteReport(reportId: string): Promise<void> {
         throwIfNotDefined(reportId, 'reportId');
 
         const pathParams = {

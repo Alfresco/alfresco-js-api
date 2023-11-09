@@ -1,0 +1,32 @@
+{
+    "name": "js-api",
+    "$schema": "node_modules/nx/schemas/project-schema.json",
+    "sourceRoot": "src",
+    "projectType": "library",
+    "targets": {
+        "build": {
+            "executor": "@nx/js:tsc",
+            "outputs": ["{options.outputPath}"],
+            "options": {
+                "outputPath": "dist/js-api",
+                "main": "./src/index.ts",
+                "tsConfig": "./tsconfig.lib.json",
+                "assets": ["*.md", "LICENSE.txt"]
+            }
+        },
+        "lint": {
+            "executor": "@nx/eslint:lint",
+            "outputs": ["{options.outputFile}"],
+            "options": {
+                "lintFilePatterns": ["./**/*.ts", "./package.json"]
+            }
+        },
+        "test": {
+            "executor": "nx:run-commands",
+            "options": {
+                "commands": ["mocha"]
+            }
+        }
+    },
+    "tags": []
+}
