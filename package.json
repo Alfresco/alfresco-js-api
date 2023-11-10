@@ -3,7 +3,6 @@
   "version": "7.3.0",
   "description": "JavaScript client library for the Alfresco REST API",
   "author": "Hyland Software, Inc. and its affiliates",
-  "typings": "./src/index.d.ts",
   "scripts": {
     "build": "nx build",
     "test": "nx test",
