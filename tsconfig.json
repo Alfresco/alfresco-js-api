@@ -1,29 +1,14 @@
 {
-    "compilerOptions": {
-        "rootDir": ".",
+    "compilerOptions":{
+        "module": "commonjs",
         "sourceMap": true,
-        "declaration": false,
-        "moduleResolution": "node",
-        "emitDecoratorMetadata": true,
-        "experimentalDecorators": true,
-        "importHelpers": true,
-        "target": "ES2022",
-        "module": "esnext",
-        "lib": ["es2022", "dom"],
-        "skipLibCheck": true,
-        "skipDefaultLibCheck": true,
-        "baseUrl": ".",
+        "target": "es2015",
+        "isolatedModules": true,
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
+        "noImplicitAny": true,
+        "noImplicitReturns": true,
+        "esModuleInterop": true,
         "allowSyntheticDefaultImports": true,
-        "paths": {
-            "@alfresco/js-api": ["src/index.ts"]
-        },
-        "types": ["mocha"]
-    },
-    "files": [],
-    "include": [],
-    "references": [
-        {
-            "path": "./tsconfig.lib.json"
-        }
-    ]
+    }
 }

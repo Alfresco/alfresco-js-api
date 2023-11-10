@@ -82,7 +82,7 @@ export class TaskRepresentation {
     }
 
     getFullName(): string {
-        let fullName = '';
+        let fullName: string = '';
 
         if (this.assignee) {
             const firstName: string = this.assignee.firstName ? this.assignee.firstName : '';
@@ -96,4 +96,5 @@ export class TaskRepresentation {
     isCompleted(): boolean {
         return !!this.endDate;
     }
+
 }

@@ -16,7 +16,7 @@
  */
 
 import { expect } from 'chai';
-import { AlfrescoApi } from '../src';
+import { AlfrescoApi } from '../index';
 import { EcmAuthMock, BpmAuthMock } from '../test/mockObjects';
 
 describe('Change config', () => {
@@ -42,6 +42,7 @@ describe('Change config', () => {
     });
 
     describe('Change hosts', () => {
+
         it('Change host Ecm', () => {
             expect(alfrescoJsApi.contentClient.basePath).to.be.equal('http://127.0.0.1:8080/alfresco/api/-default-/public/alfresco/versions/1');
 
@@ -69,4 +70,5 @@ describe('Change config', () => {
             expect(alfrescoJsApi.processClient.basePath).to.be.equal('http://differenTserverBpm:2222/activiti-app');
         });
     });
+
 });

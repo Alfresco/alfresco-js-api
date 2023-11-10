@@ -16,7 +16,7 @@
  */
 
 import { expect } from 'chai';
-import { TaskFormsApi, AlfrescoApi } from '../../src';
+import { TaskFormsApi, AlfrescoApi } from '../../index';
 import { BpmAuthMock, TaskFormMock } from '../mockObjects';
 
 describe('Activiti Task Api', () => {

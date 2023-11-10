@@ -16,8 +16,9 @@
  */
 
 import { expect } from 'chai';
-import { AlfrescoApi, TagBody, TagEntry, TagPaging, TagsApi } from '../../src';
-import { EcmAuthMock, TagMock } from '../mockObjects';
+import { AlfrescoApi } from '../../src/alfrescoApi';
+import { TagBody, TagEntry, TagPaging, TagsApi } from '../../src/api/content-rest-api';
+import { EcmAuthMock, TagMock } from '../../test/mockObjects';
 
 describe('Tags', () => {
     let authResponseMock: EcmAuthMock;
@@ -69,36 +70,34 @@ describe('Tags', () => {
         it('should return specified tag', (done) => {
             tagMock.getTagsByNamesFilterByExactTag200Response();
 
-            tagsApi
-                .listTags({
-                    tag: 'tag-test-1'
-                })
-                .then((data) => {
-                    expect(data.list.entries[0].entry.tag).to.equal('tag-test-1');
-                    expect(data.list.entries[0].entry.id).to.equal('0d89aa82-f2b8-4a37-9a54-f4c5148174d6');
-                    done();
+            tagsApi.listTags({
+                tag: 'tag-test-1'
+            }).then((data) => {
+                expect(data.list.entries[0].entry).deep.equal({
+                    tag: 'tag-test-1',
+                    id: '0d89aa82-f2b8-4a37-9a54-f4c5148174d6'
                 });
+                done();
+            });
         });
 
         it('should return tags contained specified value', (done) => {
             tagMock.getTagsByNameFilteredByMatching200Response();
 
-            tagsApi
-                .listTags({
-                    tag: '*tag-test*',
-                    matching: true
-                })
-                .then((data) => {
-                    expect(data?.list.entries.length).to.equal(2);
-
-                    expect(data.list.entries[0].entry.tag).to.equal('tag-test-1');
-                    expect(data.list.entries[0].entry.id).to.equal('0d89aa82-f2b8-4a37-9a54-f4c5148174d6');
-
-                    expect(data.list.entries[1].entry.tag).to.equal('tag-test-2');
-                    expect(data.list.entries[1].entry.id).to.equal('d79bdbd0-9f55-45bb-9521-811e15bf48f6');
-
-                    done();
+            tagsApi.listTags({
+                tag: '*tag-test*',
+                matching: true
+            }).then((data) => {
+                expect(data.list.entries[0].entry).deep.equal({
+                    tag: 'tag-test-1',
+                    id: '0d89aa82-f2b8-4a37-9a54-f4c5148174d6'
                 });
+                expect(data.list.entries[1].entry).deep.equal({
+                    tag: 'tag-test-2',
+                    id: 'd79bdbd0-9f55-45bb-9521-811e15bf48f6'
+                });
+                done();
+            });
         });
     });
 
@@ -127,7 +126,7 @@ describe('Tags', () => {
             const tags = [tag1, tag2];
             tagMock.get201ResponseForAssigningTagsToNode(tags);
 
-            tagsApi.assignTagsToNode('someNodeId', tags).then((data) => {
+            tagsApi.assignTagsToNode("someNodeId", tags).then((data) => {
                 const tagPaging = data as TagPaging;
                 expect(tagPaging.list.pagination.count).equal(2);
                 expect(tagPaging.list.entries[0].entry.tag).equal(tag1.tag);
@@ -142,7 +141,7 @@ describe('Tags', () => {
             const tags = [tag];
             tagMock.get201ResponseForAssigningTagsToNode(tags);
 
-            tagsApi.assignTagsToNode('someNodeId', tags).then((data) => {
+            tagsApi.assignTagsToNode("someNodeId", tags).then((data) => {
                 const tagEntry = data as TagEntry;
                 expect(tagEntry.entry.tag).equal(tag.tag);
                 done();
