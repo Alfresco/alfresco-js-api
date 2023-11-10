@@ -19,3 +19,4 @@ target
 .env
 .nyc_output
 .nx
+.angular

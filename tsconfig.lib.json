@@ -2,9 +2,13 @@
     "extends": "./tsconfig.json",
     "compilerOptions": {
         "outDir": "./dist/out-tsc",
+        "module": "ES2022",
         "declaration": true,
         "types": ["node"]
     },
     "include": ["src/**/*.ts"],
-    "exclude": ["src/**/*.spec.ts", "src/**/*.test.ts"]
+    "exclude": ["src/**/*.spec.ts", "src/**/*.test.ts"],
+    "angularCompilerOptions": {
+        "compilationMode": "partial"
+    }
 }

@@ -1,0 +1,9 @@
+{
+    "$schema": "../node_modules/ng-packagr/ng-package.schema.json",
+    "dest": "../dist/js-api",
+    "lib": {
+      "entryFile": "index.ts"
+    },
+    "allowedNonPeerDependencies": ["event-emitter", "superagent"],
+    "assets": ["LICENSE.txt", "README.md"]
+  }

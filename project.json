@@ -5,13 +5,11 @@
     "projectType": "library",
     "targets": {
         "build": {
-            "executor": "@nx/js:tsc",
+            "executor": "@angular-devkit/build-angular:ng-packagr",
             "outputs": ["{options.outputPath}"],
             "options": {
-                "outputPath": "dist/js-api",
-                "main": "./src/index.ts",
                 "tsConfig": "./tsconfig.lib.json",
-                "assets": ["*.md", "LICENSE.txt"]
+                "project": "./src/ng-package.json"
             }
         },
         "lint": {
