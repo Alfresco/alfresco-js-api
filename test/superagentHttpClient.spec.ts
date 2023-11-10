@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-import { FormValueRepresentation } from '../src';
+import { FormValueRepresentation } from '../index';
 import { SuperagentHttpClient } from '../src/superagentHttpClient';
 import { expect } from 'chai';
 import { Response } from 'superagent';
@@ -40,11 +40,11 @@ describe('SuperagentHttpClient', () => {
                 withCredentials: false,
                 authentications: {
                     basicAuth: {
-                        ticket: ''
+                        ticket: '',
                     },
-                    type: 'basic'
+                    type: 'basic',
                 },
-                defaultHeaders: {}
+                defaultHeaders: {},
             };
 
             const response: any = client['buildRequest'](
@@ -75,13 +75,13 @@ describe('SuperagentHttpClient', () => {
                 body: [
                     {
                         id: '1',
-                        name: 'test1'
+                        name: 'test1',
                     },
                     {
                         id: '2',
-                        name: 'test2'
-                    }
-                ]
+                        name: 'test2',
+                    },
+                ],
             } as Response;
             const result = SuperagentHttpClient['deserialize'](data, FormValueRepresentation);
             const isArray = Array.isArray(result);
