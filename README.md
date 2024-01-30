@@ -2,6 +2,8 @@
 
 JavaScript client API for the Alfresco REST API and Activiti REST API.
 
+**IMPORTANT: THE PROJECT HAS MOVED TO THE [ADF REPOSITORY](https://github.com/Alfresco/alfresco-ng2-components)**
+
 ## API clients documentation
 
 - [Authentication Api](src/api/auth-rest-api/README.md)
