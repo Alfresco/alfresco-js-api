@@ -31,7 +31,7 @@
     "tslib": "^2.6.1"
   },
   "devDependencies": {
-    "@cspell/eslint-plugin": "^7.3.6",
+    "@cspell/eslint-plugin": "^8.3.2",
     "@types/chai": "^4.2.3",
     "@types/chai-spies": "^1.0.3",
     "@types/event-emitter": "^0.3.3",
